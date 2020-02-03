@@ -1,2 +1,2 @@
 # Jerra
-Repository for Group T09 - 2
+Repository for the project of Group T09 - 2
