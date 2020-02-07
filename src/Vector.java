@@ -28,5 +28,13 @@ public class Vector implements InterfaceVector {
     public int getY() {
         return this.y;
     }
+
+    public InterfaceVector add(InterfaceVector other) {
+        return new Vector(this.getX() + other.getX(), this.getY() + other.getY());
+    }
+
+    public String toString() {
+        return "(" + this.x + ", " + this.y + ")";
+    }
     
 }
