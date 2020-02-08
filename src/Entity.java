@@ -3,18 +3,18 @@
  */
 public class Entity {
 
-    private InterfaceVector position;
-    private InterfaceVector velocity;
+    private Vector position;
+    private Vector velocity;
 
-    public Entity(InterfaceVector position, InterfaceVector velocity) {
+    public Entity(Vector position, Vector velocity) {
         this.position = position;
         this.velocity = velocity;
     }
 
-	public void setPosition(InterfaceVector position) {
+	public void setPosition(Vector position) {
         this.position = position;
     }
-    public void setVelocity(InterfaceVector velocity) {
+    public void setVelocity(Vector velocity) {
         this.velocity = velocity;
     }
 
@@ -26,11 +26,11 @@ public class Entity {
         this.velocity = new Vector(x, y);
     }
 
-    public InterfaceVector getPosition() {
+    public Vector getPosition() {
         return this.position;
     }
 
-    public InterfaceVector getVelocity() {
+    public Vector getVelocity() {
         return this.velocity;
     }
 

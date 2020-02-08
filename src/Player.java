@@ -3,7 +3,7 @@
  */
 public class Player extends Entity {
 
-    public Player(InterfaceVector position, InterfaceVector velocity) {
+    public Player(Vector position, Vector velocity) {
         super(position, velocity);
     }
 

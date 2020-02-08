@@ -6,7 +6,7 @@ public class Main {
 
 		System.out.println("Hello");
 
-		InterfaceRoom room = new TextRoom();
+		Room room = new TextRoom();
 		room.add(new Entity(new Vector(1, 1), new Vector(0, 0)));
 		room.add(new Entity(new Vector(3, -1), new Vector(0, 0)));
 		room.add(new Entity(new Vector(5, -1), new Vector(0, 0)));
