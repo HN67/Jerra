@@ -34,4 +34,12 @@ kill() | int lifetime | shoot() |
 
 #### Stage C: Kill
 
+Stage C refactors Entity to have a hitbox instead of simple position, and implements collision methods in order to determine when entities are hit by Projectiles and other collisions.
+
+| Rect | Entity |
+| --- | --- |
+| Vector origin | Rect hitbox |
+| Vector size | boolean collides(Entity) |
+| boolean collides(Rect) | |
+
 #### Stage D: Loot
