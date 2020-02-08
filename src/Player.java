@@ -1,7 +1,7 @@
 /**
  * Player
  */
-public class Player extends Entity {
+public class Player extends DefaultEntity {
 
     public Player(Vector position, Vector velocity) {
         super(position, velocity);
