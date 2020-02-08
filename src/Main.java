@@ -4,29 +4,17 @@ import java.util.Scanner;
 public class Main {
 	public static void main(String[] args) {
 
+		// Create keyboard scanner
+		Scanner keyboard = new Scanner(System.in);
+
 		System.out.println("Hello");
 
 		Room room = new TextRoom();
-		room.add(new DefaultEntity(new Vector(1, 1), new Vector(0, 0)));
-		room.add(new DefaultEntity(new Vector(3, -1), new Vector(0, 0)));
-		room.add(new DefaultEntity(new Vector(5, -1), new Vector(0, 0)));
-		room.add(new DefaultEntity(new Vector(1, -1), new Vector(0, 0)));
-		room.add(new DefaultEntity(new Vector(3, 4), new Vector(0, 0)));
-		
-		room.add(new Player(new Vector(0, 0), new Vector(0, 0)));
+		Controller controller = new TextController(room, keyboard);
+		controller.start();
 
-		Scanner keyboard = new Scanner(System.in);
-
-		String command = "";
-
-		while (!command.equals("quit")) {
-			command = keyboard.nextLine();
-			room.update(command);
-			System.out.println(room.toString());
-		}
-
+		// Collapse scanner
 		keyboard.close();
 		
-
 	}
 }
