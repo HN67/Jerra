@@ -17,20 +17,20 @@ public class Vector {
     }
 
     public Vector(Vector other) {
-        this.x = other.getX();
-        this.y = other.getY();
+        this.x = other.x();
+        this.y = other.y();
     }
 
-    public int getX() {
+    public int x() {
         return this.x;
     }
 
-    public int getY() {
+    public int y() {
         return this.y;
     }
 
     public Vector add(Vector other) {
-        return new Vector(this.getX() + other.getX(), this.getY() + other.getY());
+        return new Vector(this.x() + other.x(), this.y() + other.y());
     }
 
     public String toString() {
