@@ -2,7 +2,7 @@
  * Vector
  * @author Ryan Allard
  */
-public class Vector implements InterfaceVector {
+public class Vector {
 
     private int x;
     private int y;
@@ -29,7 +29,7 @@ public class Vector implements InterfaceVector {
         return this.y;
     }
 
-    public InterfaceVector add(InterfaceVector other) {
+    public Vector add(Vector other) {
         return new Vector(this.getX() + other.getX(), this.getY() + other.getY());
     }
 

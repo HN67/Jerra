@@ -4,7 +4,7 @@ import java.util.ArrayList;
 /**
  * TextRoom
  */
-public class TextRoom implements InterfaceRoom {
+public class TextRoom implements Room {
 
     private List<Entity> entityList;
 

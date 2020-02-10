@@ -1,7 +1,7 @@
 /**
  * Room
  */
-public interface InterfaceRoom {
+public interface Room {
 
     // private List<Entity>
 
