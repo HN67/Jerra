@@ -18,8 +18,8 @@ Stage A implements basic movement and console IO. Data is stored using a Room ->
 
  Room | Vector | Entity | Player (Entity)
 --- | --- | --- | --- |
-List\<Entity> entityList | int getX() | Vector position |
-add(Entity) | int getY() | Vector velocity |
+List\<Entity> entityList | int x() | Vector position |
+add(Entity) | int y() | Vector velocity |
 update(String) | Vector add(Vector) | update(String) | update(String)
 String toString() | | String toString() |
 | | | getName()
