@@ -21,7 +21,7 @@ public class Player extends DefaultEntity {
         if (command.equals("right")) {
             this.setVelocity(1, 0);
         }
-        this.setPosition(this.getPosition().add(this.getVelocity()));
+        super.update(command);
     }
 
     @Override

@@ -13,5 +13,7 @@ public interface Entity {
 
     public void update(String command);
     public String toString();
+
+    public boolean alive();
     
 }
