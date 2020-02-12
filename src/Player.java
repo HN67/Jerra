@@ -62,5 +62,14 @@ public class Player extends DefaultEntity {
         // If somehow there is no direction, just drop the projectile
         return new Projectile(new Vector(this.getPosition()), new Vector(0, 0), this.bulletLife);
     }
+
+    /**
+     * Checks a command to see if the Player should shoot
+     * @param command A String command
+     * @return A boolean representing whether the Player should shoot
+     */
+    public boolean shoots(String command) {
+        return command.equals("shoot");
+    }
     
 }
