@@ -17,9 +17,12 @@ public class TextRoom implements Room {
     }
 
     public void update(String command) {
+        // Update all entities
         for (Entity entity: this.entityList) {
             entity.update(command);
         }
+        // Remove dead entities
+        this.entityList.removeIf(entity -> !entity.alive());
     }
 
     public String toString() {
