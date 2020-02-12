@@ -16,11 +16,11 @@ public class TextRoom implements Room {
         this.players = new ArrayList<Player>();
     }
 
-    public void addEntity(Entity entity) {
+    public void spawnEntity(Entity entity) {
         this.entityList.add(entity);
     }
 
-    public void addPlayer(Player player) {
+    public void spawnPlayer(Player player) {
         // Adding to entityList allows bulk updating
         this.entityList.add(player);
         // Adding to players allows specific control, like shooting
@@ -38,7 +38,7 @@ public class TextRoom implements Room {
         for (Player player: this.players) {
             // Get shot projectile if player shoots
             if (player.shoots(command)) {
-                this.addEntity(player.shoot());
+                this.spawnEntity(player.shoot());
             }
         }
     }
