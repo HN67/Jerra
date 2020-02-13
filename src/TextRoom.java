@@ -9,11 +9,11 @@ public class TextRoom implements Room {
     // EntityList should contain *all* entities
     private List<Entity> entityList;
     // Sublists are for finer control
-    private List<Player> players;
+    private List<Spawner> spawners;
 
     public TextRoom() {
         this.entityList = new ArrayList<Entity>();
-        this.players = new ArrayList<Player>();
+        this.spawners = new ArrayList<Spawner>();
     }
 
     public void spawnEntity(Entity entity) {
@@ -23,8 +23,8 @@ public class TextRoom implements Room {
     public void spawnPlayer(Player player) {
         // Adding to entityList allows bulk updating
         this.entityList.add(player);
-        // Adding to players allows specific control, like shooting
-        this.players.add(player);
+        // Registers the player as a spawner (for shooting)
+        this.spawners.add(player);
     }
 
     public void update(String command) {
@@ -35,10 +35,10 @@ public class TextRoom implements Room {
         // Remove dead entities
         this.entityList.removeIf(entity -> !entity.alive());
         // Check players
-        for (Player player: this.players) {
-            // Get shot projectile if player shoots
-            if (player.shoots(command)) {
-                this.spawnEntity(player.shoot());
+        for (Spawner spawner: this.spawners) {
+            // Get spawned Entity if Spawner spawns
+            if (spawner.spawns(command)) {
+                this.spawnEntity(spawner.spawn());
             }
         }
     }

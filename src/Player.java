@@ -1,7 +1,7 @@
 /**
  * Player
  */
-public class Player extends DefaultEntity {
+public class Player extends DefaultEntity implements Spawner {
 
     private String direction;
 
@@ -38,10 +38,10 @@ public class Player extends DefaultEntity {
     }
 
     /**
-     * Returns a new projectile, shot in the direction the Player is facing
-     * @return A Projectile, that has not been added to any room
+     * Returns a new Entity, shot in the direction the Player is facing
+     * @return A Entity, that has not been added to any room
      */
-    public Projectile shoot() {
+    public Projectile spawn() {
         // Make sure to delink position vectors
         // Set Projectile velocity based on facing direction
         if (this.direction.equals("UP")) {
@@ -61,11 +61,11 @@ public class Player extends DefaultEntity {
     }
 
     /**
-     * Checks a command to see if the Player should shoot
+     * Checks a command to see if the Player should spawn an entity (using .spawn)
      * @param command A String command
-     * @return A boolean representing whether the Player should shoot
+     * @return A boolean representing whether the Player should spawn an entity
      */
-    public boolean shoots(String command) {
+    public boolean spawns(String command) {
         return command.equals("shoot");
     }
     
