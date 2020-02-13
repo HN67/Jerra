@@ -27,6 +27,8 @@ public class Player extends DefaultEntity implements Spawner {
         if (command.equals("right")) {
             this.setVelocity(1, 0);
             this.direction = "RIGHT";
+        } else {
+            this.setVelocity(0, 0);
         }
         super.update(command);
     }
