@@ -3,9 +3,6 @@
  */
 public class Player extends DefaultEntity {
 
-    // Temporary variable, should be moved to config or something?
-    private int bulletLife = 5;
-
     private String direction;
 
     public Player(Vector position, Vector velocity) {
@@ -48,19 +45,19 @@ public class Player extends DefaultEntity {
         // Make sure to delink position vectors
         // Set Projectile velocity based on facing direction
         if (this.direction.equals("UP")) {
-            return new Projectile(new Vector(this.getPosition()), new Vector(0, -1), this.bulletLife);
+            return new Bullet(new Vector(this.getPosition()), new Vector(0, -1));
         }
         if (this.direction.equals("DOWN")) {
-            return new Projectile(new Vector(this.getPosition()), new Vector(0, 1), this.bulletLife);
+            return new Bullet(new Vector(this.getPosition()), new Vector(0, 1));
         }
         if (this.direction.equals("RIGHT")) {
-            return new Projectile(new Vector(this.getPosition()), new Vector(1, 0), this.bulletLife);
+            return new Bullet(new Vector(this.getPosition()), new Vector(1, 0));
         }
         if (this.direction.equals("LEFT")) {
-            return new Projectile(new Vector(this.getPosition()), new Vector(-1, 0), this.bulletLife);
+            return new Bullet(new Vector(this.getPosition()), new Vector(-1, 0));
         }
         // If somehow there is no direction, just drop the projectile
-        return new Projectile(new Vector(this.getPosition()), new Vector(0, 0), this.bulletLife);
+        return new Bullet(new Vector(this.getPosition()), new Vector(0, 0));
     }
 
     /**
