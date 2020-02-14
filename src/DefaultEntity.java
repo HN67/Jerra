@@ -39,11 +39,15 @@ public class DefaultEntity implements Entity {
     }
 
     public void update(String command) {
-
+        this.setPosition(this.getPosition().add(this.getVelocity()));
     }
 
     public String toString() {
         return this.getName() + ": Position: " + this.position.toString() + ", Velocity: " + this.velocity.toString();
     }
-    
+
+    public boolean alive() {
+        return true;
+    }
+
 }
