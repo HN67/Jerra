@@ -44,7 +44,6 @@ public class Projectile extends DefaultEntity {
     @Override
     public void update(String command) {
         this.age -= this.speed;
-        System.out.println("Calling DefaultEntity update for Projectile:");
         super.update(command);
     }
 
