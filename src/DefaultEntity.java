@@ -49,5 +49,5 @@ public class DefaultEntity implements Entity {
     public boolean alive() {
         return true;
     }
-    
+
 }
