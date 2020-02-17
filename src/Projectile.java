@@ -9,31 +9,25 @@ public class Projectile extends DefaultEntity {
 
     protected int age;
 
+    protected static int DEFAULT_LIFETIME = 10;
+    protected static int DEFAULT_SPEED = 5;
+
     public Projectile(Vector position, Vector velocity, int speed, int lifetime) {
-        // Call super constructor
-        super(
-            new Vector(position),
-            new Vector(
-                    velocity.x() * speed,
-                    velocity.y() * speed
-                )
-            );
+        // Create new Entity
+        super(new Vector(position), velocity.scale(speed));
 
+        // Initialize instance variables.
         this.speed = speed;
-
         this.lifetime = lifetime;
-
-        // Initalizie age
         this.age = this.lifetime;
     }
 
     public Projectile(Vector position, Vector velocity) {
-        this(position, velocity, 5, 10);
+        this(position, velocity, DEFAULT_SPEED, DEFAULT_LIFETIME);
     }
 
-
     public Projectile(Vector position, Vector velocity, int speed) {
-        this(position, velocity, speed, 10);
+        this(position, velocity, speed, DEFAULT_LIFETIME);
     }
 
     @Override
