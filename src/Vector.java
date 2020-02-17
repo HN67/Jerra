@@ -47,8 +47,24 @@ public class Vector {
         return new Vector(this.x() * scale.x(), this.y() * scale.y());
     }
 
+    /**
+     * Returns a new Vector equal to the element-wise product of this and the provided
+     * @param x The scalar multiplied to x
+     * @param y The scalar multiplied to y
+     * @return The product of this vector and the provided vector
+     */
     public Vector scale(int x, int y) {
-        return new Vector(this.x() * x, this.y() * y);
+        return this.scale(new Vector(x, y));
+    }
+
+    /**
+     * Returns a new Vector which obtained by multiplying the current vector
+     * object with a scalar
+     * @param x The scalar
+     * @return The product of this vector and the provided vector
+     */
+    public Vector scale(int scalar) {
+        return this.scale(scalar, scalar);
     }
 
     public String toString() {
