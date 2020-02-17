@@ -14,17 +14,13 @@ public class Player extends DefaultEntity implements Spawner {
     public void update(String command) {
         if (command.equals("up")) {
             this.direction = "UP";
-        }
-        if (command.equals("down")) {
+        } else if (command.equals("down")) {
             this.direction = "DOWN";
-        }
-        if (command.equals("left")) {
+        } else if (command.equals("left")) {
             this.direction = "LEFT";
-        }
-        if (command.equals("right")) {
+        } else if (command.equals("right")) {
             this.direction = "RIGHT";
         } else {
-
         }
         // Call super update (updates Presence)
         super.update(command);
