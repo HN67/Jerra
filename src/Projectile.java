@@ -6,9 +6,9 @@ public class Projectile extends DefaultEntity {
     private int lifetime;
     private int age;
 
-    public Projectile(Vector position, Vector velocity, int lifetime) {
+    public Projectile(Presence presence, int lifetime) {
         // Call super constructor
-        super(position, velocity);
+        super(presence);
         // Reference lifetime
         this.lifetime = lifetime;
         // Initalizie age
