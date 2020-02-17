@@ -14,5 +14,7 @@ public interface Presence extends Updatable {
     public void setVelocity(Vector velocity);
     public void setVelocity(int x, int y);
     public Vector getVelocity();
+
+    public String toString();
     
 }
