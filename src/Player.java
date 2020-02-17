@@ -15,16 +15,13 @@ public class Player extends DefaultEntity implements Spawner {
         if (command.equals("up")) {
             this.setVelocity(0, -1);
             this.direction = "UP";
-        }
-        if (command.equals("down")) {
+        } else if (command.equals("down")) {
             this.setVelocity(0, 1);
             this.direction = "DOWN";
-        }
-        if (command.equals("left")) {
+        } else if (command.equals("left")) {
             this.setVelocity(-1, 0);
             this.direction = "LEFT";
-        }
-        if (command.equals("right")) {
+        } else if (command.equals("right")) {
             this.setVelocity(1, 0);
             this.direction = "RIGHT";
         } else {
@@ -70,5 +67,5 @@ public class Player extends DefaultEntity implements Spawner {
     public boolean spawns(String command) {
         return command.equals("shoot");
     }
-    
+
 }
