@@ -20,10 +20,9 @@ public class TextController implements Controller {
 		this.room.spawnEntity(new DefaultEntity(new Vector(5, -1), new Vector(0, 0)));
 		this.room.spawnEntity(new DefaultEntity(new Vector(1, -1), new Vector(0, 0)));
         this.room.spawnEntity(new DefaultEntity(new Vector(3, 4), new Vector(0, 0)));
-        this.room.spawnEntity(new Projectile(new Vector(-5, 0), new Vector(1, 0), 5));
 
         this.room.spawnPlayer(new Player(new Vector(0, 0), new Vector(0, 0)));
-        
+
         String command = "";
 
 		while (!command.equals("quit")) {
@@ -33,5 +32,5 @@ public class TextController implements Controller {
 		}
 
     }
-    
+
 }

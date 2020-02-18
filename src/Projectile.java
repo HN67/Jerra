@@ -3,16 +3,37 @@
  */
 public class Projectile extends DefaultEntity {
 
-    private int lifetime;
-    private int age;
+    protected int lifetime;
 
-    public Projectile(Vector position, Vector velocity, int lifetime) {
+    protected int speed;
+
+    protected int age;
+
+    public Projectile(Vector position, Vector velocity, int speed, int lifetime) {
         // Call super constructor
-        super(position, velocity);
-        // Reference lifetime
+        super(
+            new Vector(position),
+            new Vector(
+                    velocity.x() * speed,
+                    velocity.y() * speed
+                )
+            );
+
+        this.speed = speed;
+
         this.lifetime = lifetime;
+
         // Initalizie age
         this.age = this.lifetime;
+    }
+
+    public Projectile(Vector position, Vector velocity) {
+        this(position, velocity, 5, 10);
+    }
+
+
+    public Projectile(Vector position, Vector velocity, int speed) {
+        this(position, velocity, speed, 10);
     }
 
     @Override
@@ -22,7 +43,7 @@ public class Projectile extends DefaultEntity {
 
     @Override
     public void update(String command) {
-        this.age -= 1;
+        this.age -= this.speed;
         super.update(command);
     }
 
