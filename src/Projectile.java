@@ -3,14 +3,15 @@
  */
 public class Projectile extends DefaultEntity {
 
-    private int lifetime;
-    private int age;
+    protected int lifetime;
+    protected int age;
 
     public Projectile(Presence presence, int lifetime) {
         // Call super constructor
         super(presence);
         // Reference lifetime
         this.lifetime = lifetime;
+
         // Initalizie age
         this.age = this.lifetime;
     }

@@ -63,5 +63,5 @@ public class Player extends DefaultEntity implements Spawner {
     public boolean spawns(String command) {
         return command.equals("shoot");
     }
-    
+
 }

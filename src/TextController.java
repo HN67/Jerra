@@ -14,7 +14,6 @@ public class TextController implements Controller {
     }
 
     public void start() {
-
         Vector zero = new Vector(0, 0);
 
         this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Vector(1, 1), zero)));
@@ -36,5 +35,5 @@ public class TextController implements Controller {
 		}
 
     }
-    
+
 }

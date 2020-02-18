@@ -10,7 +10,7 @@ public class Bullet extends Projectile {
 
     @Override
     public String getName() {
-        return "BULLET";
+        return "Bullet (" + this.age + ")";
     }
-    
+
 }
