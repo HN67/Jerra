@@ -1,4 +1,7 @@
-
+/**
+ * Effect Interface
+ * An Effect represents a mutation that can be applied to an Entity
+ */
 public interface Effect {
 	
 	public Effect combine(Effect effect);
@@ -8,6 +11,10 @@ public interface Effect {
 	public void setDamage(int x);
 	public int getDamage();
 	
-	public void setAccl(Vector vector);
-	public Vector getAccl();
+	public void setAcceleration(Vector vector);
+	/**
+	 * Acceleration represents the change to the Entity's velocity
+	 */
+	public Vector getAcceleration();
+
 }
