@@ -114,6 +114,29 @@ public class Rect {
         ;
     }
 
+    /**
+     * Returns a new Rect displaced from this Rect by the given displacements.
+     * The displacements are applied to the origin of the Rect.
+     * Does not modify this Rect.
+     * @param x a int, the horizontal displacement (can be any number, negative, zero, or positive)
+     * @param y a int, the vertical displacement (can also be any number)
+     * @return a new Rect with the applied displacement
+     */
+    public Rect move(int x, int y) {
+        return new Rect(this.getOrigin().add(x, y), this.getSize());
+    }
+
+    /**
+     * Returns a new Rect displaced from this Rect by the given Vector displacement
+     * The origin of this Rect is displaced by the given Vector.
+     * Does not modify this Rect.
+     * @param displacement a Vector, containing the horizontal and vertical displacement
+     * @return a new Rect with the applied displacement
+     */
+    public Rect move(Vector displacement) {
+        return move(displacement.x(), displacement.y());
+    }
+
     public String toString() {
         return "[" + this.topleft().toString() + " to " + this.bottomright().toString() + "]";
     }
