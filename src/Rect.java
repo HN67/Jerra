@@ -46,6 +46,14 @@ public class Rect {
         return origin.y() + this.height();
     }
 
+    public Vector topleft() {
+        return this.origin;
+    }
+
+    public Vector bottomright() {
+        return this.origin.add(this.size);
+    }
+
     public boolean intersects(Rect other) {
         return 
             (other.left() < this.right())
@@ -53,6 +61,10 @@ public class Rect {
             && (other.top() < this.bottom())
             && (other.bottom() > this.top())
         ;
+    }
+
+    public String toString() {
+        return "[" + this.topleft().toString() + " to " + this.bottomright().toString() + "]";
     }
     
 }
