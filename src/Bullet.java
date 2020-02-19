@@ -2,8 +2,10 @@
  * Bullet
  */
 public class Bullet extends Projectile {
-    public Bullet(Vector position, Vector velocity) {
-        super(position, velocity, 2, 8);
+
+    public Bullet(Presence presence) {
+        // Set Bullet range
+        super(presence, 5);
     }
 
     @Override

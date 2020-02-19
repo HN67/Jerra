@@ -1,15 +1,12 @@
 /**
  * Entity
  */
-public interface Entity {
+public interface Entity extends Updatable {
 
-    public void setPosition(Vector position);
-    public void setPosition(int x, int y);
+    public Presence getPresence();
+    public void setPresence(Presence presence);
+
     public Vector getPosition();
-
-    public void setVelocity(Vector velocity);
-    public void setVelocity(int x, int y);
-    public Vector getVelocity();
 
     public void update(String command);
     public String toString();
