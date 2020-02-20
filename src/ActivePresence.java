@@ -13,14 +13,14 @@ public class ActivePresence extends DefaultPresence {
 
     /**
      * Constructs an Active Presence controlled by inputs to the update method
-     * @param position Position vector of the Presence
+     * @param position Position rect of the Presence
      * @param velocity Base velocity vector of the Presence, scaled in update
      * @param up The Command string that causes upward movement
      * @param right The Command string that causes rightward movement 
      * @param down The Command string that causes downward movement
      * @param left The Command string that causes leftward movement
      */
-    public ActivePresence(Vector position, Vector velocity, String up, String down, String left, String right) {
+    public ActivePresence(Rect position, Vector velocity, String up, String down, String left, String right) {
         super(position, velocity);
 
         // Save base velocity

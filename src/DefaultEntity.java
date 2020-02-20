@@ -17,7 +17,7 @@ public class DefaultEntity implements Entity {
         return this.presence;
     }
 
-    public Vector getPosition() {
+    public Rect getPosition() {
         return this.presence.getPosition();
     }
 
