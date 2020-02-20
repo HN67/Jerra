@@ -24,12 +24,8 @@ public class Projectile extends DefaultEntity {
     @Override
     public void update(String command) {
         this.age -= 1;
+        this.kill(this.age <= 0);
         super.update(command);
-    }
-
-    @Override
-    public boolean alive() {
-        return this.age > 0;
     }
 
 }

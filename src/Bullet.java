@@ -21,4 +21,12 @@ public class Bullet extends Projectile {
         return "Bullet (" + this.age + ")";
     }
 
+    @Override
+    public void interact(Entity other, String command) {
+        // Kill other entity
+        other.kill(true);
+        // Kill this (remove for penetrating)
+        this.kill(true);
+    }
+
 }
