@@ -25,6 +25,10 @@ public class DefaultEntity implements Entity {
         this.presence = presence;
     }
 
+    public boolean collides(Entity other) {
+        return this.getPresence().collides(other.getPresence());
+    }
+
     public void update(String command) {
         this.presence.update(command);
     }

@@ -71,6 +71,10 @@ public class DefaultPresence implements Presence {
         return this.velocity;
     }
 
+    public boolean collides(Presence other) {
+        return this.getPosition().intersects(other.getPosition());
+    }
+
     /**
      * Updates the Presence by adding the Velocity onto the Position origin
      */

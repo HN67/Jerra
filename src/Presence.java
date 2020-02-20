@@ -13,7 +13,6 @@ public interface Presence extends Updatable {
      */
     public void setPosition(Rect position);
 
-
     /**
      * Replaces the origin of this Presence with a new Vector
      * @param origin a Vector, the new origin of the Presence
@@ -76,6 +75,14 @@ public interface Presence extends Updatable {
      * @return a Vector, identical to the velocity of this Presence
      */
     public Vector getVelocity();
+
+    /**
+     * Determines whether this Presence and the other Presence are colliding
+     * Checks the intersection of the Rects
+     * @param other a Presence, to be checked if colliding with
+     * @return a boolean, true if there is a collision
+     */
+    public boolean collides(Presence other);
 
     /**
      * Returns a String representation of this Presence.
