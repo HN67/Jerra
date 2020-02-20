@@ -2,6 +2,10 @@
 
 Repository for *Jerra*, a two dimensional shoot-loot-upgrade game.
 
+## Building
+
+Jerra can be built by by running `javac *.java` inside the `src` directory to compile the source files, and then running the compiled project with `java Main`.
+
 ## Roadmap
 
 Jerra will be implemented in multiple stages, of which the two main stages will be a text-based version run in the console, and a graphical version.
