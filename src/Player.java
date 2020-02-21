@@ -38,21 +38,22 @@ public class Player extends DefaultEntity implements Spawner {
      */
     public Projectile spawn() {
         // Make sure to delink position vectors
+        Vector position = new Vector(this.getPosition().getOrigin());
         // Set Projectile velocity based on facing direction
         if (this.direction.equals("UP")) {
-            return new Bullet(new DefaultPresence(new Vector(this.getPosition()), new Vector(0, -1)));
+            return new Bullet(position, new Vector(0, -1));
         }
         if (this.direction.equals("DOWN")) {
-            return new Bullet(new DefaultPresence(new Vector(this.getPosition()), new Vector(0, 1)));
+            return new Bullet(position, new Vector(0, 1));
         }
         if (this.direction.equals("RIGHT")) {
-            return new Bullet(new DefaultPresence(new Vector(this.getPosition()), new Vector(1, 0)));
+            return new Bullet(position, new Vector(1, 0));
         }
         if (this.direction.equals("LEFT")) {
-            return new Bullet(new DefaultPresence(new Vector(this.getPosition()), new Vector(-1, 0)));
+            return new Bullet(position, new Vector(-1, 0));
         }
         // If somehow there is no direction, just drop the projectile
-        return new Bullet(new DefaultPresence(new Vector(this.getPosition()), new Vector(0, 0)));
+        return new Bullet(position, new Vector(0, 0));
     }
 
     /**

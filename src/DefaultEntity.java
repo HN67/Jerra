@@ -17,12 +17,16 @@ public class DefaultEntity implements Entity {
         return this.presence;
     }
 
-    public Vector getPosition() {
+    public Rect getPosition() {
         return this.presence.getPosition();
     }
 
     public void setPresence(Presence presence) {
         this.presence = presence;
+    }
+
+    public boolean collides(Entity other) {
+        return this.getPresence().collides(other.getPresence());
     }
 
     public void update(String command) {

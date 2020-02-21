@@ -5,15 +5,15 @@
  */
 public class DefaultPresence implements Presence {
 
-    private Vector position;
+    private Rect position;
     private Vector velocity;
 
     /**
-     * Constructs a Presence with the given two Vectors
-     * @param position
-     * @param velocity
+     * Constructs a Presence with the given position and velocity
+     * @param position a Rect, the position
+     * @param velocity a Vector, the velocity
      */
-    public DefaultPresence(Vector position, Vector velocity) {
+    public DefaultPresence(Rect position, Vector velocity) {
         this.position = position;
         this.velocity = velocity;
     }
@@ -23,38 +23,63 @@ public class DefaultPresence implements Presence {
      * @param other The Presence to copy
      */
     public DefaultPresence(Presence other) {
-        this.position = new Vector(other.getPosition());
+        this.position = new Rect(other.getPosition());
         this.velocity = new Vector(other.getVelocity());
     }
 
-	public void setPosition(Vector position) {
+	public void setPosition(Rect position) {
         this.position = position;
     }
-    public void setVelocity(Vector velocity) {
-        this.velocity = velocity;
+
+    public void setPosition(Vector position) {
+        this.position = new Rect(position, this.position.getSize());
     }
 
     public void setPosition(int x, int y) {
         this.setPosition(new Vector(x, y));
     }
 
+    public void setSize(Vector size) {
+        this.position = new Rect(this.position.getOrigin(), size);
+    }
+
+    public void setSize(int width, int height) {
+        this.setSize(new Vector(width, height));
+    }
+
+    public void setVelocity(Vector velocity) {
+        this.velocity = velocity;
+    }
+
     public void setVelocity(int x, int y) {
         this.setVelocity(new Vector(x, y));
     }
 
-    public Vector getPosition() {
+    public Rect getPosition() {
         return this.position;
+    }
+
+    public Vector getOrigin() {
+        return this.position.getOrigin();
+    }
+
+    public Vector getSize() {
+        return this.position.getSize();
     }
 
     public Vector getVelocity() {
         return this.velocity;
     }
 
+    public boolean collides(Presence other) {
+        return this.getPosition().intersects(other.getPosition());
+    }
+
     /**
-     * Updates the Presence by adding the Velocity onto the Position
+     * Updates the Presence by adding the Velocity onto the Position origin
      */
     public void update(String command) {
-        this.setPosition(this.getPosition().add(this.getVelocity()));
+        this.setPosition(this.getOrigin().add(this.getVelocity()));
     }
 
     public String toString() {
