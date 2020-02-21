@@ -16,12 +16,12 @@ public class TextController implements Controller {
     public void start() {
         Vector zero = new Vector(0, 0);
 
-        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(1, 1), new Vector(1, 1)), zero)));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(3, -1), new Vector(1, 1)), zero)));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(5, -1), new Vector(1, 1)), zero)));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(1, -1), new Vector(1, 1)), zero)));
-        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(3, 4), new Vector(1, 1)), zero)));
-        this.room.spawnEntity(new Bullet(new Vector(-5, 0), new Vector(1, 0)));
+        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(4, 0), new Vector(1, 1)), zero)));
+		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(-4, 0), new Vector(1, 1)), zero)));
+		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 4), new Vector(1, 1)), zero)));
+		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, -4), new Vector(1, 1)), zero)));
+        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(4, 4), new Vector(1, 1)), zero)));
+        this.room.spawnEntity(new Bullet(new Vector(-3, 0), new Vector(1, 0)));
 
         // ActivePresence takes a base velocity, which is scaled off of (1, 1 in this case)
         this.room.spawnPlayer(new Player(new ActivePresence(new Rect(new Vector(0, 0), new Vector(1, 1)), new Vector(1, 1), "up", "down", "left", "right")));

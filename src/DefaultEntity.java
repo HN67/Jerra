@@ -4,9 +4,11 @@
 public class DefaultEntity implements Entity {
 
     private Presence presence;
+    private boolean alive;
 
     public DefaultEntity(Presence presence) {
         this.presence = presence;
+        this.alive = true;
     }
 
     public String getName() {
@@ -33,12 +35,20 @@ public class DefaultEntity implements Entity {
         this.presence.update(command);
     }
 
+    public void interact(Entity other, String command) {
+        ;
+    }
+
     public String toString() {
         return this.getName() + ": " + this.presence.toString();
     }
 
     public boolean alive() {
-        return true;
+        return this.alive;
+    }
+
+    public void kill(boolean dead) {
+        this.alive = !dead;
     }
 
 }

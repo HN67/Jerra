@@ -42,6 +42,18 @@ public class Vector {
         return this.add(other.x(), other.y());
     }
 
+    public Vector subtract(int x, int y) {
+        return new Vector(this.x() - x, this.y() - y);
+    }
+
+    /**
+     * Returns a new Vector equal to the element-wise difference of this and the provided
+     * @param other The second vector to subtract with
+     * @return The difference between this Vector and the other Vector (this - other)
+     */
+    public Vector subtract(Vector other) {
+        return this.subtract(other.x(), other.y());
+    }
 
     public Vector scale(int x, int y) {
         return new Vector(this.x() * x, this.y() * y);
@@ -54,6 +66,15 @@ public class Vector {
      */
     public Vector scale(Vector scale) {
         return this.scale(scale.x(), scale.y());
+    }
+
+    /**
+     * Returns the additive negative of this Vector.
+     * Vector + Vector.negate() = 0
+     * @return a Vector, the opposite of this Vector
+     */
+    public Vector negate() {
+        return this.scale(-1, -1);
     }
 
     public String toString() {
