@@ -73,6 +73,8 @@ public class TextRoom implements Room {
             }
         }
 
+        this.spawners.removeIf(spawner -> !spawner.alive());
+
     }
 
     @Override
