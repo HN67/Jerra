@@ -16,7 +16,12 @@ Jerra is currently a text based game designed to be run from the console. Jerra 
 
 ### Movement
 
-### Projectiles
+The player controls an avatar which can be moved by entering movement commands, such as "up", "down", "left", and "right", which causes the avatar to move in the respective direction. Movement is implemented in Jerra with a capable velocity system, allowing expansion into acceleration and other complex movement if desired.
 
 ### Mortality
 
+### Collisions
+
+Jerra uses a sophisticated linear control hierarchy to handle collisions. Each Entity self contains logic to check for and handle a collision with another Entity, and the Room can operate these methods without any knowledge of the internal logic.
+
+### Projectiles
