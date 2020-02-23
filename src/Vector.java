@@ -4,8 +4,8 @@
  */
 public class Vector {
 
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
 
     public Vector() {
         this(0, 0);

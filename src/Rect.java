@@ -8,8 +8,8 @@
  */
 public class Rect {
 
-    private Vector origin;
-    private Vector size;
+    private final Vector origin;
+    private final Vector size;
 
     /**
      * Constructs a Rect using an origin (top left) and size (width / height).
