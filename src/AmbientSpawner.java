@@ -27,6 +27,12 @@ public class AmbientSpawner implements Spawner {
         // TODO
         // Keep tick incrementer, return true every 10 ticks or something
         // maybe add frequency to constructor
+    	this.frequency += 1;
+    	if (this.frequency == 10) {
+    		this.frequency = 0;
+    		return true;
+    	}
+    	return false;
     }
 
     @Override
