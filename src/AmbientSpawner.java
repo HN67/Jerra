@@ -9,9 +9,17 @@ public class AmbientSpawner implements Spawner {
      * @param origin a Vector, the center of the spawning area
      * @param range a int, the radius of the spawning area
      */
+	private int frequency;
+	private Entity entity;
+	private Vector vector;
+	private int range;
+	
     public AmbientSpawner(Entity entity, Vector origin, int range) {
         // TODO
         // Save origin and range and entity
+    	this.entity = entity;
+    	this.vector = origin;
+    	this.range = range;
     }
 
     @Override
