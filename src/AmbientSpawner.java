@@ -41,6 +41,14 @@ public class AmbientSpawner implements Spawner {
         // copy the saved entity, set its position to something within the spawning area
         // and return it
         // may need to add methods to Rect/Vector (remember Rect/Vector is immutable)
+    	int negative = (int)(Math.random()*(2));
+    	int y = 0;
+    	if (negative == 0) {
+    		y = (int)(Math.random()*(this.range+1));
+    	} else if(negative == 1) {
+    		y = (int)(Math.random()*(this.range+1)*-1);
+    	}
+    	
     }
 
     @Override
