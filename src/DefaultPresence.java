@@ -82,11 +82,6 @@ public class DefaultPresence implements Presence {
         this.setPosition(this.getOrigin().add(this.getVelocity()));
     }
 
-    public Presence copy() {
-        // Simply delegate to copy constructor
-        return new DefaultPresence(this);
-    }
-
     public String toString() {
         return "Position: " + this.position.toString() + ", Velocity: " + this.velocity.toString();
     }

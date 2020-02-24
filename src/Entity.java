@@ -1,7 +1,7 @@
 /**
  * Entity
  */
-public interface Entity extends Updatable, Copyable<Entity> {
+public interface Entity extends Updatable {
 
     public Presence getPresence();
     public void setPresence(Presence presence);
@@ -12,13 +12,8 @@ public interface Entity extends Updatable, Copyable<Entity> {
     
     public void interact(Entity other, String command);
 
-    @Override
     public void update(String command);
-    @Override
     public String toString();
-
-    @Override
-    public Entity copy();
 
     public boolean alive();
     public void kill(boolean dead);
