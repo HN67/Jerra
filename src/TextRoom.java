@@ -89,17 +89,21 @@ public class TextRoom implements Room {
     public void playerGrid() {
         for (int row = 0; row < 10; row++) {
             for (int col = 0; col < 10; col++) {
+                boolean found = false;
                 for (Entity entity: this.entityList) {
                     if (entity.getPosition().getOrigin().equals(new Vector(col, row))) {
                         System.out.print(entity.symbol());
+                        found = true;
+                        break;
                     }
-                    else {
-                        System.out.print(" ");
-                    }
+                }
+                if (!found) {
+                    System.out.print(" ");
+                }
+            
             }
             System.out.println();
         }
-    }
 
-}
+    }
 }
