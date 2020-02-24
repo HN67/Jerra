@@ -92,7 +92,7 @@ public class TextRoom implements Room {
                 boolean found = false;
                 for (Entity entity: this.entityList) {
                     if (entity.getPosition().getOrigin().equals(new Vector(col, row))) {
-                        System.out.print(entity.symbol());
+                        System.out.print(entity.symbol() + " ");
                         found = true;
                         break;
                     }

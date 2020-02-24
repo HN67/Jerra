@@ -17,10 +17,10 @@ public class TextController implements Controller {
         Vector zero = new Vector(0, 0);
 
         this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(4, 0), new Vector(1, 1)), zero)));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(-4, 0), new Vector(1, 1)), zero)));
+		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(8, 0), new Vector(1, 1)), zero)));
 		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 4), new Vector(1, 1)), zero)));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, -4), new Vector(1, 1)), zero)));
-        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(4, 4), new Vector(1, 1)), zero)));
+		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 8), new Vector(1, 1)), zero)));
+        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(5, 5), new Vector(1, 1)), zero)));
         // this.room.spawnEntity(new Bullet(new Vector(-3, 0), new Vector(1, 0)));
 
         // ActivePresence takes a base velocity, which is scaled off of (1, 1 in this case)
