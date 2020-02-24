@@ -80,5 +80,9 @@ public class Vector {
     public String toString() {
         return "(" + this.x + ", " + this.y + ")";
     }
+
+    public boolean equals(Vector other) {
+        return (this.x() == other.x() && this.y() == other.y());
+    }
     
 }
