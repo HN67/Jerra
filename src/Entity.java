@@ -14,6 +14,7 @@ public interface Entity extends Updatable {
 
     public void update(String command);
     public String toString();
+    public String symbol();
 
     public boolean alive();
     public void kill(boolean dead);

@@ -32,6 +32,11 @@ public class Player extends DefaultEntity implements Spawner {
         return "PLAYER (" + this.direction + ")";
     }
 
+    @Override
+    public String symbol() {
+        return "P";
+    }
+
     /**
      * Returns a new Entity, shot in the direction the Player is facing
      * @return A Entity, that has not been added to any room

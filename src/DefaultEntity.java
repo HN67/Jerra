@@ -43,6 +43,10 @@ public class DefaultEntity implements Entity {
         return this.getName() + ": " + this.presence.toString();
     }
 
+    public String symbol() {
+        return "E";
+    }
+
     public boolean alive() {
         return this.alive;
     }
