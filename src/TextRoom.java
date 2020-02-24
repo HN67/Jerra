@@ -98,7 +98,7 @@ public class TextRoom implements Room {
                     }
                 }
                 if (!found) {
-                    System.out.print(" ");
+                    System.out.print("  ");
                 }
             
             }
