@@ -16,12 +16,16 @@ Jerra is currently a text based game designed to be run from the console. Jerra 
 
 ### Movement
 
-The player controls an avatar which can be moved by entering movement commands, such as "up", "down", "left", and "right", which causes the avatar to move in the respective direction. Movement is implemented in Jerra with a capable velocity system, allowing expansion into acceleration and other complex movement if desired.
+The player controls an avatar which can be moved by entering movement commands, such as "up", "down", "left", and "right", which causes the avatar to move in the respective direction. Conversely, bullets move in a fixed linear direction. Movement is implemented in Jerra with a capable velocity system, allowing expansion into acceleration and other complex movement if desired.
 
-### Mortality
+### Spawning
+
+New entities are spawned into the game room with a robust Spawner architecture, which allows spawners to self report when and what they spawn. The avatar uses this architecture to spawn bullets, and an ambient spawner uses this architecture to spawn new entities.
 
 ### Collisions
 
-Jerra uses a sophisticated linear control hierarchy to handle collisions. Each Entity self contains logic to check for and handle a collision with another Entity, and the Room can operate these methods without any knowledge of the internal logic.
+Jerra checks for collisions between all entities, and allows them to interact with each other. Currently, this allows for bullets to hit and kill the player's avatar, as well as other entities, but has the potential to be expanded to handle any type of interaction, such as opening a chest.
 
-### Projectiles
+### Mortality
+
+Every entity has a state of aliveness, and is removed from the game when it is "dead". This allows for a flexible system, where bullets report as dead when they have gone a specific distance, and the avatar and other entities report as dead when they have been hit by a bullet.
