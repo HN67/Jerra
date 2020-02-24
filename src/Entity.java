@@ -18,6 +18,4 @@ public interface Entity extends Updatable {
     public boolean alive();
     public void kill(boolean dead);
     
-    public Entity copy(Entity entity);
-    
 }
