@@ -31,7 +31,8 @@ public class TextController implements Controller {
 		while (!command.equals("quit")) {
 			command = this.keyboard.nextLine();
 			this.room.update(command);
-			System.out.println(this.room);
+            System.out.println(this.room);
+            this.room.playerGrid();
 		}
 
     }

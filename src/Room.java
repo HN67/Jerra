@@ -21,6 +21,4 @@ public interface Room {
     @Override
     public String toString();
 
-    
-
 }

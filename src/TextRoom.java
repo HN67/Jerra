@@ -86,5 +86,11 @@ public class TextRoom implements Room {
         return output;
     }
 
+    public void playerGrid() {
+        for (int row = 0; row < 11; row++) {
+            System.out.println("**********");
+        }
+    }
+
     
 }
