@@ -16,6 +16,7 @@ public interface Entity extends Updatable, Copyable<Entity> {
     public void update(String command);
     @Override
     public String toString();
+    public String symbol();
 
     @Override
     public Entity copy();

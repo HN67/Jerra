@@ -17,10 +17,10 @@ public class TextController implements Controller {
         Vector zero = new Vector(0, 0);
 
         this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(4, 0), new Vector(1, 1)), zero)));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(-4, 0), new Vector(1, 1)), zero)));
+		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(8, 0), new Vector(1, 1)), zero)));
 		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 4), new Vector(1, 1)), zero)));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, -4), new Vector(1, 1)), zero)));
-        this.room.spawnEntity(new Bullet(new Vector(-3, 0), new Vector(1, 0)));
+		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 8), new Vector(1, 1)), zero)));
+        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(5, 5), new Vector(1, 1)), zero)));
 
         this.room.spawnSpawner(new AmbientSpawner(
             new DefaultEntity(new DefaultPresence(new Rect(0, 0, 1, 1), zero)),
@@ -29,7 +29,6 @@ public class TextController implements Controller {
             3
         ));
 
-        ActivePresence takes a base velocity, which is scaled off of (1, 1 in this case)
         this.room.spawnPlayer(new Player(new ActivePresence(new Rect(new Vector(0, 0), new Vector(1, 1)), new Vector(1, 1), "up", "down", "left", "right")));
         
         String command = "";
@@ -37,7 +36,8 @@ public class TextController implements Controller {
 		while (!command.equals("quit")) {
 			command = this.keyboard.nextLine();
 			this.room.update(command);
-			System.out.println(this.room);
+            System.out.println(this.room);
+            this.room.generateGrid();
 		}
 
     }
