@@ -13,6 +13,11 @@ public interface Room {
      */
     public void spawnEntity(Entity entity);
     /**
+     * Spawns (inserts) a general Spawner in the Room
+     * @param spawner The Spawner that the Room will now tack (as a general Spawner)
+     */
+    public void spawnSpawner(Spawner spawner);
+    /**
      * Spawns (inserts) a Player in the Room, allowing the Room to have finer control
      * @param player The Player that the Room will now track (as a Player)
      */

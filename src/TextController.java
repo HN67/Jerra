@@ -21,9 +21,14 @@ public class TextController implements Controller {
 		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 4), new Vector(1, 1)), zero)));
 		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 8), new Vector(1, 1)), zero)));
         this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(5, 5), new Vector(1, 1)), zero)));
-        // this.room.spawnEntity(new Bullet(new Vector(-3, 0), new Vector(1, 0)));
 
-        // ActivePresence takes a base velocity, which is scaled off of (1, 1 in this case)
+        this.room.spawnSpawner(new AmbientSpawner(
+            new DefaultEntity(new DefaultPresence(new Rect(0, 0, 1, 1), zero)),
+            new Vector(4, 4), 
+            1, 
+            3
+        ));
+
         this.room.spawnPlayer(new Player(new ActivePresence(new Rect(new Vector(0, 0), new Vector(1, 1)), new Vector(1, 1), "up", "down", "left", "right")));
         
         String command = "";
