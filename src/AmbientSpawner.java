@@ -2,37 +2,40 @@
  * Ambient Spawner, an object that periodically spawns Entities around its position.
  */
 public class AmbientSpawner implements Spawner {
+    
+    private int period;
+	private int tick;
+	private Entity entity;
+	private Vector origin;
+	private int range;
 
     /**
      * Constructs an AmbientSpawner that spawns copies of the given entity at nearby positions
      * @param entity a Entity, this spawner creates copies of this Entity
      * @param origin a Vector, the center of the spawning area
      * @param range a int, the radius of the spawning area
+     * @param period, a int, the Entity is spawned every this many ticks
      */
-	private int frequency;
-	private Entity entity;
-	private Vector vector;
-	private int range;
-	
-    public AmbientSpawner(Entity entity, Vector origin, int range) {
-        // TODO
+    public AmbientSpawner(Entity entity, Vector origin, int range, int period) {
         // Save origin and range and entity
     	this.entity = entity;
-    	this.vector = origin;
-    	this.range = range;
+    	this.origin = origin;
+        this.range = range;
+        // Initalize tick and period
+        this.tick = 0;
+        this.period = period;
     }
 
     @Override
     public boolean spawns(String command) {
-        // TODO
-        // Keep tick incrementer, return true every 10 ticks or something
-        // maybe add frequency to constructor
-    	this.frequency += 1;
-    	if (this.frequency == 10) {
-    		this.frequency = 0;
+        // Count the number of ticks, return true every period amount
+    	this.tick += 1;
+    	if (this.tick >= period) {
+    		this.tick = 0;
     		return true;
-    	}
-    	return false;
+    	} else {
+            return false;
+        }
     }
 
     @Override
