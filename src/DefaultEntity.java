@@ -50,10 +50,5 @@ public class DefaultEntity implements Entity {
     public void kill(boolean dead) {
         this.alive = !dead;
     }
-    
-    public Entity copy() {
-    	Entity newEntity = new DefaultEntity(this.presence);
-    	return newEntity;
-    }
 
 }
