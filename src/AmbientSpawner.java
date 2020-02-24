@@ -43,27 +43,34 @@ public class AmbientSpawner implements Spawner {
 
     @Override
     public Entity spawn() {
-        // TODO
-        // copy the saved entity, set its position to something within the spawning area
-        // and return it
-        // may need to add methods to Rect/Vector (remember Rect/Vector is immutable)
+        // Generate random offsets
+        // Determine negative or not for y offset
     	int negative = (int)(Math.random()*(2));
-    	int y = 0;
+    	int y;
     	if (negative == 0) {
+            // Non negative, just generate up to range + 1 exclusive
     		y = (int)(Math.random()*(this.range+1));
-    	} else if(negative == 1) {
-    		y = (int)(Math.random()*(this.range+1)*-1);
-    	}
+    	} else {
+            // Negate generation result
+    		y = (int)(Math.random()*(this.range+1))*-1;
+        }
+        // Determine negative or not for x offset
     	negative = (int)(Math.random()*(2));
-    	int x = 0;
+    	int x;
     	if (negative == 0) {
+            // Non negative, just generate up to range + 1 exclusive
     		x = (int)(Math.random()*(this.range+1));
-    	} else if(negative == 1) {
-    		x = (int)(Math.random()*(this.range+1)*-1);
-    	}
-    	Entity newEntity = this.entity.copy();
-    	newEntity.getPresence().setPosition(origin);
-    	newEntity.getPresence().getOrigin().add(x, y);
+    	} else {
+            // Negate generation result
+    		x = (int)(Math.random()*(this.range+1))*-1;
+        }
+        // Copy entity
+        Entity newEntity = this.entity.copy();
+        // Set position to determined offset of origin
+        Presence newPresence = newEntity.getPresence();
+        // It would be convenient if setPosition returned a Presence so we could oneline, but this works
+        newPresence.setPosition(this.origin.add(x, y));
+        newEntity.setPresence(newPresence);
     	return newEntity;
     }
 
