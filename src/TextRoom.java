@@ -91,24 +91,27 @@ public class TextRoom implements Room {
         return output;
     }
     @Override
-    public void generateGrid() {
+    public String gridString() {
+        // Create string builder with 11*10*2 capacity
+        StringBuilder output = new StringBuilder(220);
         for (int row = 0; row < 10; row++) {
             for (int col = 0; col < 10; col++) {
                 boolean found = false;
                 for (Entity entity: this.entityList) {
                     if (entity.getPosition().getOrigin().equals(new Vector(col, row))) {
-                        System.out.print(entity.symbol() + " ");
+                        output.append(entity.symbol() + " ");
                         found = true;
                         break;
                     }
                 }
                 if (!found) {
-                    System.out.print("  ");
+                    output.append("  ");
                 }
-            
             }
-            System.out.println();
+            output.append("\n");
         }
-
+        // Return string built from builder
+        return output.toString();
     }
+
 }
