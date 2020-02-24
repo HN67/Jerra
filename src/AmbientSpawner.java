@@ -1,3 +1,5 @@
+import java.lang.Math;
+
 /**
  * Ambient Spawner, an object that periodically spawns Entities around its position.
  */
@@ -13,7 +15,8 @@ public class AmbientSpawner implements Spawner {
      * Constructs an AmbientSpawner that spawns copies of the given entity at nearby positions
      * @param entity a Entity, this spawner creates copies of this Entity
      * @param origin a Vector, the center of the spawning area
-     * @param range a int, the radius of the spawning area
+     * @param range a int, the radius of the spawning area. Specifically, the origin coordinate
+     * of the spawned entity is <= origin -+ range.
      * @param period, a int, the Entity is spawned every this many ticks
      */
     public AmbientSpawner(Entity entity, Vector origin, int range, int period) {
