@@ -32,7 +32,7 @@ public class TextController implements Controller {
 			command = this.keyboard.nextLine();
 			this.room.update(command);
             System.out.println(this.room);
-            this.room.playerGrid();
+            this.room.generateGrid();
 		}
 
     }

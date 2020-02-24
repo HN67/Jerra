@@ -86,7 +86,7 @@ public class TextRoom implements Room {
         return output;
     }
     @Override
-    public void playerGrid() {
+    public void generateGrid() {
         for (int row = 0; row < 10; row++) {
             for (int col = 0; col < 10; col++) {
                 boolean found = false;
