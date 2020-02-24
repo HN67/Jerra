@@ -51,7 +51,17 @@ public class AmbientSpawner implements Spawner {
     	} else if(negative == 1) {
     		y = (int)(Math.random()*(this.range+1)*-1);
     	}
-    	
+    	negative = (int)(Math.random()*(2));
+    	int x = 0;
+    	if (negative == 0) {
+    		x = (int)(Math.random()*(this.range+1));
+    	} else if(negative == 1) {
+    		x = (int)(Math.random()*(this.range+1)*-1);
+    	}
+    	Entity newEntity = this.entity.copy();
+    	newEntity.getPresence().setPosition(origin);
+    	newEntity.getPresence().getOrigin().add(x, y);
+    	return newEntity;
     }
 
     @Override
