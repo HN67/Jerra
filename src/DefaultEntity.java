@@ -35,6 +35,15 @@ public class DefaultEntity implements Entity {
         this.presence.update(command);
     }
 
+    @Override
+    public Entity copy() {
+        // Construct with copied presence
+        Entity out = new DefaultEntity(this.getPresence().copy());
+        // Copy over aliveness
+        out.kill(!this.alive());
+        return out;
+    }
+
     public void interact(Entity other, String command) {
         ;
     }

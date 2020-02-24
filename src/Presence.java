@@ -5,7 +5,7 @@
  * Moreover, a Presence is capable of self updating.
  * @author Ryan Allard
  */
-public interface Presence extends Updatable {
+public interface Presence extends Updatable, Copyable<Presence> {
 
     /**
      * Replaces the position of this Presence with a new Rect
