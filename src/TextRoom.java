@@ -22,6 +22,11 @@ public class TextRoom implements Room {
     }
 
     @Override
+    public void spawnSpawner(Spawner spawner) {
+        this.spawners.add(spawner);
+    }
+
+    @Override
     public void spawnPlayer(Player player) {
         // Adding to entityList allows bulk updating
         this.entityList.add(player);
