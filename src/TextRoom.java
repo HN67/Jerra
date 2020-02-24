@@ -85,10 +85,13 @@ public class TextRoom implements Room {
         }
         return output;
     }
-
+    @Override
     public void playerGrid() {
-        for (int row = 0; row < 11; row++) {
-            System.out.println("**********");
+        for (int row = 0; row < 10; row++) {
+            for (int col = 0; col < 10; col++) {
+                System.out.print("(" + row + "," + col + ")");
+            }
+            System.out.println();
         }
     }
 
