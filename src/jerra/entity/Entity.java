@@ -1,3 +1,12 @@
+package jerra.entity;
+
+import jerra.api.Copyable;
+import jerra.api.Updatable;
+
+import jerra.core.Rect;
+
+import jerra.presence.Presence;
+
 /**
  * Entity
  */

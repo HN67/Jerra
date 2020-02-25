@@ -1,3 +1,5 @@
+package jerra.control;
+
 /**
  * Controller
  * @author Ryan Allard

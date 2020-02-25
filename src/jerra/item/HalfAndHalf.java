@@ -1,3 +1,5 @@
+package jerra.item;
+
 /**
  * HalfAndHalf
  * ... slows you down.

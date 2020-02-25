@@ -1,3 +1,9 @@
+package jerra.room;
+
+import jerra.entity.Entity;
+import jerra.entity.Spawner;
+import jerra.entity.Player;
+
 /**
  * Room
  */
@@ -26,6 +32,6 @@ public interface Room {
     @Override
     public String toString();
 
-    public void generateGrid();
+    public String gridString();
 
 }

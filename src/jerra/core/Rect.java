@@ -1,3 +1,5 @@
+package jerra.core;
+
 /**
  * Rect object that represents a rectangular bounding area.
  * Rects use a coordinate system with a top-left zero origin, so down and right are positive directions

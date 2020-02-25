@@ -1,3 +1,5 @@
+package jerra.core;
+
 /**
  * Vector
  * @author Ryan Allard

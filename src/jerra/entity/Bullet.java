@@ -1,3 +1,11 @@
+package jerra.entity;
+
+import jerra.core.Rect;
+import jerra.core.Vector;
+
+import jerra.presence.Presence;
+import jerra.presence.DefaultPresence;
+
 /**
  * Bullet
  */

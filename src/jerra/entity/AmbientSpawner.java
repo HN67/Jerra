@@ -1,4 +1,10 @@
+package jerra.entity;
+
 import java.lang.Math;
+
+import jerra.core.Vector;
+
+import jerra.presence.Presence;
 
 /**
  * Ambient Spawner, an object that periodically spawns Entities around its position.

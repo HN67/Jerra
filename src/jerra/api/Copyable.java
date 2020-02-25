@@ -1,3 +1,5 @@
+package jerra.api;
+
 /**
  * Interface to specify that a class has a copy method.
  * Copyable has a generic type, which should usually be specified

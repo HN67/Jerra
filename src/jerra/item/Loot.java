@@ -1,3 +1,10 @@
+package jerra.item;
+
+import jerra.api.Updatable;
+
+import jerra.presence.Presence;
+
+
 /**
  * Loot object interface
  * Represents a combination of a physical entity and an inventory

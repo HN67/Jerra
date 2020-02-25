@@ -1,3 +1,5 @@
+package jerra.item;
+
 /** 
  * This is the abstract Item class. This must be extended by a concrete,
  * in-game item class. An item could be but is not limited to food, or a

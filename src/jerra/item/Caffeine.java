@@ -1,3 +1,5 @@
+package jerra.item;
+
 /**
  * Caffeine
  * Caffeine speeds you up but...
