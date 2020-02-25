@@ -2,6 +2,7 @@ package jerra.control;
 
 import java.util.Scanner;
 
+
 import jerra.core.Vector;
 import jerra.core.Rect;
 
@@ -13,6 +14,7 @@ import jerra.entity.Player;
 import jerra.entity.AmbientSpawner;
 
 import jerra.room.Room;
+import jerra.view.TextView;
 
 /**
  * TextController
@@ -46,12 +48,14 @@ public class TextController implements Controller {
         this.room.spawnPlayer(new Player(new ActivePresence(new Rect(new Vector(0, 0), new Vector(1, 1)), new Vector(1, 1), "up", "down", "left", "right")));
         
         String command = "";
+        
+        TextView view = new TextView(this.room);
 
 		while (!command.equals("quit")) {
 			command = this.keyboard.nextLine();
 			this.room.update(command);
             System.out.println(this.room);
-            System.out.println(this.room.gridString());
+            view.render();
 		}
 
     }

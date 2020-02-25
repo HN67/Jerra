@@ -1,5 +1,7 @@
 package jerra.room;
 
+import java.util.List;
+
 import jerra.entity.Entity;
 import jerra.entity.Spawner;
 import jerra.entity.Player;
@@ -28,10 +30,10 @@ public interface Room {
      * @param player The Player that the Room will now track (as a Player)
      */
     public void spawnPlayer(Player player);
+    
+    public List<Entity> getEntities();
 
     @Override
     public String toString();
-
-    public String gridString();
 
 }

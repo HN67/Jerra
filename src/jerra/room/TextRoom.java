@@ -1,9 +1,8 @@
 package jerra.room;
 
 import java.util.List;
-import java.util.ArrayList;
 
-import jerra.core.Vector;
+import java.util.ArrayList;
 
 import jerra.entity.Entity;
 import jerra.entity.Spawner;
@@ -89,6 +88,11 @@ public class TextRoom implements Room {
         this.spawners.removeIf(spawner -> !spawner.alive());
 
     }
+    
+    @Override
+    public List<Entity> getEntities() {
+    	return this.entityList;
+    }
 
     @Override
     public String toString() {
@@ -97,29 +101,6 @@ public class TextRoom implements Room {
             output += entity.toString() + "\n";
         }
         return output;
-    }
-    @Override
-    public String gridString() {
-        // Create string builder with 11*10*2 capacity
-        StringBuilder output = new StringBuilder(220);
-        for (int row = 0; row < 10; row++) {
-            for (int col = 0; col < 10; col++) {
-                boolean found = false;
-                for (Entity entity: this.entityList) {
-                    if (entity.getPosition().getOrigin().equals(new Vector(col, row))) {
-                        output.append(entity.symbol() + " ");
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    output.append("  ");
-                }
-            }
-            output.append("\n");
-        }
-        // Return string built from builder
-        return output.toString();
     }
 
 }
