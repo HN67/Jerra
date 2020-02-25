@@ -1,20 +1,22 @@
 package jerra.view;
 
-abstract public class View<T>{
+abstract public class View<Model>{
 	
-	protected T model;
+	protected Model model;
 	
-	public View(T model) {
+	public View(Model model) {
 		this.setModel(model);
 	}
 	
 	
-	public void setModel(T model) {
+	public void setModel(Model model) {
 		// Potential privacy leaks.
+		// Might create interface CopyConstructor or
+		// CopiesItself
 		this.model = model;
 	}
 	
-	public T getModel() {
+	public Model getModel() {
 		return this.model;
 	}
 	
