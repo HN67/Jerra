@@ -1,3 +1,5 @@
+package jerra;
+
 /**
  * An implementation of a Presence by simply storing the Vectors
  * The update method is a sane default of adding the velocity to the position

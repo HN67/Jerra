@@ -1,3 +1,5 @@
+package jerra;
+
 /**
  * Loot object interface
  * Represents a combination of a physical entity and an inventory

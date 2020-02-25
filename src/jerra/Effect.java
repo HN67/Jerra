@@ -1,3 +1,5 @@
+package jerra;
+
 /**
  * Effect Interface
  * An Effect represents a mutation that can be applied to an Entity

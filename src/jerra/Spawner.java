@@ -1,3 +1,5 @@
+package jerra;
+
 /**
  * Spawner Interface
  * Represents something that has the capability to spawn an Entity

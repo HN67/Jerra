@@ -1,3 +1,5 @@
+package jerra;
+
 import java.util.Scanner;
 
 /**

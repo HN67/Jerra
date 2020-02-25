@@ -1,3 +1,5 @@
+package jerra;
+
 /**
  * Presence
  * A class representing a physical presence

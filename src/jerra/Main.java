@@ -1,9 +1,12 @@
+package jerra;
+
 import java.util.Scanner;
-import java.io.File;
 
 // The main file
 public class Main {
 	public static void main(String[] args) {
+
+		//this.getClass().getClassLoader().getResourceAsStream(resources/<resource>)
 
 		// Create keyboard scanner
 		Scanner keyboard = new Scanner(System.in);

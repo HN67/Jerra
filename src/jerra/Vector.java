@@ -1,3 +1,5 @@
+package jerra;
+
 /**
  * Vector
  * @author Ryan Allard

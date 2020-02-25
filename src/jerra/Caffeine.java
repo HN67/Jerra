@@ -1,3 +1,5 @@
+package jerra;
+
 /**
  * Caffeine
  * Caffeine speeds you up but...

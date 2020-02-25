@@ -1,3 +1,5 @@
+package jerra;
+
 /**
  * HalfAndHalf
  * ... slows you down.

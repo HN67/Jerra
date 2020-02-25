@@ -1,3 +1,5 @@
+package jerra;
+
 /**
  * ActivePresence
  * @author Ryan Allard
