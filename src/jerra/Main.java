@@ -1,30 +1,44 @@
 package jerra;
 
-import java.util.Scanner;
-
+import javafx.application.Application;
+import javafx.scene.*;
+import javafx.scene.paint.*;
+import javafx.stage.Stage;
+import javafx.scene.canvas.*;
 import jerra.room.Room;
 import jerra.room.TextRoom;
 
 import jerra.control.Controller;
-import jerra.control.TextController;
+import jerra.control.GameController;
 
-// The main file
-public class Main {
-	public static void main(String[] args) {
+public class Main extends Application {
+	
+	Controller controller;
+	
+	@Override
+    public void start(Stage primaryStage) {
+				
+		
+		Group root = new Group();
+		Scene s = new Scene(root, 625, 625, Color.BLACK);
 
-		//this.getClass().getClassLoader().getResourceAsStream(resources/<resource>)
-
-		// Create keyboard scanner
-		Scanner keyboard = new Scanner(System.in);
-
-		System.out.println("Hello");
-
+		final Canvas canvas = new Canvas(625,625);
+		GraphicsContext gc = canvas.getGraphicsContext2D();
+		 
+		root.getChildren().add(canvas);
+		
+		primaryStage.setScene(s);
+		primaryStage.show();
+		
 		Room room = new TextRoom();
-		Controller controller = new TextController(room, keyboard);
+		
+		Controller controller = new GameController(room, "placeholder", gc);
 		controller.start();
-
-		// Collapse scanner
-		keyboard.close();
+    }
+	
+	public static void main(String[] args) {
+		
+		launch(args);
 		
 	}
 }

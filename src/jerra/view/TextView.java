@@ -8,16 +8,8 @@ public class TextView extends View{
 	private Room model;
 	
 	public TextView(Room model) {
-		this.setModel(model);
+		super(model);
 	}
-	
-	
-	public void setModel(Room model) {
-		// Potential privacy leaks.
-		this.model = model;
-	}
-	
-	
 	
     public void render() {
         StringBuilder output = new StringBuilder(220);
