@@ -1,4 +1,9 @@
-package jerra;
+package jerra.item;
+
+import jerra.api.Updatable;
+
+import jerra.presence.Presence;
+
 
 /**
  * Loot object interface

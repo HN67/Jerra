@@ -1,4 +1,6 @@
-package jerra;
+package jerra.entity;
+
+import jerra.presence.Presence;
 
 /**
  * Projectile

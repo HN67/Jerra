@@ -1,4 +1,7 @@
-package jerra;
+package jerra.presence;
+
+import jerra.core.Vector;
+import jerra.core.Rect;
 
 /**
  * An implementation of a Presence by simply storing the Vectors

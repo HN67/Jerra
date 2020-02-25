@@ -1,4 +1,7 @@
-package jerra;
+package jerra.presence;
+
+import jerra.core.Vector;
+import jerra.core.Rect;
 
 /**
  * ActivePresence

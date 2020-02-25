@@ -1,4 +1,8 @@
-package jerra;
+package jerra.entity;
+
+import jerra.core.Rect;
+
+import jerra.presence.Presence;
 
 /**
  * Entity

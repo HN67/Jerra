@@ -1,4 +1,4 @@
-package jerra;
+package jerra.core;
 
 /**
  * Vector

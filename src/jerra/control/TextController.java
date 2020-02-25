@@ -1,6 +1,18 @@
-package jerra;
+package jerra.control;
 
 import java.util.Scanner;
+
+import jerra.core.Vector;
+import jerra.core.Rect;
+
+import jerra.presence.DefaultPresence;
+import jerra.presence.ActivePresence;
+
+import jerra.entity.DefaultEntity;
+import jerra.entity.Player;
+import jerra.entity.AmbientSpawner;
+
+import jerra.room.Room;
 
 /**
  * TextController

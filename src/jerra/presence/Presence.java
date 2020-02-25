@@ -1,4 +1,10 @@
-package jerra;
+package jerra.presence;
+
+import jerra.core.Vector;
+import jerra.core.Rect;
+
+import jerra.api.Updatable;
+import jerra.api.Copyable;
 
 /**
  * Presence

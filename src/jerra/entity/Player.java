@@ -1,4 +1,8 @@
-package jerra;
+package jerra.entity;
+
+import jerra.core.Vector;
+
+import jerra.presence.Presence;
 
 /**
  * Player

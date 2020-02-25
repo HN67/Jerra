@@ -1,4 +1,4 @@
-package jerra;
+package jerra.api;
 
 /**
  * Interface to specify that a class has a copy method.

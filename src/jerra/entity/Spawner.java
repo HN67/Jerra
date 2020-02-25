@@ -1,4 +1,4 @@
-package jerra;
+package jerra.entity;
 
 /**
  * Spawner Interface

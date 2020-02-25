@@ -1,4 +1,4 @@
-package jerra;
+package jerra.api;
 
 /**
  * Updatable interface, guarentees that an object can be updated

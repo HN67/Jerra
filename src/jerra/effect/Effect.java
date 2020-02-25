@@ -1,4 +1,8 @@
-package jerra;
+package jerra.effect;
+
+import jerra.core.Vector;
+
+import jerra.entity.Entity;
 
 /**
  * Effect Interface

@@ -1,4 +1,4 @@
-package jerra;
+package jerra.item;
 
 /** 
  * This is the abstract Item class. This must be extended by a concrete,

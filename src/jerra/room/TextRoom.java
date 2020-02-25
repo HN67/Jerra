@@ -1,7 +1,13 @@
-package jerra;
+package jerra.room;
 
 import java.util.List;
 import java.util.ArrayList;
+
+import jerra.core.Vector;
+
+import jerra.entity.Entity;
+import jerra.entity.Spawner;
+import jerra.entity.Player;
 
 /**
  * TextRoom

@@ -1,4 +1,8 @@
-package jerra;
+package jerra.room;
+
+import jerra.entity.Entity;
+import jerra.entity.Spawner;
+import jerra.entity.Player;
 
 /**
  * Room

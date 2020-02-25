@@ -1,4 +1,4 @@
-package jerra;
+package jerra.core;
 
 /**
  * Rect object that represents a rectangular bounding area.
