@@ -1,7 +1,5 @@
 package jerra.control;
 
-import java.util.Scanner;
-
 import javafx.scene.canvas.GraphicsContext;
 import jerra.core.Vector;
 import jerra.core.Rect;
@@ -14,19 +12,19 @@ import jerra.entity.Player;
 import jerra.entity.AmbientSpawner;
 
 import jerra.room.Room;
-import jerra.view.FxView;
+import jerra.view.RoomView;
 import jerra.view.TextView;
 
 /**
  * TextController
  */
-public class GameController implements Controller {
+public class RoomController implements Controller {
 
     private Room room;
     private String input;
     private GraphicsContext context;
 
-    public GameController(Room room, String input, GraphicsContext context) {
+    public RoomController(Room room, String input, GraphicsContext context) {
         this.room = room;
         this.input = input;
         this.context = context;
@@ -50,9 +48,9 @@ public class GameController implements Controller {
 
         this.room.spawnPlayer(new Player(new ActivePresence(new Rect(new Vector(0, 0), new Vector(1, 1)), new Vector(1, 1), "up", "down", "left", "right")));
         
-        FxView fxView = new FxView(this.room, this.context);
+        RoomView view = new RoomView(this.room, this.context);
         
-        fxView.render();
+        view.render();
     }
 
 }

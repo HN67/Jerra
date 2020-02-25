@@ -9,7 +9,7 @@ import jerra.room.Room;
 import jerra.room.TextRoom;
 
 import jerra.control.Controller;
-import jerra.control.GameController;
+import jerra.control.RoomController;
 
 public class Main extends Application {
 	
@@ -32,7 +32,7 @@ public class Main extends Application {
 		
 		Room room = new TextRoom();
 		
-		Controller controller = new GameController(room, "placeholder", gc);
+		Controller controller = new RoomController(room, "placeholder", gc);
 		controller.start();
     }
 	

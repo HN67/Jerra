@@ -7,11 +7,11 @@ import jerra.core.Vector;
 import jerra.entity.Entity;
 import jerra.room.Room;
 
-public class FxView extends View {
+public class RoomView extends View<Room> {
 	
 	private GraphicsContext context;
 	
-	public FxView(Room model, GraphicsContext context) {
+	public RoomView(Room model, GraphicsContext context) {
 		super(model);
 		
 		this.context = context;

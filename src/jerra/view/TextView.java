@@ -4,7 +4,7 @@ import jerra.core.Vector;
 import jerra.entity.Entity;
 import jerra.room.Room;
 
-public class TextView extends View{
+public class TextView extends View<Room> {
 	private Room model;
 	
 	public TextView(Room model) {

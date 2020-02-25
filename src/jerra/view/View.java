@@ -1,22 +1,20 @@
 package jerra.view;
 
-import jerra.room.Room;
-
-abstract public class View {
+abstract public class View<T>{
 	
-	protected Room model;
+	protected T model;
 	
-	public View(Room model) {
+	public View(T model) {
 		this.setModel(model);
 	}
 	
 	
-	public void setModel(Room model) {
+	public void setModel(T model) {
 		// Potential privacy leaks.
 		this.model = model;
 	}
 	
-	public Room getModel() {
+	public T getModel() {
 		return this.model;
 	}
 	
