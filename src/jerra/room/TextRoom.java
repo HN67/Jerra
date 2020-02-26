@@ -1,12 +1,11 @@
 package jerra.room;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import java.util.ArrayList;
-
 import jerra.entity.Entity;
-import jerra.entity.Spawner;
 import jerra.entity.Player;
+import jerra.entity.Spawner;
 
 /**
  * TextRoom
@@ -48,9 +47,9 @@ public class TextRoom implements Room {
             entity.queue(command);
         }
         // Queue command to every spawner
-        for (Spawner spawner: this.spawners) {
-            spawner.queue(command);
-        }
+        // for (Spawner spawner: this.spawners) {
+        //     spawner.queue(command);
+        // }
     }
 
     @Override

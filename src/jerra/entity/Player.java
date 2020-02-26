@@ -1,7 +1,6 @@
 package jerra.entity;
 
 import jerra.core.Vector;
-
 import jerra.presence.Presence;
 
 /**
@@ -11,9 +10,17 @@ public class Player extends DefaultEntity implements Spawner {
 
     private String direction;
 
-    public Player(Presence presence) {
+    public Player(Presence presence, String direction) {
         super(presence);
-        this.direction = "UP";
+        this.setDirection(direction);
+    }
+
+    public Player(Presence presence) {
+        this(presence, "UP");
+    }
+
+    public void setDirection(String direction) {
+        this.direction = new String(direction);
     }
 
     @Override
@@ -30,6 +37,7 @@ public class Player extends DefaultEntity implements Spawner {
             } else {
             }
         }
+
         // Call super update (updates Presence and clears queue)
         super.update();
     }

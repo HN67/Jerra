@@ -44,7 +44,17 @@ public class RoomController implements Controller {
             3
         ));
 
-        this.room.spawnPlayer(new Player(new ActivePresence(new Rect(new Vector(0, 0), new Vector(1, 1)), new Vector(1, 1), "up", "down", "left", "right")));
+        this.room.spawnPlayer(
+            new Player(
+                new ActivePresence(
+                    new Rect(
+                        new Vector(0, 0), new Vector(1, 1)
+                    ), 
+                    new Vector(1, 1), "up", "down", "left", "right"
+                ),
+                "RIGHT"
+            )
+        );
     
         RoomView view = new RoomView(this.room, this.canvas);
 
@@ -89,6 +99,8 @@ public class RoomController implements Controller {
 
         RoomView view = new RoomView(this.room, this.canvas);
         view.render();
+
+        this.room.clearQueue();
     }
 
 }
