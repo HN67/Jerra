@@ -19,12 +19,10 @@ import jerra.view.TextView;
 public class RoomController implements Controller {
 
     private Room room;
-    private String input;
     private Canvas canvas;
 
-    public RoomController(Room room, String input, Canvas canvas) {
+    public RoomController(Room room, Canvas canvas) {
         this.room = room;
-        this.input = input;
         this.canvas = canvas;
     }
 
