@@ -57,6 +57,7 @@ public class ActivePresence extends DefaultPresence {
 
     @Override
     public void update() {
+        this.setVelocity(0, 0);
         for (String command: this.commandQueue()) {
             // Sets velocity to axis bound of base velocity based on command
             if (command.equals(this.up)) {
@@ -67,8 +68,6 @@ public class ActivePresence extends DefaultPresence {
                 this.setVelocity(this.getBaseVelocity().scale(-1, 0));
             } else if (command.equals(this.right)) {
                 this.setVelocity(this.getBaseVelocity().scale(1, 0));
-            } else {
-                this.setVelocity(0, 0);
             }
         }
         // Add velocity into position

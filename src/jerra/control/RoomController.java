@@ -1,7 +1,11 @@
 package jerra.control;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.Event;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
+import javafx.util.Duration;
 import jerra.core.Rect;
 import jerra.core.Vector;
 import jerra.entity.AmbientSpawner;
@@ -21,6 +25,9 @@ public class RoomController implements Controller {
     private Room room;
     private Canvas canvas;
 
+    private TextView textView;
+    private RoomView view;
+
     public RoomController(Room room, Canvas canvas) {
         this.room = room;
         this.canvas = canvas;
@@ -39,7 +46,7 @@ public class RoomController implements Controller {
             new DefaultEntity(new DefaultPresence(new Rect(0, 0, 1, 1), zero)),
             new Vector(4, 4), 
             1, 
-            3
+            50 // 10 seconds at 10 FPS
         ));
 
         this.room.spawnPlayer(
@@ -54,14 +61,21 @@ public class RoomController implements Controller {
             )
         );
     
-        RoomView view = new RoomView(this.room, this.canvas);
-
+        this.view = new RoomView(this.room, this.canvas);
         view.render();
 
-        TextView textView = new TextView(this.room);
+        this.textView = new TextView(this.room);
         textView.render();
 
+        // Handle key events
         this.canvas.getScene().setOnKeyPressed(event -> this.handle(event));
+
+        // Create game loop
+        Timeline gameLoop = new Timeline();
+        gameLoop.setCycleCount(Timeline.INDEFINITE);
+        KeyFrame frame = new KeyFrame(new Duration(100), (event) -> this.update(event));
+        gameLoop.getKeyFrames().add(frame);
+        gameLoop.play();
 
     }
 
@@ -93,15 +107,19 @@ public class RoomController implements Controller {
                 this.room.queue("");
         }
 
+        //this.update(keyCode);
+    }
+
+    private void update(Event event) {
+
         this.room.update();
 
-        TextView textView = new TextView(this.room);
-        textView.render();
+        this.textView.render();
 
-        RoomView view = new RoomView(this.room, this.canvas);
-        view.render();
+        this.view.render();
 
         this.room.clearQueue();
+
     }
 
 }

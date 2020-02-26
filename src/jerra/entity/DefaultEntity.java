@@ -59,6 +59,7 @@ public class DefaultEntity implements Entity {
     @Override
     public void clearQueue() {
         this.commands.clear();
+        this.presence.clearQueue();
     }
 
     @Override
