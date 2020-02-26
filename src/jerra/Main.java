@@ -31,7 +31,7 @@ public class Main extends Application {
 		
 		Room room = new TextRoom();
 		
-		RoomController controller = new RoomController(room, "placeholder", canvas);
+		RoomController controller = new RoomController(room, canvas);
 		// Controller controller = new TextController(room, new Scanner(System.in));
 		controller.start();
 
