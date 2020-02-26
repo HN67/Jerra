@@ -1,11 +1,14 @@
 package jerra.control;
 
+import java.util.Set;
+import java.util.HashSet;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.Event;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
+
 import jerra.core.Rect;
 import jerra.core.Vector;
 import jerra.entity.AmbientSpawner;
@@ -29,9 +32,12 @@ public class RoomController implements Controller {
     private TextView textView;
     private RoomView view;
 
+    private Set<String> heldKeys;
+
     public RoomController(Room room, Canvas canvas) {
         this.room = room;
         this.canvas = canvas;
+        this.heldKeys = new HashSet<String>();
     }
 
     public void start() {
@@ -75,49 +81,80 @@ public class RoomController implements Controller {
         textView.render();
 
         // Handle key events
-        this.canvas.getScene().setOnKeyPressed(event -> this.handle(event));
+        this.canvas.getScene().setOnKeyPressed(event -> this.handleKeyPress(event));
+        this.canvas.getScene().setOnKeyReleased(event -> this.handleKeyRelease(event));
 
         // Create game loop
         Timeline gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);
-        KeyFrame frame = new KeyFrame(new Duration(20), (event) -> this.update(event));
+        KeyFrame frame = new KeyFrame(new Duration(20), (event) -> this.update());
         gameLoop.getKeyFrames().add(frame);
         gameLoop.play();
 
     }
 
-    private void handle(KeyEvent keyCode) {     
+    private void handleKeyPress(KeyEvent keyCode) {     
 
         String key = keyCode.getCode().toString();
 
         switch(key) {
             case "W":
-                this.room.queue("up");
+                this.heldKeys.add("up");
                 break;
             case "S":
-                this.room.queue("down");
+                this.heldKeys.add("down");
                 break;
 
             case "A":
-                this.room.queue("left");
+                this.heldKeys.add("left");
                 break;
-            
             case "D":
-                this.room.queue("right");
+                this.heldKeys.add("right");
                 break;
-
             case "SPACE":
-                this.room.queue("shoot");
-                break;    
-
+                this.heldKeys.add("shoot");
+                break;
             default:
-                this.room.queue("");
+                ;
         }
 
-        //this.update(keyCode);
     }
 
-    private void update(Event event) {
+    private void handleKeyRelease(KeyEvent key) {
+
+        String keyString = key.getCode().toString();
+
+        switch(keyString) {
+            case "W":
+                this.heldKeys.remove("up");
+                break;
+            case "S":
+                this.heldKeys.remove("down");
+                break;
+            case "A":
+                this.heldKeys.remove("left");
+                break;
+            case "D":
+                this.heldKeys.remove("right");
+                break;
+            case "SPACE":
+                this.heldKeys.remove("shoot");
+                break;    
+            default:
+                ;
+        }
+
+    }
+
+    private void queueKeys() {
+        for (String key: this.heldKeys) {
+            this.room.queue(key);
+        }
+    }
+
+    private void update() {
+
+        this.queueKeys();
 
         this.room.update();
 
