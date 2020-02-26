@@ -9,6 +9,7 @@ import javafx.util.Duration;
 import jerra.core.Rect;
 import jerra.core.Vector;
 import jerra.entity.AmbientSpawner;
+import jerra.entity.Bullet;
 import jerra.entity.DefaultEntity;
 import jerra.entity.Player;
 import jerra.presence.ActivePresence;
@@ -35,27 +36,33 @@ public class RoomController implements Controller {
 
     public void start() {
         Vector zero = new Vector(0, 0);
+        Vector block = new Vector(25, 25);
 
-        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(4, 0), new Vector(1, 1)), zero)));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(8, 0), new Vector(1, 1)), zero)));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 4), new Vector(1, 1)), zero)));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 8), new Vector(1, 1)), zero)));
-        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(5, 5), new Vector(1, 1)), zero)));
+        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(100, 0), block), zero)));
+		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(200, 0), block), zero)));
+		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 100), block), zero)));
+		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 200), block), zero)));
+        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(125, 125), block), zero)));
 
         this.room.spawnSpawner(new AmbientSpawner(
-            new DefaultEntity(new DefaultPresence(new Rect(0, 0, 1, 1), zero)),
-            new Vector(4, 4), 
-            1, 
-            50 // 10 seconds at 10 FPS
+            new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 0), block), zero)),
+            new Vector(300, 300), 
+            300, 
+            25
         ));
 
         this.room.spawnPlayer(
             new Player(
                 new ActivePresence(
                     new Rect(
-                        new Vector(0, 0), new Vector(1, 1)
+                        new Vector(0, 0), block
                     ), 
-                    new Vector(1, 1), "up", "down", "left", "right"
+                    new Vector(5, 5), "up", "down", "left", "right"
+                ),
+                new Bullet(
+                    new Rect(
+                        new Vector(0, 0), block
+                    ), new Vector(30, 30), 10
                 ),
                 "RIGHT"
             )
@@ -73,7 +80,7 @@ public class RoomController implements Controller {
         // Create game loop
         Timeline gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);
-        KeyFrame frame = new KeyFrame(new Duration(100), (event) -> this.update(event));
+        KeyFrame frame = new KeyFrame(new Duration(20), (event) -> this.update(event));
         gameLoop.getKeyFrames().add(frame);
         gameLoop.play();
 

@@ -3,7 +3,6 @@ package jerra.view;
 import jerra.room.Room;
 
 public class TextView extends View<Room> {
-	private Room model;
 	
 	public TextView(Room model) {
 		super(model);

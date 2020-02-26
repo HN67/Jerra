@@ -9,14 +9,16 @@ import jerra.presence.Presence;
 public class Player extends DefaultEntity implements Spawner {
 
     private String direction;
+    private Projectile bullet;
 
-    public Player(Presence presence, String direction) {
+    public Player(Presence presence, Projectile bullet, String direction) {
         super(presence);
         this.setDirection(direction);
+        this.bullet = bullet;
     }
 
-    public Player(Presence presence) {
-        this(presence, "UP");
+    public Player(Presence presence, Projectile bullet) {
+        this(presence, bullet, "UP");
     }
 
     public void setDirection(String direction) {
@@ -57,24 +59,31 @@ public class Player extends DefaultEntity implements Spawner {
      * Returns a new Entity, shot in the direction the Player is facing
      * @return A Entity, that has not been added to any room
      */
-    public Projectile spawn() {
-        // Make sure to delink position vectors
-        Vector position = new Vector(this.getPosition().getOrigin());
+    @Override
+    public Entity spawn() {
+        // Prepare new bullet
+        Entity bullet = this.bullet.copy();
+        Presence presence = bullet.getPresence().copy();
+        presence.setPosition(this.getPosition().getOrigin());
+        Vector velocity = presence.getVelocity();
         // Set Projectile velocity based on facing direction
         if (this.direction.equals("UP")) {
-            return new Bullet(position, new Vector(0, -1));
+            velocity = velocity.scale(0, -1);
         }
         if (this.direction.equals("DOWN")) {
-            return new Bullet(position, new Vector(0, 1));
+            velocity = velocity.scale(0, 1);
         }
         if (this.direction.equals("RIGHT")) {
-            return new Bullet(position, new Vector(1, 0));
+            velocity = velocity.scale(1, 0);
         }
         if (this.direction.equals("LEFT")) {
-            return new Bullet(position, new Vector(-1, 0));
+            velocity = velocity.scale(-1, 0);
         }
-        // If somehow there is no direction, just drop the projectile
-        return new Bullet(position, new Vector(0, 0));
+        // Update and return new bullet
+        presence.setVelocity(velocity);
+        bullet.setPresence(presence);
+        return bullet;
+
     }
 
     /**

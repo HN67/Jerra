@@ -46,7 +46,7 @@ public class RoomView extends View<Room> {
 
 		context.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		
-		int scale = 25;
+		int scale = 1;
 		
 		for(Entity entity : model.getEntities()) {
 			
