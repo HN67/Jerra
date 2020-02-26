@@ -1,5 +1,6 @@
 package jerra.view;
 
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import jerra.core.Rect;
@@ -9,16 +10,16 @@ import jerra.room.Room;
 
 public class RoomView extends View<Room> {
 	
-	private GraphicsContext context;
+	private Canvas canvas;
 	
-	public RoomView(Room model, GraphicsContext context) {
+	public RoomView(Room model, Canvas canvas) {
 		super(model);
 		
-		this.context = context;
+		this.canvas = canvas;
 	}
 	
-	public GraphicsContext getContext() {
-		return this.context;
+	public Canvas getCanvas() {
+		return this.canvas;
 	}
 	
 	private static Color getColor(String symbol) {
@@ -40,7 +41,10 @@ public class RoomView extends View<Room> {
 	@Override
 	public void render() {
 		Room model = this.getModel();
-		GraphicsContext context = this.getContext();
+		Canvas canvas = this.getCanvas();
+		GraphicsContext context = canvas.getGraphicsContext2D();
+
+		context.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		
 		int scale = 25;
 		

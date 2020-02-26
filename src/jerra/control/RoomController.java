@@ -1,16 +1,14 @@
 package jerra.control;
 
-import javafx.scene.canvas.GraphicsContext;
-import jerra.core.Vector;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.input.KeyEvent;
 import jerra.core.Rect;
-
-import jerra.presence.DefaultPresence;
-import jerra.presence.ActivePresence;
-
+import jerra.core.Vector;
+import jerra.entity.AmbientSpawner;
 import jerra.entity.DefaultEntity;
 import jerra.entity.Player;
-import jerra.entity.AmbientSpawner;
-
+import jerra.presence.ActivePresence;
+import jerra.presence.DefaultPresence;
 import jerra.room.Room;
 import jerra.view.RoomView;
 import jerra.view.TextView;
@@ -22,12 +20,12 @@ public class RoomController implements Controller {
 
     private Room room;
     private String input;
-    private GraphicsContext context;
+    private Canvas canvas;
 
-    public RoomController(Room room, String input, GraphicsContext context) {
+    public RoomController(Room room, String input, Canvas canvas) {
         this.room = room;
         this.input = input;
-        this.context = context;
+        this.canvas = canvas;
     }
 
     public void start() {
@@ -47,9 +45,49 @@ public class RoomController implements Controller {
         ));
 
         this.room.spawnPlayer(new Player(new ActivePresence(new Rect(new Vector(0, 0), new Vector(1, 1)), new Vector(1, 1), "up", "down", "left", "right")));
-        
-        RoomView view = new RoomView(this.room, this.context);
-        
+    
+        RoomView view = new RoomView(this.room, this.canvas);
+
+        view.render();
+
+        TextView textView = new TextView(this.room);
+        textView.render();
+    }
+
+    public void handle(KeyEvent keyCode) {     
+
+        String key = keyCode.getCode().toString();
+
+        switch(key) {
+            case "W":
+                this.room.queue("up");
+                break;
+            case "S":
+                this.room.queue("down");
+                break;
+
+            case "A":
+                this.room.queue("left");
+                break;
+            
+            case "D":
+                this.room.queue("right");
+                break;
+
+            case "SPACE":
+                this.room.queue("shoot");
+                break;    
+
+            default:
+                this.room.queue("");
+        }
+
+        this.room.update();
+
+        TextView textView = new TextView(this.room);
+        textView.render();
+
+        RoomView view = new RoomView(this.room, this.canvas);
         view.render();
     }
 

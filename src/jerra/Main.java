@@ -1,19 +1,15 @@
 package jerra;
 
 import javafx.application.Application;
-import javafx.scene.*;
-import javafx.scene.paint.*;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.scene.canvas.*;
-
-import java.util.Scanner;
-import jerra.control.TextController;
-
-import jerra.room.Room;
-import jerra.room.TextRoom;
-
 import jerra.control.Controller;
 import jerra.control.RoomController;
+import jerra.room.Room;
+import jerra.room.TextRoom;
 
 public class Main extends Application {
 	
@@ -27,7 +23,6 @@ public class Main extends Application {
 		Scene s = new Scene(root, 625, 625, Color.BLACK);
 
 		final Canvas canvas = new Canvas(625,625);
-		GraphicsContext gc = canvas.getGraphicsContext2D();
 		 
 		root.getChildren().add(canvas);
 		
@@ -36,9 +31,11 @@ public class Main extends Application {
 		
 		Room room = new TextRoom();
 		
-		Controller controller = new RoomController(room, "placeholder", gc);
+		RoomController controller = new RoomController(room, "placeholder", canvas);
 		// Controller controller = new TextController(room, new Scanner(System.in));
 		controller.start();
+
+		s.setOnKeyPressed(event -> controller.handle(event));
     }
 	
 	public static void main(String[] args) {
