@@ -60,9 +60,12 @@ public class RoomController implements Controller {
 
         TextView textView = new TextView(this.room);
         textView.render();
+
+        this.canvas.getScene().setOnKeyPressed(event -> this.handle(event));
+
     }
 
-    public void handle(KeyEvent keyCode) {     
+    private void handle(KeyEvent keyCode) {     
 
         String key = keyCode.getCode().toString();
 

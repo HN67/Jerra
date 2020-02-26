@@ -28,14 +28,16 @@ public class Main extends Application {
 		
 		primaryStage.setScene(s);
 		primaryStage.show();
+
+		canvas.requestFocus();
 		
 		Room room = new TextRoom();
 		
-		RoomController controller = new RoomController(room, canvas);
+		Controller controller = new RoomController(room, canvas);
 		// Controller controller = new TextController(room, new Scanner(System.in));
 		controller.start();
 
-		s.setOnKeyPressed(event -> controller.handle(event));
+		//s.setOnKeyPressed(event -> controller.handle(event));
     }
 	
 	public static void main(String[] args) {
