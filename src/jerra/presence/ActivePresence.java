@@ -56,21 +56,23 @@ public class ActivePresence extends DefaultPresence {
     }
 
     @Override
-    public void update(String command) {
-        // Sets velocity to axis bound of base velocity based on command
-        if (command.equals(this.up)) {
-            this.setVelocity(this.getBaseVelocity().scale(0, -1));
-        } else if (command.equals(this.down)) {
-            this.setVelocity(this.getBaseVelocity().scale(0, 1));
-        } else if (command.equals(this.left)) {
-            this.setVelocity(this.getBaseVelocity().scale(-1, 0));
-        } else if (command.equals(this.right)) {
-            this.setVelocity(this.getBaseVelocity().scale(1, 0));
-        } else {
-            this.setVelocity(0, 0);
+    public void update() {
+        for (String command: this.commandQueue()) {
+            // Sets velocity to axis bound of base velocity based on command
+            if (command.equals(this.up)) {
+                this.setVelocity(this.getBaseVelocity().scale(0, -1));
+            } else if (command.equals(this.down)) {
+                this.setVelocity(this.getBaseVelocity().scale(0, 1));
+            } else if (command.equals(this.left)) {
+                this.setVelocity(this.getBaseVelocity().scale(-1, 0));
+            } else if (command.equals(this.right)) {
+                this.setVelocity(this.getBaseVelocity().scale(1, 0));
+            } else {
+                this.setVelocity(0, 0);
+            }
         }
         // Add velocity into position
-        super.update(command);
+        super.update();
     }
     
 }

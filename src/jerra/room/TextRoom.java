@@ -42,11 +42,35 @@ public class TextRoom implements Room {
     }
 
     @Override
-    public void update(String command) {
+    public void queue(String command) {
+        // Queue command to every entity
+        for (Entity entity: this.entityList) {
+            entity.queue(command);
+        }
+        // Queue command to every spawner
+        for (Spawner spawner: this.spawners) {
+            spawner.queue(command);
+        }
+    }
+
+    @Override
+    public void clearQueue() {
+        // Queue command to every entity
+        for (Entity entity: this.entityList) {
+            entity.clearQueue();
+        }
+        // Queue command to every spawner
+        for (Spawner spawner: this.spawners) {
+            spawner.clearQueue();
+        }
+    }
+
+    @Override
+    public void update() {
 
         // Update all general entities
         for (Entity entity: this.entityList) {
-            entity.update(command);
+            entity.update();
         }
 
         // Check for collisions between Entities (O(n^2))
@@ -70,7 +94,7 @@ public class TextRoom implements Room {
         for (int i = 0, n = this.entityList.size(); i < n; i++) {
             // Iterate through each collision with the entity
             for (Entity other: allCollisions.get(i)) {
-                this.entityList.get(i).interact(other, command);
+                this.entityList.get(i).interact(other);
             }
         }
 
@@ -80,7 +104,7 @@ public class TextRoom implements Room {
         // Check spawners
         for (Spawner spawner: this.spawners) {
             // Get spawned Entity if Spawner spawns
-            if (spawner.spawns(command)) {
+            if (spawner.spawns()) {
                 this.spawnEntity(spawner.spawn());
             }
         }

@@ -36,7 +36,7 @@ public class AmbientSpawner implements Spawner {
     }
 
     @Override
-    public boolean spawns(String command) {
+    public boolean spawns() {
         // Count the number of ticks, return true every period amount
     	this.tick += 1;
     	if (this.tick >= period) {
@@ -83,6 +83,14 @@ public class AmbientSpawner implements Spawner {
     @Override
     public boolean alive() {
         return true;
+    }
+
+    public void queue(String command) {
+        ;
+    }
+
+    public void clearQueue() {
+        ;
     }
     
 }

@@ -52,8 +52,10 @@ public class TextController implements Controller {
         TextView view = new TextView(this.room);
 
 		while (!command.equals("quit")) {
-			command = this.keyboard.nextLine();
-			this.room.update(command);
+            command = this.keyboard.nextLine();
+            this.room.queue(command);
+            this.room.update();
+            this.room.clearQueue();
             System.out.println(this.room);
             view.render();
 		}

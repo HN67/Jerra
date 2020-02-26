@@ -17,19 +17,21 @@ public class Player extends DefaultEntity implements Spawner {
     }
 
     @Override
-    public void update(String command) {
-        if (command.equals("up")) {
-            this.direction = "UP";
-        } else if (command.equals("down")) {
-            this.direction = "DOWN";
-        } else if (command.equals("left")) {
-            this.direction = "LEFT";
-        } else if (command.equals("right")) {
-            this.direction = "RIGHT";
-        } else {
+    public void update() {
+        for (String command: this.commandQueue()) {
+            if (command.equals("up")) {
+                this.direction = "UP";
+            } else if (command.equals("down")) {
+                this.direction = "DOWN";
+            } else if (command.equals("left")) {
+                this.direction = "LEFT";
+            } else if (command.equals("right")) {
+                this.direction = "RIGHT";
+            } else {
+            }
         }
-        // Call super update (updates Presence)
-        super.update(command);
+        // Call super update (updates Presence and clears queue)
+        super.update();
     }
 
     @Override
@@ -69,11 +71,15 @@ public class Player extends DefaultEntity implements Spawner {
 
     /**
      * Checks a command to see if the Player should spawn an entity (using .spawn)
-     * @param command A String command
      * @return A boolean representing whether the Player should spawn an entity
      */
-    public boolean spawns(String command) {
-        return command.equals("shoot");
+    public boolean spawns() {
+        for (String command: this.commandQueue()) {
+            if (command.equals("shoot")) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

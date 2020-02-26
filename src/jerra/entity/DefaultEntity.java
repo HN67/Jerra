@@ -1,5 +1,8 @@
 package jerra.entity;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import jerra.core.Rect;
 
 import jerra.presence.Presence;
@@ -12,7 +15,13 @@ public class DefaultEntity implements Entity {
     private Presence presence;
     private boolean alive;
 
+    private List<String> commands;
+
     public DefaultEntity(Presence presence) {
+
+        // Initalize command list
+        this.commands = new ArrayList<String>();
+
         this.presence = presence;
         this.alive = true;
     }
@@ -37,8 +46,24 @@ public class DefaultEntity implements Entity {
         return this.getPresence().collides(other.getPresence());
     }
 
-    public void update(String command) {
-        this.presence.update(command);
+    public List<String> commandQueue() {
+        return this.commands;
+    }
+
+    @Override
+    public void queue(String command) {
+        this.commands.add(command);
+        this.presence.queue(command);
+    }
+
+    @Override
+    public void clearQueue() {
+        this.commands.clear();
+    }
+
+    @Override
+    public void update() {
+        this.presence.update();
     }
 
     @Override
@@ -50,7 +75,8 @@ public class DefaultEntity implements Entity {
         return out;
     }
 
-    public void interact(Entity other, String command) {
+    @Override
+    public void interact(Entity other) {
         ;
     }
 

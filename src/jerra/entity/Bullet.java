@@ -30,7 +30,7 @@ public class Bullet extends Projectile {
     }
 
     @Override
-    public void interact(Entity other, String command) {
+    public void interact(Entity other) {
         // Kill other entity
         other.kill(true);
         // Kill this (remove for penetrating)

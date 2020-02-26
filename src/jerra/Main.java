@@ -5,6 +5,10 @@ import javafx.scene.*;
 import javafx.scene.paint.*;
 import javafx.stage.Stage;
 import javafx.scene.canvas.*;
+
+import java.util.Scanner;
+import jerra.control.TextController;
+
 import jerra.room.Room;
 import jerra.room.TextRoom;
 
@@ -33,6 +37,7 @@ public class Main extends Application {
 		Room room = new TextRoom();
 		
 		Controller controller = new RoomController(room, "placeholder", gc);
+		// Controller controller = new TextController(room, new Scanner(System.in));
 		controller.start();
     }
 	
