@@ -33,11 +33,17 @@ public class GraphicController implements Controller {
     private GraphicView view;
 
     private Set<String> heldKeys;
+    private Set<String> lastKeys;
+    private Set<String> newKeys;
 
     public GraphicController(Room room, Canvas canvas) {
         this.room = room;
         this.canvas = canvas;
+
         this.heldKeys = new HashSet<String>();
+        this.lastKeys = new HashSet<String>();
+        this.newKeys = new HashSet<String>();
+
     }
 
     public void start() {
@@ -54,7 +60,7 @@ public class GraphicController implements Controller {
             new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 0), block), zero)),
             new Vector(300, 300), 
             300, 
-            25
+            100
         ));
 
         this.room.spawnPlayer(
@@ -96,7 +102,6 @@ public class GraphicController implements Controller {
     private void handleKeyPress(KeyEvent key) {     
 
         this.heldKeys.add(key.getCode().toString());
-        System.out.println(key.getCode().toString());
 
     }
 
@@ -106,7 +111,23 @@ public class GraphicController implements Controller {
 
     }
 
+    /**
+     * Calculates various keysets, such as new key presses
+     */
+    private void computeKeys() {
+
+        // Find new keys by removing old ones
+        this.newKeys = new HashSet<String>(this.heldKeys);
+        this.newKeys.removeAll(this.lastKeys);
+
+        // Reset last keys to current press set
+        this.lastKeys = new HashSet<String>(this.heldKeys);
+
+    }
+
     private void queueKeys() {
+
+        // Check held key events; note: will include new presses
         for (String key: this.heldKeys) {
             switch(key) {
                 case "W":
@@ -121,6 +142,15 @@ public class GraphicController implements Controller {
                 case "D":
                     this.room.queue("right");
                     break;
+                default:
+                    break;
+            }
+        }
+
+        // Check through keys that specifically appeared this update,
+        // i.e. newly pressed
+        for (String key: this.newKeys) {
+            switch (key) {
                 case "SPACE":
                     this.room.queue("shoot");
                     break;
@@ -141,21 +171,28 @@ public class GraphicController implements Controller {
                     this.room.queue("shoot");
                     break;
                 default:
-                    ;
+                    break;
             }
         }
     }
 
     private void update() {
 
+        // Compute key sets
+        this.computeKeys();
+
+        // Queue key driven commands into the room
         this.queueKeys();
 
+        // Update the room
         this.room.update();
 
+        // Render the views
         this.textView.render();
 
         this.view.render();
 
+        // Clear the room command queue
         this.room.clearQueue();
 
     }
