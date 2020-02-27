@@ -93,62 +93,39 @@ public class GraphicController implements Controller {
 
     }
 
-    private void handleKeyPress(KeyEvent keyCode) {     
+    private void handleKeyPress(KeyEvent key) {     
 
-        String key = keyCode.getCode().toString();
-
-        switch(key) {
-            case "W":
-                this.heldKeys.add("up");
-                break;
-            case "S":
-                this.heldKeys.add("down");
-                break;
-
-            case "A":
-                this.heldKeys.add("left");
-                break;
-            case "D":
-                this.heldKeys.add("right");
-                break;
-            case "SPACE":
-                this.heldKeys.add("shoot");
-                break;
-            default:
-                ;
-        }
+        this.heldKeys.add(key.getCode().toString());
 
     }
 
     private void handleKeyRelease(KeyEvent key) {
 
-        String keyString = key.getCode().toString();
-
-        switch(keyString) {
-            case "W":
-                this.heldKeys.remove("up");
-                break;
-            case "S":
-                this.heldKeys.remove("down");
-                break;
-            case "A":
-                this.heldKeys.remove("left");
-                break;
-            case "D":
-                this.heldKeys.remove("right");
-                break;
-            case "SPACE":
-                this.heldKeys.remove("shoot");
-                break;    
-            default:
-                ;
-        }
+        this.heldKeys.remove(key.getCode().toString());
 
     }
 
     private void queueKeys() {
         for (String key: this.heldKeys) {
-            this.room.queue(key);
+            switch(key) {
+                case "W":
+                    this.room.queue("up");
+                    break;
+                case "S":
+                    this.room.queue("down");
+                    break;
+                case "A":
+                    this.room.queue("left");
+                    break;
+                case "D":
+                    this.room.queue("right");
+                    break;
+                case "SPACE":
+                    this.room.queue("shoot");
+                    break;
+                default:
+                    ;
+            }
         }
     }
 
