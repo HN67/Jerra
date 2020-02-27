@@ -96,6 +96,7 @@ public class GraphicController implements Controller {
     private void handleKeyPress(KeyEvent key) {     
 
         this.heldKeys.add(key.getCode().toString());
+        System.out.println(key.getCode().toString());
 
     }
 
@@ -121,6 +122,22 @@ public class GraphicController implements Controller {
                     this.room.queue("right");
                     break;
                 case "SPACE":
+                    this.room.queue("shoot");
+                    break;
+                case "UP":
+                    this.room.queue("upSecondary");
+                    this.room.queue("shoot");
+                    break;
+                case "DOWN":
+                    this.room.queue("downSecondary");
+                    this.room.queue("shoot");
+                    break;
+                case "LEFT":
+                    this.room.queue("leftSecondary");
+                    this.room.queue("shoot");
+                    break;
+                case "RIGHT":
+                    this.room.queue("rightSecondary");
                     this.room.queue("shoot");
                     break;
                 default:

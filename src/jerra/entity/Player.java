@@ -28,13 +28,13 @@ public class Player extends DefaultEntity implements Spawner {
     @Override
     public void update() {
         for (String command: this.commandQueue()) {
-            if (command.equals("up")) {
+            if (command.equals("upSecondary")) {
                 this.direction = "UP";
-            } else if (command.equals("down")) {
+            } else if (command.equals("downSecondary")) {
                 this.direction = "DOWN";
-            } else if (command.equals("left")) {
+            } else if (command.equals("leftSecondary")) {
                 this.direction = "LEFT";
-            } else if (command.equals("right")) {
+            } else if (command.equals("rightSecondary")) {
                 this.direction = "RIGHT";
             } else {
             }
