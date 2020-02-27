@@ -18,23 +18,23 @@ import jerra.entity.Player;
 import jerra.presence.ActivePresence;
 import jerra.presence.DefaultPresence;
 import jerra.room.Room;
-import jerra.view.RoomView;
+import jerra.view.GraphicView;
 import jerra.view.TextView;
 
 /**
  * TextController
  */
-public class RoomController implements Controller {
+public class GraphicController implements Controller {
 
     private Room room;
     private Canvas canvas;
 
     private TextView textView;
-    private RoomView view;
+    private GraphicView view;
 
     private Set<String> heldKeys;
 
-    public RoomController(Room room, Canvas canvas) {
+    public GraphicController(Room room, Canvas canvas) {
         this.room = room;
         this.canvas = canvas;
         this.heldKeys = new HashSet<String>();
@@ -74,7 +74,7 @@ public class RoomController implements Controller {
             )
         );
     
-        this.view = new RoomView(this.room, this.canvas);
+        this.view = new GraphicView(this.room, this.canvas);
         view.render();
 
         this.textView = new TextView(this.room);

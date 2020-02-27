@@ -7,7 +7,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import jerra.control.Controller;
-import jerra.control.RoomController;
+import jerra.control.GraphicController;
 import jerra.room.Room;
 import jerra.room.TextRoom;
 
@@ -33,7 +33,7 @@ public class Main extends Application {
 		
 		Room room = new TextRoom();
 		
-		Controller controller = new RoomController(room, canvas);
+		Controller controller = new GraphicController(room, canvas);
 		// Controller controller = new TextController(room, new Scanner(System.in));
 		controller.start();
 

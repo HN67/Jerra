@@ -8,11 +8,11 @@ import jerra.core.Vector;
 import jerra.entity.Entity;
 import jerra.room.Room;
 
-public class RoomView extends View<Room> {
+public class GraphicView extends View<Room> {
 	
 	private Canvas canvas;
 	
-	public RoomView(Room model, Canvas canvas) {
+	public GraphicView(Room model, Canvas canvas) {
 		super(model);
 		
 		this.canvas = canvas;
