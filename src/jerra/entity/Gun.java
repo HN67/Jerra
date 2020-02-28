@@ -43,10 +43,5 @@ public class Gun implements Spawner, Updatable {
         this.cooldown = this.reload;
         return this.bullet.copy();
     }
-
-    @Override
-    public boolean alive() {
-        return true;
-    }
     
 }
