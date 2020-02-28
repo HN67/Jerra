@@ -84,13 +84,5 @@ public class AmbientSpawner implements Spawner {
     public boolean alive() {
         return true;
     }
-
-    public void queue(String command) {
-        ;
-    }
-
-    public void clearQueue() {
-        ;
-    }
     
 }
