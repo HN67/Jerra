@@ -83,6 +83,25 @@ public class Vector {
         return this.scale(-1, -1);
     }
 
+    /**
+     * Returns a Vector containing the signs of this Vectors components
+     * Sign of n is calculated as following: n < 0 -> -1, n > 0 -> +1, n = 0 -> 0
+     * @return a Vector, equal to Vector(sign(this.x()), sign(this.y()))
+     */
+    public Vector sign() {
+        return new Vector(sign(this.x()), sign(this.y()));
+    }
+
+    private static int sign(int num) {
+        if (num > 0) {
+            return 1;
+        } else if (num < 0) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+
     public String toString() {
         return "(" + this.x + ", " + this.y + ")";
     }

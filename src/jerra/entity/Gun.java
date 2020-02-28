@@ -1,11 +1,12 @@
 package jerra.entity;
 
+import jerra.api.Copyable;
 import jerra.api.Updatable;
 
 /**
  * Gun class, designed to be a bullet spawner
  */
-public class Gun implements Spawner, Updatable {
+public class Gun implements Spawner, Updatable, Copyable<Gun> {
 
     private Entity bullet;
     private int reload;
@@ -42,6 +43,13 @@ public class Gun implements Spawner, Updatable {
     public Entity spawn() {
         this.cooldown = this.reload;
         return this.bullet.copy();
+    }
+
+    @Override
+    public Gun copy() {
+        Gun out = new Gun(this.bullet.copy(), this.reload);
+        out.cooldown = this.cooldown;
+        return out;
     }
     
 }
