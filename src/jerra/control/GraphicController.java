@@ -50,14 +50,14 @@ public class GraphicController implements Controller {
         Vector zero = new Vector(0, 0);
         Vector block = new Vector(25, 25);
 
-        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(100, 0), block), zero)));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(200, 0), block), zero)));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 100), block), zero)));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 200), block), zero)));
-        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(125, 125), block), zero)));
+        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(100, 0), block), zero), null));
+		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(200, 0), block), zero), null));
+		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 100), block), zero), null));
+		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 200), block), zero), null));
+        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(125, 125), block), zero), null));
 
         this.room.spawnSpawner(new AmbientSpawner(
-            new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 0), block), zero)),
+            new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 0), block), zero), null),
             new Vector(300, 300), 
             300, 
             100
@@ -74,9 +74,9 @@ public class GraphicController implements Controller {
                 new Bullet(
                     new Rect(
                         new Vector(0, 0), block
-                    ), new Vector(30, 30), 10
+                    ), new Vector(30, 30), 10, null
                 ),
-                "RIGHT"
+                "RIGHT", null
             )
         );
     

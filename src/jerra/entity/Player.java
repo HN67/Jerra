@@ -1,5 +1,6 @@
 package jerra.entity;
 
+import javafx.scene.image.Image;
 import jerra.core.Vector;
 import jerra.presence.Presence;
 
@@ -11,14 +12,14 @@ public class Player extends DefaultEntity implements Spawner {
     private String direction;
     private Projectile bullet;
 
-    public Player(Presence presence, Projectile bullet, String direction) {
-        super(presence);
+    public Player(Presence presence, Projectile bullet, String direction, Image image) {
+        super(presence, image);
         this.setDirection(direction);
         this.bullet = bullet;
     }
 
-    public Player(Presence presence, Projectile bullet) {
-        this(presence, bullet, "UP");
+    public Player(Presence presence, Projectile bullet, Image image) {
+        this(presence, bullet, "UP", image);
     }
 
     public void setDirection(String direction) {

@@ -1,5 +1,6 @@
 package jerra.entity;
 
+import javafx.scene.image.Image;
 import jerra.core.Rect;
 import jerra.core.Vector;
 
@@ -19,14 +20,14 @@ public class Bullet extends Projectile {
         return new DefaultPresence(position, velocity);
     }
 
-    public Bullet(Rect position, Vector velocity, int lifetime) {
+    public Bullet(Rect position, Vector velocity, int lifetime, Image image) {
         // Create projectile with predetermined presence
-        super(constructPresence(position, velocity), lifetime);
+        super(constructPresence(position, velocity), lifetime, image);
     }
 
     @Override
     public Entity copy() {
-        return new Bullet(this.getPosition(), this.getPresence().getVelocity(), this.lifetime);
+        return new Bullet(this.getPosition(), this.getPresence().getVelocity(), this.lifetime, this.image());
     }
 
     @Override

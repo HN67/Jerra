@@ -1,5 +1,6 @@
 package jerra.entity;
 
+import javafx.scene.image.Image;
 import jerra.api.Copyable;
 import jerra.api.Updatable;
 import jerra.api.Interactive;
@@ -31,5 +32,7 @@ public interface Entity extends Updatable, Copyable<Entity>, Interactive {
 
     public boolean alive();
     public void kill(boolean dead);
+    
+    public Image image();
     
 }
