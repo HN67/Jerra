@@ -60,6 +60,10 @@ public class Vector {
     public Vector scale(int x, int y) {
         return new Vector(this.x() * x, this.y() * y);
     }
+    
+    public Vector scale(int scale) {
+        return this.scale(scale, scale);
+    }
 
     /**
      * Returns a new Vector equal to the element-wise product of this and the provided

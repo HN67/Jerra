@@ -1,30 +1,14 @@
 package jerra;
 
-import java.util.Scanner;
-
-import jerra.room.Room;
-import jerra.room.TextRoom;
-
-import jerra.control.Controller;
-import jerra.control.TextController;
-
-// The main file
+/**
+ * Entrypoint for Jerra
+ */
 public class Main {
-	public static void main(String[] args) {
 
-		//this.getClass().getClassLoader().getResourceAsStream(resources/<resource>)
+    public static void main(String[] args) {
 
-		// Create keyboard scanner
-		Scanner keyboard = new Scanner(System.in);
+        App.launch(App.class, args);
 
-		System.out.println("Hello");
-
-		Room room = new TextRoom();
-		Controller controller = new TextController(room, keyboard);
-		controller.start();
-
-		// Collapse scanner
-		keyboard.close();
-		
-	}
+    }
+    
 }

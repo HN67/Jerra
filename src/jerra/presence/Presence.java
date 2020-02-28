@@ -5,6 +5,7 @@ import jerra.core.Rect;
 
 import jerra.api.Updatable;
 import jerra.api.Copyable;
+import jerra.api.Interactive;
 
 /**
  * Presence
@@ -13,7 +14,7 @@ import jerra.api.Copyable;
  * Moreover, a Presence is capable of self updating.
  * @author Ryan Allard
  */
-public interface Presence extends Updatable, Copyable<Presence> {
+public interface Presence extends Updatable, Copyable<Presence>, Interactive {
 
     /**
      * Replaces the position of this Presence with a new Rect

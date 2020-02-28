@@ -13,15 +13,20 @@ public class Bullet extends Projectile {
 
     /**
      * Constructs a Presence based on position and velocity
-     * Bullets have a fixed size
+     * Bullets have a fixed lifetime
      */
-    private static Presence constructPresence(Vector position, Vector velocity) {
-        return new DefaultPresence(new Rect(position, new Vector(1, 1)), velocity);
+    private static Presence constructPresence(Rect position, Vector velocity) {
+        return new DefaultPresence(position, velocity);
     }
 
-    public Bullet(Vector position, Vector velocity) {
-        // Create projectile with predetermined presence and lifetime
-        super(constructPresence(position, velocity), 5);
+    public Bullet(Rect position, Vector velocity, int lifetime) {
+        // Create projectile with predetermined presence
+        super(constructPresence(position, velocity), lifetime);
+    }
+
+    @Override
+    public Entity copy() {
+        return new Bullet(this.getPosition(), this.getPresence().getVelocity(), this.lifetime);
     }
 
     @Override
@@ -30,7 +35,7 @@ public class Bullet extends Projectile {
     }
 
     @Override
-    public void interact(Entity other, String command) {
+    public void interact(Entity other) {
         // Kill other entity
         other.kill(true);
         // Kill this (remove for penetrating)

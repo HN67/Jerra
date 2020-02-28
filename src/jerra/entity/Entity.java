@@ -2,6 +2,7 @@ package jerra.entity;
 
 import jerra.api.Copyable;
 import jerra.api.Updatable;
+import jerra.api.Interactive;
 
 import jerra.core.Rect;
 
@@ -10,7 +11,7 @@ import jerra.presence.Presence;
 /**
  * Entity
  */
-public interface Entity extends Updatable, Copyable<Entity> {
+public interface Entity extends Updatable, Copyable<Entity>, Interactive {
 
     public Presence getPresence();
     public void setPresence(Presence presence);
@@ -19,10 +20,8 @@ public interface Entity extends Updatable, Copyable<Entity> {
 
     public boolean collides(Entity other);
     
-    public void interact(Entity other, String command);
+    public void interact(Entity other);
 
-    @Override
-    public void update(String command);
     @Override
     public String toString();
     public String symbol();

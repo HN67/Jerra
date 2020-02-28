@@ -7,9 +7,8 @@ package jerra.api;
 public interface Updatable {
 
     /**
-     * Updates the Updatable using a String, likely retrieved from a console
-     * @param command
+     * Updates the Updatable
      */
-    public void update(String command);
+    public void update();
     
 }
