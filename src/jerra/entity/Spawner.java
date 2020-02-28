@@ -1,13 +1,11 @@
 package jerra.entity;
 
-import jerra.api.Interactive;
-
 /**
  * Spawner Interface
  * Represents something that has the capability to spawn an Entity
  * @author Ryan Allard
  */
-public interface Spawner extends Interactive {
+public interface Spawner {
 
     /**
      * Describes whether the Spawner would currently spawn an Entity
@@ -20,7 +18,5 @@ public interface Spawner extends Interactive {
      * @return The new Entity
      */
     public Entity spawn();
-
-    public boolean alive();
 
 }

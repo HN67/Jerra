@@ -46,10 +46,6 @@ public class TextRoom implements Room {
         for (Entity entity: this.entityList) {
             entity.queue(command);
         }
-        // Queue command to every spawner
-        // for (Spawner spawner: this.spawners) {
-        //     spawner.queue(command);
-        // }
     }
 
     @Override
@@ -57,10 +53,6 @@ public class TextRoom implements Room {
         // Queue command to every entity
         for (Entity entity: this.entityList) {
             entity.clearQueue();
-        }
-        // Queue command to every spawner
-        for (Spawner spawner: this.spawners) {
-            spawner.clearQueue();
         }
     }
 
@@ -107,8 +99,6 @@ public class TextRoom implements Room {
                 this.spawnEntity(spawner.spawn());
             }
         }
-
-        this.spawners.removeIf(spawner -> !spawner.alive());
 
     }
     
