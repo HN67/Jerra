@@ -14,6 +14,7 @@ import jerra.core.Vector;
 import jerra.entity.AmbientSpawner;
 import jerra.entity.Bullet;
 import jerra.entity.DefaultEntity;
+import jerra.entity.Gun;
 import jerra.entity.Player;
 import jerra.presence.ActivePresence;
 import jerra.presence.DefaultPresence;
@@ -71,10 +72,12 @@ public class GraphicController implements Controller {
                     ), 
                     new Vector(5, 5), "up", "down", "left", "right"
                 ),
-                new Bullet(
-                    new Rect(
-                        new Vector(0, 0), block
-                    ), new Vector(30, 30), 10
+                new Gun(
+                    new Bullet(
+                        new Rect(
+                            new Vector(0, 0), block
+                        ), new Vector(30, 30), 10
+                    ), 10
                 ),
                 "RIGHT"
             )
