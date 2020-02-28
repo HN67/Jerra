@@ -31,7 +31,7 @@ public class TextRoom implements Room {
     // Entity set should contain *all* entities
     private Set<Entity> entities;
     // Spawner set
-    private Set<Spawner> spawners;
+    private Set<Spawner<Entity>> spawners;
 
     // Removes the object from all sets
     private void remove(Object object) {
@@ -48,7 +48,7 @@ public class TextRoom implements Room {
         this.mortals = new HashSet<Mortal>();
 
         this.entities = new LinkedHashSet<Entity>();
-        this.spawners = new LinkedHashSet<Spawner>();
+        this.spawners = new LinkedHashSet<Spawner<Entity>>();
     }
 
     @Override
@@ -61,7 +61,7 @@ public class TextRoom implements Room {
     }
 
     @Override
-    public void spawnSpawner(Spawner spawner) {
+    public void spawnSpawner(Spawner<Entity> spawner) {
         this.spawners.add(spawner);
     }
 
@@ -131,7 +131,7 @@ public class TextRoom implements Room {
         }
         
         // Check spawners
-        for (Spawner spawner: this.spawners) {
+        for (Spawner<Entity> spawner: this.spawners) {
             // Get spawned Entity if Spawner spawns
             if (spawner.spawns()) {
                 this.spawnEntity(spawner.spawn());

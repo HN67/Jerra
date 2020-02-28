@@ -6,7 +6,7 @@ import jerra.presence.Presence;
 /**
  * Player
  */
-public class Player extends DefaultEntity implements Spawner {
+public class Player extends DefaultEntity implements Spawner<Entity> {
 
     private String direction;
     private Gun gun;

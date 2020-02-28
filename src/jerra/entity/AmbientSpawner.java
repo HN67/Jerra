@@ -9,7 +9,7 @@ import jerra.presence.Presence;
 /**
  * Ambient Spawner, an object that periodically spawns Entities around its position.
  */
-public class AmbientSpawner implements Spawner {
+public class AmbientSpawner implements Spawner<Entity> {
     
     private int period;
 	private int tick;

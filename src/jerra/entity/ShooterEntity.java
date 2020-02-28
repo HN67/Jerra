@@ -7,7 +7,7 @@ import jerra.presence.Presence;
  * DefaultEntity with a Gun that fires the Gun as often as possible.
  * Bullets are shot in the current velocity direction of the Shooter
  */
-public class ShooterEntity extends DefaultEntity implements Spawner {
+public class ShooterEntity extends DefaultEntity implements Spawner<Entity> {
 
     private Gun gun;
 

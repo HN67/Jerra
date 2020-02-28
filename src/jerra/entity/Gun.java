@@ -6,7 +6,7 @@ import jerra.api.Updatable;
 /**
  * Gun class, designed to be a bullet spawner
  */
-public class Gun implements Spawner, Updatable, Copyable<Gun> {
+public class Gun implements Spawner<Entity>, Updatable, Copyable<Gun> {
 
     private Entity bullet;
     private int reload;
