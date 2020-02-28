@@ -79,10 +79,5 @@ public class AmbientSpawner implements Spawner {
         newEntity.setPresence(newPresence);
     	return newEntity;
     }
-
-    @Override
-    public boolean alive() {
-        return true;
-    }
     
 }

@@ -1,6 +1,6 @@
 package jerra.room;
 
-import java.util.List;
+import java.util.Set;
 
 import jerra.api.Updatable;
 import jerra.api.Interactive;
@@ -30,7 +30,7 @@ public interface Room extends Updatable, Interactive {
      */
     public void spawnPlayer(Player player);
     
-    public List<Entity> getEntities();
+    public Set<Entity> getEntities();
 
     @Override
     public String toString();

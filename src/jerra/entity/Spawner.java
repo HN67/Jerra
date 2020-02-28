@@ -19,6 +19,4 @@ public interface Spawner {
      */
     public Entity spawn();
 
-    public boolean alive();
-
 }
