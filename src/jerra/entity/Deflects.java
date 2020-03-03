@@ -74,12 +74,4 @@ public interface Deflects extends Entity {
             return;
         }
     }
-
-    /**
-     * Prevents another entity from going through the wall.
-     */
-    @Override
-    default void interact(Entity other) {
-        this.deflect(other);
-    }
 }
