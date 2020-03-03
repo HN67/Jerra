@@ -34,7 +34,7 @@ public class GraphicView extends View<Room> {
 				color = Color.GREEN;
 				break;
 
-			default:
+			case "W":
 				color = Color.YELLOW;
 		}
 		
