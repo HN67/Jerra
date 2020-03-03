@@ -13,8 +13,6 @@ public interface Deflects extends Entity {
      * @param other an Entity, that is approaching this object.
      */
     default void deflect(Entity other) {
-        // Stop the other entity.
-        other.getPresence().getVelocity().scale(0);
 
         Rect otherPosition = other.getPosition();
 
@@ -26,10 +24,10 @@ public interface Deflects extends Entity {
             otherPosition.left() > this.getPosition().centerX() &&
             other.getPresence().getVelocity().x() < 0
         ) {
+            System.out.println("align left");
             other.getPresence().setPosition(
                 otherPosition.alignLeft(this.getPosition().right())
             );  
-            return;
         }
 
         // If another entity collides against the wall's left side,
@@ -40,10 +38,10 @@ public interface Deflects extends Entity {
             otherPosition.right() < this.getPosition().centerX() &&
             other.getPresence().getVelocity().x() > 0
         ) {
+            System.out.println("align right");
             other.getPresence().setPosition(
                 otherPosition.alignRight(this.getPosition().left())
             );
-            return;
         }
 
         // If another entity collides against the wall's top side,
@@ -52,12 +50,13 @@ public interface Deflects extends Entity {
         if(
             otherPosition.bottom() >= this.getPosition().top() && 
             otherPosition.bottom() < this.getPosition().centerY() && 
-            other.getPresence().getVelocity().y() > 0
+            other.getPresence().getVelocity().y() > 0 &&
+            (other.getPosition().top() < this.getPosition().top())
         ) {
+            System.out.println("align bot");
             other.getPresence().setPosition(
                 otherPosition.alignBottom(this.getPosition().top())
             );
-            return;
         }
 
         // If another entity collides against the wall's bottom side,
@@ -66,12 +65,13 @@ public interface Deflects extends Entity {
         if(
             otherPosition.top() <= this.getPosition().bottom() && 
             otherPosition.top() > this.getPosition().centerY() &&
-            other.getPresence().getVelocity().y() < 0
+            other.getPresence().getVelocity().y() < 0 &&
+            (other.getPosition().bottom() > this.getPosition().bottom())
         ) {
+            System.out.println("align top");
             other.getPresence().setPosition(
                 otherPosition.alignTop(this.getPosition().bottom())
             );
-            return;
         }
     }
 
