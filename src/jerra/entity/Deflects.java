@@ -3,6 +3,15 @@ package jerra.entity;
 import jerra.core.Rect;
 
 public interface Deflects extends Entity {
+
+    /**
+     * Aligns another entity against this object's side where
+     * the entity was approaching towards. For example, if an entity is approaching
+     * this object's left side. The entity's right is then aligned to this
+     * object's left side.
+     * 
+     * @param other an Entity, that is approaching this object.
+     */
     default void deflect(Entity other) {
         // Stop the other entity.
         other.getPresence().getVelocity().scale(0);
