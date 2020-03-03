@@ -10,7 +10,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 import jerra.core.Rect;
 import jerra.core.Vector;
+import jerra.entity.AmbientSpawner;
 import jerra.entity.Bullet;
+import jerra.entity.DefaultEntity;
 import jerra.entity.Player;
 import jerra.entity.Wall;
 import jerra.presence.ActivePresence;
@@ -47,9 +49,22 @@ public class GraphicController implements Controller {
     public void start() {
         Vector zero = new Vector(0, 0);
         Vector block = new Vector(25, 25);
-        int stroke = 10;
+        int stroke = 20;
         Vector verticalWall = new Vector(stroke, (int) this.canvas.getHeight());
         Vector horizontalWall = new Vector((int) this.canvas.getHeight(), stroke);
+
+        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(100, 0), block), zero)));
+		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(200, 0), block), zero)));
+		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 100), block), zero)));
+		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 200), block), zero)));
+        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(125, 125), block), zero)));
+
+        this.room.spawnSpawner(new AmbientSpawner(
+            new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 0), block), zero)),
+            new Vector(300, 300), 
+            300, 
+            100
+        ));
 
         this.room.spawnEntity(
             new Wall(
@@ -142,7 +157,7 @@ public class GraphicController implements Controller {
             new Player(
                 new ActivePresence(
                     new Rect(
-                        new Vector(10, 10), block
+                        new Vector(30, 30), block
                     ), 
                     new Vector(5, 5), "up", "down", "left", "right"
                 ),
