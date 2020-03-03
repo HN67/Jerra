@@ -47,6 +47,9 @@ public class GraphicController implements Controller {
     public void start() {
         Vector zero = new Vector(0, 0);
         Vector block = new Vector(25, 25);
+        int stroke = 10;
+        Vector verticalWall = new Vector(stroke, (int) this.canvas.getHeight());
+        Vector horizontalWall = new Vector((int) this.canvas.getHeight(), stroke);
 
         this.room.spawnEntity(
             new Wall(
@@ -60,11 +63,86 @@ public class GraphicController implements Controller {
             )
         );
 
+        this.room.spawnEntity(
+            new Wall(
+                new DefaultPresence(
+                    new Rect(
+                        new Vector(250, 250),
+                        new Vector(50, 50)
+                    ), 
+                    zero
+                )
+            )
+        );
+
+        this.room.spawnEntity(
+            new Wall(
+                new DefaultPresence(
+                    new Rect(
+                        new Vector(300, 300),
+                        new Vector(50, 50)
+                    ), 
+                    zero
+                )
+            )
+        );
+
+        this.room.spawnEntity(
+            new Wall(
+                new DefaultPresence(
+                    new Rect(
+                        new Vector(0,0),
+                        verticalWall
+                    ), 
+                    zero
+                )
+            )
+        );
+
+        this.room.spawnEntity(
+            new Wall(
+                new DefaultPresence(
+                    new Rect(
+                        new Vector(
+                            (int) this.canvas.getWidth() - stroke, 
+                            0
+                        ),
+                        verticalWall
+                    ), 
+                    zero
+                )
+            )
+        );
+
+        this.room.spawnEntity(
+            new Wall(
+                new DefaultPresence(
+                    new Rect(
+                        new Vector(0, (int) this.canvas.getHeight() - stroke),
+                        horizontalWall
+                    ), 
+                    zero
+                )
+            )
+        );
+
+        this.room.spawnEntity(
+            new Wall(
+                new DefaultPresence(
+                    new Rect(
+                        new Vector(10, 0),
+                        horizontalWall
+                    ), 
+                    zero
+                )
+            )
+        );
+
         this.room.spawnPlayer(
             new Player(
                 new ActivePresence(
                     new Rect(
-                        new Vector(0, 0), block
+                        new Vector(10, 10), block
                     ), 
                     new Vector(5, 5), "up", "down", "left", "right"
                 ),
@@ -185,7 +263,7 @@ public class GraphicController implements Controller {
         this.room.update();
 
         // Render the views
-        this.textView.render();
+        // this.textView.render();
 
         this.view.render();
 
