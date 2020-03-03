@@ -1,20 +1,18 @@
 package jerra.control;
 
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
-
 import jerra.core.Rect;
 import jerra.core.Vector;
-import jerra.entity.AmbientSpawner;
 import jerra.entity.Bullet;
-import jerra.entity.DefaultEntity;
 import jerra.entity.Player;
+import jerra.entity.Wall;
 import jerra.presence.ActivePresence;
 import jerra.presence.DefaultPresence;
 import jerra.room.Room;
@@ -50,18 +48,17 @@ public class GraphicController implements Controller {
         Vector zero = new Vector(0, 0);
         Vector block = new Vector(25, 25);
 
-        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(100, 0), block), zero)));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(200, 0), block), zero)));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 100), block), zero)));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 200), block), zero)));
-        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(125, 125), block), zero)));
-
-        this.room.spawnSpawner(new AmbientSpawner(
-            new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 0), block), zero)),
-            new Vector(300, 300), 
-            300, 
-            100
-        ));
+        this.room.spawnEntity(
+            new Wall(
+                new DefaultPresence(
+                    new Rect(
+                        new Vector(100, 100),
+                        new Vector(50, 50)
+                    ), 
+                    zero
+                )
+            )
+        );
 
         this.room.spawnPlayer(
             new Player(
