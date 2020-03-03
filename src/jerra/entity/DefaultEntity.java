@@ -1,5 +1,7 @@
 package jerra.entity;
 
+import jerra.api.Physical;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -42,7 +44,8 @@ public class DefaultEntity implements Entity {
         this.presence = presence;
     }
 
-    public boolean collides(Entity other) {
+    @Override
+    public boolean collides(Physical other) {
         return this.getPresence().collides(other.getPresence());
     }
 
