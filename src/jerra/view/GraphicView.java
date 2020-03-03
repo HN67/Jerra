@@ -62,6 +62,7 @@ public class GraphicView extends View<Room> {
 				width,
 				height
 			);
+//			context.drawImage(entity.image(), entity.getPosition().centerX(), entity.getPosition().centerY());
 		}
 	}
 
