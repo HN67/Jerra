@@ -14,6 +14,10 @@ public interface Deflects extends Entity {
      */
     default void deflect(Entity other) {
 
+        if(!other.deflectable()) {
+            return;
+        }
+
         Rect otherPosition = other.getPosition();
 
         // If another entity collides against the wall's right side,
@@ -25,7 +29,6 @@ public interface Deflects extends Entity {
             other.getPresence().getVelocity().x() < 0 &&
             other.getPosition().right() > this.getPosition().right()
         ) {
-            System.out.println("align left");
             other.getPresence().setPosition(
                 otherPosition.alignLeft(this.getPosition().right())
             );  
@@ -40,7 +43,6 @@ public interface Deflects extends Entity {
             other.getPresence().getVelocity().x() > 0 &&
             other.getPosition().left() < this.getPosition().left()
         ) {
-            System.out.println("align right");
             other.getPresence().setPosition(
                 otherPosition.alignRight(this.getPosition().left())
             );
@@ -55,7 +57,6 @@ public interface Deflects extends Entity {
             other.getPresence().getVelocity().y() > 0 &&
             other.getPosition().top() < this.getPosition().top()
         ) {
-            System.out.println("align bot");
             other.getPresence().setPosition(
                 otherPosition.alignBottom(this.getPosition().top())
             );
@@ -70,7 +71,6 @@ public interface Deflects extends Entity {
             other.getPresence().getVelocity().y() < 0 &&
             other.getPosition().bottom() > this.getPosition().bottom()
         ) {
-            System.out.println("align top");
             other.getPresence().setPosition(
                 otherPosition.alignTop(this.getPosition().bottom())
             );

@@ -1,11 +1,9 @@
 package jerra.entity;
 
 import jerra.api.Copyable;
-import jerra.api.Updatable;
 import jerra.api.Interactive;
-
+import jerra.api.Updatable;
 import jerra.core.Rect;
-
 import jerra.presence.Presence;
 
 /**
@@ -31,5 +29,9 @@ public interface Entity extends Updatable, Copyable<Entity>, Interactive {
 
     public boolean alive();
     public void kill(boolean dead);
+
+    default boolean deflectable() {
+        return true;
+    }
     
 }

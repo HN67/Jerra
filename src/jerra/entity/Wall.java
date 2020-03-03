@@ -34,5 +34,6 @@ public class Wall extends DefaultEntity implements Deflects {
 
     @Override
     public void kill(boolean dead) {
+        // Unkillable!
     }
 }
