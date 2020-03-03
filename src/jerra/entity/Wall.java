@@ -21,9 +21,18 @@ public class Wall extends DefaultEntity implements Deflects {
     }
 
     @Override
+    public String symbol() {
+        return "W";
+    }
+
+    @Override
     public void interact(Entity other) {
         this.deflect(other);
 
         super.interact(other);
+    }
+
+    @Override
+    public void kill(boolean dead) {
     }
 }

@@ -22,7 +22,8 @@ public interface Deflects extends Entity {
         if(
             otherPosition.left() <= this.getPosition().right() &&
             otherPosition.left() > this.getPosition().centerX() &&
-            other.getPresence().getVelocity().x() < 0
+            other.getPresence().getVelocity().x() < 0 &&
+            other.getPosition().right() > this.getPosition().right()
         ) {
             System.out.println("align left");
             other.getPresence().setPosition(
@@ -36,7 +37,8 @@ public interface Deflects extends Entity {
         if(
             otherPosition.right() >= this.getPosition().left() &&
             otherPosition.right() < this.getPosition().centerX() &&
-            other.getPresence().getVelocity().x() > 0
+            other.getPresence().getVelocity().x() > 0 &&
+            other.getPosition().left() < this.getPosition().left()
         ) {
             System.out.println("align right");
             other.getPresence().setPosition(
@@ -51,7 +53,7 @@ public interface Deflects extends Entity {
             otherPosition.bottom() >= this.getPosition().top() && 
             otherPosition.bottom() < this.getPosition().centerY() && 
             other.getPresence().getVelocity().y() > 0 &&
-            (other.getPosition().top() < this.getPosition().top())
+            other.getPosition().top() < this.getPosition().top()
         ) {
             System.out.println("align bot");
             other.getPresence().setPosition(
@@ -66,16 +68,12 @@ public interface Deflects extends Entity {
             otherPosition.top() <= this.getPosition().bottom() && 
             otherPosition.top() > this.getPosition().centerY() &&
             other.getPresence().getVelocity().y() < 0 &&
-            (other.getPosition().bottom() > this.getPosition().bottom())
+            other.getPosition().bottom() > this.getPosition().bottom()
         ) {
             System.out.println("align top");
             other.getPresence().setPosition(
                 otherPosition.alignTop(this.getPosition().bottom())
             );
         }
-    }
-
-    default boolean deflects() {
-        return true;
     }
 }
