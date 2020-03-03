@@ -13,7 +13,6 @@ public class ObjectEffect implements Effect{
 	}
 	
 	public Effect combine(Effect effect) {
-		// TODO Auto-generated method stub
 		return new ObjectEffect(this.damage + effect.getDamage(), effect.getAcceleration().add(this.acceleration));
 		
 	}
@@ -38,14 +37,12 @@ public class ObjectEffect implements Effect{
 
 	@Override
 	public void setAcceleration(Vector vector) {
-		// TODO Auto-generated method stub
 		this.acceleration = vector;
 		
 	}
 
 	@Override
 	public Vector getAcceleration() {
-		// TODO Auto-generated method stub
 		return this.acceleration;
 	}
 
