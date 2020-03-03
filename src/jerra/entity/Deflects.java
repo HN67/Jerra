@@ -74,4 +74,8 @@ public interface Deflects extends Entity {
             return;
         }
     }
+
+    default boolean deflects() {
+        return true;
+    }
 }
