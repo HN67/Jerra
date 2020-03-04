@@ -17,6 +17,8 @@ import jerra.entity.DefaultEntity;
 import jerra.entity.Gun;
 import jerra.entity.ShooterEntity;
 import jerra.entity.Player;
+import jerra.entity.Shooter;
+
 import jerra.presence.ActivePresence;
 import jerra.presence.DefaultPresence;
 import jerra.presence.WanderPresence;
@@ -67,10 +69,9 @@ public class GraphicController implements Controller {
                 10
             )
         );
-        this.room.spawnEntity(shooter);
-        this.room.spawnSpawner(shooter);
+        this.room.spawnShooter(shooter);
 
-        this.room.spawnSpawner(new AmbientSpawner(
+        this.room.spawnSpawner(new AmbientSpawner<Shooter>(
             // new DefaultEntity(new WanderPresence(new Rect(new Vector(0, 0), block), new Vector(3, 3), 25)),
             shooter,
             new Vector(300, 300), 
@@ -78,7 +79,7 @@ public class GraphicController implements Controller {
             100
         ));
 
-        this.room.spawnPlayer(
+        this.room.spawnShooter(
             new Player(
                 new ActivePresence(
                     new Rect(

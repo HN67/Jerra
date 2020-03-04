@@ -2,6 +2,9 @@ package jerra.entity;
 
 import java.lang.Math;
 
+import jerra.api.Physical;
+import jerra.api.Copyable;
+
 import jerra.core.Vector;
 
 import jerra.presence.Presence;
@@ -9,11 +12,11 @@ import jerra.presence.Presence;
 /**
  * Ambient Spawner, an object that periodically spawns Entities around its position.
  */
-public class AmbientSpawner implements Spawner<Entity> {
+public class AmbientSpawner<Spawnable extends Physical & Copyable<Spawnable>> implements Spawner<Spawnable> {
     
     private int period;
 	private int tick;
-	private Entity entity;
+	private Spawnable entity;
 	private Vector origin;
 	private int range;
 
@@ -25,7 +28,7 @@ public class AmbientSpawner implements Spawner<Entity> {
      * of the spawned entity is <= origin -+ range.
      * @param period, a int, the Entity is spawned every this many ticks
      */
-    public AmbientSpawner(Entity entity, Vector origin, int range, int period) {
+    public AmbientSpawner(Spawnable entity, Vector origin, int range, int period) {
         // Save origin and range and entity
     	this.entity = entity;
     	this.origin = origin;
@@ -48,7 +51,7 @@ public class AmbientSpawner implements Spawner<Entity> {
     }
 
     @Override
-    public Entity spawn() {
+    public Spawnable spawn() {
         // Generate random offsets
         // Determine negative or not for y offset
     	int negative = (int)(Math.random()*(2));
@@ -71,7 +74,7 @@ public class AmbientSpawner implements Spawner<Entity> {
     		x = (int)(Math.random()*(this.range+1))*-1;
         }
         // Copy entity
-        Entity newEntity = this.entity.copy();
+        Spawnable newEntity = this.entity.copy();
         // Set position to determined offset of origin
         Presence newPresence = newEntity.getPresence();
         // It would be convenient if setPosition returned a Presence so we could oneline, but this works

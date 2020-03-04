@@ -17,6 +17,7 @@ import jerra.api.Updatable;
 import jerra.entity.Entity;
 import jerra.entity.Player;
 import jerra.entity.Spawner;
+import jerra.entity.Shooter;
 
 /**
  * TextRoom
@@ -71,6 +72,12 @@ public class TextRoom implements Room {
         this.spawnEntity(player);
         // Registers the player as a spawner (for shooting)
         this.spawners.add(player);
+    }
+
+    @Override
+    public void spawnShooter(Shooter shooter) {
+        this.spawnEntity(shooter);
+        this.spawnSpawner(shooter);
     }
 
     @Override
