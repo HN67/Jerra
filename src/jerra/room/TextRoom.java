@@ -33,6 +33,7 @@ public class TextRoom implements Room {
     private Set<Entity> entities;
     // Spawner set
     private Set<Spawner<Entity>> spawners;
+    private Set<Spawner<Shooter>> shooterSpawners;
 
     // Removes the object from all sets
     private void remove(Object object) {
@@ -41,6 +42,7 @@ public class TextRoom implements Room {
         this.mortals.remove(object);
         this.entities.remove(object);
         this.spawners.remove(object);
+        this.shooterSpawners.remove(object);
     }
 
     public TextRoom() {
@@ -50,6 +52,7 @@ public class TextRoom implements Room {
 
         this.entities = new LinkedHashSet<Entity>();
         this.spawners = new LinkedHashSet<Spawner<Entity>>();
+        this.shooterSpawners = new HashSet<Spawner<Shooter>>();
     }
 
     @Override
@@ -78,6 +81,11 @@ public class TextRoom implements Room {
     public void spawnShooter(Shooter shooter) {
         this.spawnEntity(shooter);
         this.spawnSpawner(shooter);
+    }
+
+    @Override
+    public void spawnShooterSpawner(Spawner<Shooter> spawner) {
+        this.shooterSpawners.add(spawner);
     }
 
     @Override
@@ -142,6 +150,13 @@ public class TextRoom implements Room {
             // Get spawned Entity if Spawner spawns
             if (spawner.spawns()) {
                 this.spawnEntity(spawner.spawn());
+            }
+        }
+
+        for (Spawner<Shooter> spawner: this.shooterSpawners) {
+            // Get spawned Entity if Spawner spawns
+            if (spawner.spawns()) {
+                this.spawnShooter(spawner.spawn());
             }
         }
 

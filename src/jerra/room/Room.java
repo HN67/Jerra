@@ -35,6 +35,11 @@ public interface Room extends Updatable, Interactive {
      * @param shooter the Shooter the room will now track
      */
     public void spawnShooter(Shooter spawner);
+    /**
+     * Spawns (inserts) a Shooter spawner in the Room
+     * @param spawner The Spawner that the Room will now track, adding its produces as Shooters
+     */
+    public void spawnShooterSpawner(Spawner<Shooter> spawner);
     
     public Set<Entity> getEntities();
 

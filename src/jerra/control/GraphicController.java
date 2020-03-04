@@ -12,6 +12,7 @@ import javafx.util.Duration;
 import jerra.core.Rect;
 import jerra.core.Vector;
 import jerra.entity.AmbientSpawner;
+import jerra.entity.AmbientShooterSpawner;
 import jerra.entity.Bullet;
 import jerra.entity.DefaultEntity;
 import jerra.entity.Gun;
@@ -71,7 +72,7 @@ public class GraphicController implements Controller {
         );
         this.room.spawnShooter(shooter);
 
-        this.room.spawnSpawner(new AmbientSpawner<Shooter>(
+        this.room.spawnShooterSpawner(new AmbientShooterSpawner(
             // new DefaultEntity(new WanderPresence(new Rect(new Vector(0, 0), block), new Vector(3, 3), 25)),
             shooter,
             new Vector(300, 300), 
