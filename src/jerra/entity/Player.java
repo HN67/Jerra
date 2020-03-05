@@ -6,19 +6,19 @@ import jerra.presence.Presence;
 /**
  * Player
  */
-public class Player extends DefaultEntity implements Spawner {
+public class Player extends DefaultEntity implements Shooter {
 
     private String direction;
-    private Projectile bullet;
+    private Gun gun;
 
-    public Player(Presence presence, Projectile bullet, String direction) {
+    public Player(Presence presence, Gun gun, String direction) {
         super(presence);
         this.setDirection(direction);
-        this.bullet = bullet;
+        this.gun = gun;
     }
 
-    public Player(Presence presence, Projectile bullet) {
-        this(presence, bullet, "UP");
+    public Player(Presence presence, Gun gun) {
+        this(presence, gun, "UP");
     }
 
     public void setDirection(String direction) {
@@ -39,6 +39,9 @@ public class Player extends DefaultEntity implements Spawner {
             } else {
             }
         }
+
+        // Update gun
+        this.gun.update();
 
         // Call super update (updates Presence and clears queue)
         super.update();
@@ -61,8 +64,8 @@ public class Player extends DefaultEntity implements Spawner {
      */
     @Override
     public Entity spawn() {
-        // Prepare new bullet
-        Entity bullet = this.bullet.copy();
+        // Get new bullet from gun
+        Entity bullet = this.gun.spawn();
         Presence presence = bullet.getPresence().copy();
         presence.setPosition(this.getPosition().getOrigin());
         Vector velocity = presence.getVelocity();
@@ -91,12 +94,21 @@ public class Player extends DefaultEntity implements Spawner {
      * @return A boolean representing whether the Player should spawn an entity
      */
     public boolean spawns() {
-        for (String command: this.commandQueue()) {
-            if (command.equals("shoot")) {
-                return true;
+        // Only spawns if gun is ready
+        if (this.gun.spawns()) {
+            // Check for appropriate command
+            for (String command: this.commandQueue()) {
+                if (command.equals("shoot")) {
+                    return true;
+                }
             }
         }
         return false;
+    }
+
+    @Override
+    public Shooter copy() {
+        return new Player(this.getPresence().copy(), this.gun.copy(), this.direction);
     }
 
 }

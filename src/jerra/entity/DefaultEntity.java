@@ -1,10 +1,10 @@
 package jerra.entity;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
+import jerra.api.Physical;
 import jerra.core.Rect;
-
 import jerra.presence.Presence;
 
 /**
@@ -42,7 +42,8 @@ public class DefaultEntity implements Entity {
         this.presence = presence;
     }
 
-    public boolean collides(Entity other) {
+    @Override
+    public boolean collides(Physical other) {
         return this.getPresence().collides(other.getPresence());
     }
 
@@ -95,6 +96,11 @@ public class DefaultEntity implements Entity {
 
     public void kill(boolean dead) {
         this.alive = !dead;
+    }
+
+    @Override
+    public void deflect(Physical other) {
+        ;
     }
 
 }

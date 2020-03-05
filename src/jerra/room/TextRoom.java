@@ -1,10 +1,19 @@
 package jerra.room;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+import jerra.api.Interactive;
+import jerra.api.Mortal;
+import jerra.api.Updatable;
 import jerra.entity.Entity;
 import jerra.entity.Player;
+import jerra.entity.Shooter;
 import jerra.entity.Spawner;
 
 /**
@@ -12,115 +21,154 @@ import jerra.entity.Spawner;
  */
 public class TextRoom implements Room {
 
-    // EntityList should contain *all* entities
-    private List<Entity> entityList;
-    // Sublists are for finer control
-    private List<Spawner> spawners;
+    // Raw sets
+    private Set<Updatable> updatables;
+    private Set<Interactive> interactables;
+    private Set<Mortal> mortals;
+
+    // Entity set should contain *all* entities
+    private Set<Entity> entities;
+    // Spawner set
+    private Set<Spawner<Entity>> spawners;
+    private Set<Spawner<Shooter>> shooterSpawners;
+
+    // Removes the object from all sets
+    private void remove(Object object) {
+        this.updatables.remove(object);
+        this.interactables.remove(object);
+        this.mortals.remove(object);
+        this.entities.remove(object);
+        this.spawners.remove(object);
+        this.shooterSpawners.remove(object);
+    }
 
     public TextRoom() {
-        this.entityList = new ArrayList<Entity>();
-        this.spawners = new ArrayList<Spawner>();
+        this.updatables = new HashSet<Updatable>();
+        this.interactables = new HashSet<Interactive>();
+        this.mortals = new HashSet<Mortal>();
+
+        this.entities = new LinkedHashSet<Entity>();
+        this.spawners = new LinkedHashSet<Spawner<Entity>>();
+        this.shooterSpawners = new HashSet<Spawner<Shooter>>();
     }
 
     @Override
     public void spawnEntity(Entity entity) {
-        this.entityList.add(entity);
+        this.updatables.add(entity);
+        this.interactables.add(entity);
+        this.mortals.add(entity);
+
+        this.entities.add(entity);
     }
 
     @Override
-    public void spawnSpawner(Spawner spawner) {
+    public void spawnSpawner(Spawner<Entity> spawner) {
         this.spawners.add(spawner);
     }
 
     @Override
     public void spawnPlayer(Player player) {
-        // Adding to entityList allows bulk updating
-        this.entityList.add(player);
+        // Adding to entities allows bulk updating
+        this.spawnEntity(player);
         // Registers the player as a spawner (for shooting)
         this.spawners.add(player);
     }
 
     @Override
+    public void spawnShooter(Shooter shooter) {
+        this.spawnEntity(shooter);
+        this.spawnSpawner(shooter);
+    }
+
+    @Override
+    public void spawnShooterSpawner(Spawner<Shooter> spawner) {
+        this.shooterSpawners.add(spawner);
+    }
+
+    @Override
     public void queue(String command) {
         // Queue command to every entity
-        for (Entity entity: this.entityList) {
-            entity.queue(command);
+        for (Interactive interactable: this.interactables) {
+            interactable.queue(command);
         }
-        // Queue command to every spawner
-        // for (Spawner spawner: this.spawners) {
-        //     spawner.queue(command);
-        // }
     }
 
     @Override
     public void clearQueue() {
         // Queue command to every entity
-        for (Entity entity: this.entityList) {
-            entity.clearQueue();
-        }
-        // Queue command to every spawner
-        for (Spawner spawner: this.spawners) {
-            spawner.clearQueue();
+        for (Interactive interactable: this.interactables) {
+            interactable.clearQueue();
         }
     }
 
     @Override
     public void update() {
 
-        // Update all general entities
-        for (Entity entity: this.entityList) {
-            entity.update();
+        // Update all general updatables
+        for (Updatable updatable: this.updatables) {
+            updatable.update();
         }
 
         // Check for collisions between Entities (O(n^2))
-        // Creates a list of lists of collisions, ordered in the same order as entity list
-        List<List<Entity>> allCollisions = new ArrayList<List<Entity>>(this.entityList.size());
+        // Creates a map from each entity to its collisions
+        Map<Entity, List<Entity>> allCollisions = new HashMap<Entity, List<Entity>>(this.entities.size());
         // Iterate through each entity
-        for (Entity entity: this.entityList) {
+        for (Entity entity: this.entities) {
             List<Entity> collisions = new ArrayList<Entity>();
             // Check for collision with *every other* entity
-            for (Entity other: this.entityList) {
+            for (Entity other: this.entities) {
                 // Check for collision and ensure its not the same entity
                 // Lazy evaluation ensures second check is only performed if first succeeds
                 if (entity.collides(other) && entity != other) {
                     collisions.add(other);
                 }
             }
-            // Add collisions to larger list
-            allCollisions.add(collisions);
+            // Add collisions to map
+            allCollisions.put(entity, collisions);
         }
         // Resolve collisions through interaction
-        for (int i = 0, n = this.entityList.size(); i < n; i++) {
+        for (Map.Entry<Entity, List<Entity>> entry: allCollisions.entrySet()) {
             // Iterate through each collision with the entity
-            for (Entity other: allCollisions.get(i)) {
-                this.entityList.get(i).interact(other);
+            Entity entity = entry.getKey();
+            for (Entity other: entry.getValue()) {
+                entity.deflect(other);
+                entity.interact(other);
             }
         }
 
-        // Remove dead entities
-        this.entityList.removeIf(entity -> !entity.alive());
+        // Remove dead mortals
+        for (Mortal mortal: new HashSet<Mortal>(this.mortals)) {
+            if (!mortal.alive()) {
+                this.remove(mortal);
+            }
+        }
         
         // Check spawners
-        for (Spawner spawner: this.spawners) {
+        for (Spawner<Entity> spawner: this.spawners) {
             // Get spawned Entity if Spawner spawns
             if (spawner.spawns()) {
                 this.spawnEntity(spawner.spawn());
             }
         }
 
-        this.spawners.removeIf(spawner -> !spawner.alive());
+        for (Spawner<Shooter> spawner: this.shooterSpawners) {
+            // Get spawned Entity if Spawner spawns
+            if (spawner.spawns()) {
+                this.spawnShooter(spawner.spawn());
+            }
+        }
 
     }
     
     @Override
-    public List<Entity> getEntities() {
-    	return this.entityList;
+    public Set<Entity> getEntities() {
+    	return this.entities;
     }
 
     @Override
     public String toString() {
         String output = "";
-        for (Entity entity: this.entityList) {
+        for (Entity entity: this.entities) {
             output += entity.toString() + "\n";
         }
         return output;
