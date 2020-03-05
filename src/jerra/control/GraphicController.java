@@ -11,14 +11,12 @@ import javafx.util.Duration;
 
 import jerra.core.Rect;
 import jerra.core.Vector;
-import jerra.entity.AmbientSpawner;
 import jerra.entity.AmbientShooterSpawner;
 import jerra.entity.Bullet;
 import jerra.entity.DefaultEntity;
 import jerra.entity.Gun;
 import jerra.entity.ShooterEntity;
 import jerra.entity.Player;
-import jerra.entity.Shooter;
 
 import jerra.presence.ActivePresence;
 import jerra.presence.DefaultPresence;
@@ -66,8 +64,8 @@ public class GraphicController implements Controller {
         ShooterEntity shooter = new ShooterEntity(
             new WanderPresence(new Rect(new Vector(300, 300), block), new Vector(3, 3), 25),
             new Gun(
-                new Bullet(new Rect(zero, block), new Vector(30, 30), 10),
-                10
+                new Bullet(new Rect(zero, block), new Vector(30, 30), 7),
+                40
             )
         );
         this.room.spawnShooter(shooter);

@@ -8,6 +8,7 @@ import jerra.core.Rect;
 import jerra.presence.DefaultPresence;
 import jerra.presence.ActivePresence;
 
+import jerra.entity.Entity;
 import jerra.entity.DefaultEntity;
 import jerra.entity.Gun;
 import jerra.entity.Player;
@@ -39,7 +40,7 @@ public class TextController implements Controller {
 		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 8), new Vector(1, 1)), zero)));
         this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(5, 5), new Vector(1, 1)), zero)));
 
-        this.room.spawnSpawner(new AmbientSpawner(
+        this.room.spawnSpawner(new AmbientSpawner<Entity>(
             new DefaultEntity(new DefaultPresence(new Rect(0, 0, 1, 1), zero)),
             new Vector(4, 4), 
             1, 
