@@ -6,7 +6,7 @@ package jerra.item;
  * weapon. Let's say we have drinks like: Caffeine or HalfAndHalf which might 
  * speed a player up or slow a player down, respectively.
  */
-abstract class Item {
+public abstract class Item {
     /**
      * Implementation for checking if an item equals another item.
      * Here, the class for both items are just compared;
