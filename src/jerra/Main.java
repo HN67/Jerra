@@ -23,6 +23,9 @@ public class Main {
         System.out.println(inventory);
         inventory.remove(new HalfAndHalf());
         System.out.println(inventory);
+        inventory.remove(new HalfAndHalf());
+        inventory.remove(new HalfAndHalf());
+        System.out.println(inventory);
 
     }
     
