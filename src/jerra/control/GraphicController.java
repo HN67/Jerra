@@ -18,6 +18,8 @@ import jerra.entity.Gun;
 import jerra.entity.ShooterEntity;
 import jerra.entity.Player;
 
+import jerra.stats.Stats;
+
 import jerra.effect.AccelerationEffect;
 
 import jerra.presence.ActivePresence;
@@ -65,6 +67,7 @@ public class GraphicController implements Controller {
         
         ShooterEntity shooter = new ShooterEntity(
             new WanderPresence(new Rect(new Vector(300, 300), block), new Vector(3, 3), 25),
+            new Stats(10, 10),
             new Gun(
                 new Bullet(new Rect(zero, block), new Vector(30, 30), new AccelerationEffect(new Vector(1, 1)), 7, 'E'),
                 40
@@ -89,6 +92,7 @@ public class GraphicController implements Controller {
                     ), 
                     new Vector(5, 5), "up", "down", "left", "right"
                 ),
+                new Stats(10, 10),
                 new Gun(
                     new Bullet(
                         new Rect(
