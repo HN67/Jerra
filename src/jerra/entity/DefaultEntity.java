@@ -31,7 +31,7 @@ public class DefaultEntity implements Entity {
 
         // Default team
         this.team = 0;
-        
+
     }
 
     public String getName() {
@@ -115,8 +115,9 @@ public class DefaultEntity implements Entity {
     }
 
     @Override
-    public void setTeam(char team) {
+    public Affiliate setTeam(char team) {
         this.team = team;
+        return this;
     }
 
     public boolean friendly(Affiliate other) {

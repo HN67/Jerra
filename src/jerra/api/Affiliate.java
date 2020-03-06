@@ -14,8 +14,9 @@ public interface Affiliate {
     /**
      * Sets the team of this Affiliate
      * @param team a char, each unique char is a unique team
+     * @return a Affiliate, this Affiliate to allow chaining
      */
-    public void setTeam(char team);
+    public Affiliate setTeam(char team);
     /**
      * Checks if the two Affiliates are on the same team.
      * Usually checks if their team is the same

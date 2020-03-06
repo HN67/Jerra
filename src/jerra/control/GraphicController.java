@@ -90,9 +90,10 @@ public class GraphicController implements Controller {
                 new Gun(
                     new Bullet(
                         new Rect(
-                            new Vector(0, 0), block
-                        ), new Vector(30, 30), 10, 'P'
-                    ), 10
+                            new Vector(0, 0), new Vector(10, 10)
+                        ), new Vector(15, 15), 100, 'P'
+                    ),
+                    10
                 ),
                 'P',
                 new Vector(1, 0)
