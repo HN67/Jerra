@@ -1,4 +1,4 @@
-package jerra.effect;
+package jerra.stats;
 
 import java.util.Map;
 import java.util.HashMap;
