@@ -30,14 +30,14 @@ public class Inventory{
     }
 
     public void remove(Item item) {  
-            for (Item i : inventory.keySet()) {
-                if (i.equals(item)) {
-                    if (inventory.get(i)>0) {
-                        inventory.replace(i, inventory.get(i)-1);
-                        return;
-                    }
-                }   
-            }
+        for (Item i : inventory.keySet()) {
+            if (i.equals(item)) {
+                if (inventory.get(i)>0) {
+                    inventory.replace(i, inventory.get(i)-1);
+                    return;
+                }
+            }   
+        }
     }
 
 }
