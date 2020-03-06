@@ -93,7 +93,7 @@ public class GraphicController implements Controller {
                         ), new Vector(30, 30), 10
                     ), 10
                 ),
-                "RIGHT"
+                new Vector(1, 0)
             )
         );
     
