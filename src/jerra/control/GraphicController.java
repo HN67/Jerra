@@ -1,23 +1,21 @@
 package jerra.control;
 
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
-
 import jerra.core.Rect;
 import jerra.core.Vector;
-import jerra.entity.AmbientShooterSpawner;
+import jerra.entity.AmbientSpawner;
 import jerra.entity.Bullet;
 import jerra.entity.DefaultEntity;
 import jerra.entity.Gun;
-import jerra.entity.ShooterEntity;
 import jerra.entity.Player;
-
+import jerra.entity.ShooterEntity;
 import jerra.presence.ActivePresence;
 import jerra.presence.DefaultPresence;
 import jerra.presence.WanderPresence;
@@ -54,13 +52,8 @@ public class GraphicController implements Controller {
         Vector zero = new Vector(0, 0);
         Vector block = new Vector(25, 25);
 
-        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(100, 0), block), zero)));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(200, 0), block), zero)));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 100), block), zero)));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 200), block), zero)));
-        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(125, 125), block), zero)));
+        this.room.spawn(new DefaultEntity(new DefaultPresence(new Rect(new Vector(100, 0), block), zero)));
 
-        
         ShooterEntity shooter = new ShooterEntity(
             new WanderPresence(new Rect(new Vector(300, 300), block), new Vector(3, 3), 25),
             new Gun(
@@ -69,9 +62,9 @@ public class GraphicController implements Controller {
             ),
             'E'
         );
-        this.room.spawnShooter(shooter);
+        this.room.spawn(shooter);
 
-        this.room.spawnShooterSpawner(new AmbientShooterSpawner(
+        this.room.spawn(new AmbientSpawner(
             // new DefaultEntity(new WanderPresence(new Rect(new Vector(0, 0), block), new Vector(3, 3), 25)),
             shooter,
             new Vector(300, 300), 
@@ -79,7 +72,7 @@ public class GraphicController implements Controller {
             100
         ));
 
-        this.room.spawnShooter(
+        this.room.spawn(
             new Player(
                 new ActivePresence(
                     new Rect(

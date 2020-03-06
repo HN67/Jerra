@@ -1,7 +1,5 @@
 package jerra.entity;
 
-import java.lang.Math;
-
 import jerra.core.Vector;
 import jerra.presence.Presence;
 
@@ -9,7 +7,7 @@ import jerra.presence.Presence;
  * DefaultEntity with a Gun that fires the Gun as often as possible.
  * Bullets are shot in the current velocity direction of the Shooter
  */
-public class ShooterEntity extends DefaultEntity implements Shooter {
+public class ShooterEntity extends DefaultEntity implements Spawner {
 
     private Gun gun;
 
@@ -17,6 +15,11 @@ public class ShooterEntity extends DefaultEntity implements Shooter {
         super(presence);
         this.gun = gun;
         this.setTeam(team);
+    }
+
+    @Override
+    public String getName() {
+        return "Shooter";
     }
 
     @Override
@@ -55,7 +58,7 @@ public class ShooterEntity extends DefaultEntity implements Shooter {
     }
 
     @Override
-    public Shooter copy() {
+    public ShooterEntity copy() {
         return new ShooterEntity(this.getPresence().copy(), this.gun.copy(), this.getTeam());
     }
     

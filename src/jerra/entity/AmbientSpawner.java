@@ -1,16 +1,13 @@
 package jerra.entity;
 
-import jerra.api.Physical;
-import jerra.api.Copyable;
-
 import jerra.core.Vector;
 
 /**
  * Ambient Spawner, an object that periodically spawns Entities around its position.
  */
-public class AmbientSpawner<Spawnable extends Physical & Copyable<Spawnable>> extends BaseAmbient implements Spawner<Spawnable> {
+public class AmbientSpawner extends BaseAmbient implements Spawner {
     
-	private Spawnable entity;
+	private Entity entity;
 
     /**
      * Constructs an AmbientSpawner that spawns copies of the given entity at nearby positions
@@ -20,7 +17,7 @@ public class AmbientSpawner<Spawnable extends Physical & Copyable<Spawnable>> ex
      * of the spawned entity is <= origin -+ range.
      * @param period, a int, the Entity is spawned every this many ticks
      */
-    public AmbientSpawner(Spawnable entity, Vector origin, int range, int period) {
+    public AmbientSpawner(Entity entity, Vector origin, int range, int period) {
         // Call super constructor
         super(origin, range, period);
         // Save entity
@@ -34,9 +31,9 @@ public class AmbientSpawner<Spawnable extends Physical & Copyable<Spawnable>> ex
     }
 
     @Override
-    public Spawnable spawn() {
+    public Entity spawn() {
         // Copy entity
-        Spawnable newEntity = this.entity.copy();
+        Entity newEntity = this.entity.copy();
         // Place new entity
         super.place(newEntity);
         // Return entity

@@ -6,7 +6,7 @@ import jerra.presence.Presence;
 /**
  * Player
  */
-public class Player extends DefaultEntity implements Shooter {
+public class Player extends DefaultEntity implements Spawner {
 
     private Vector direction;
     private Gun gun;
@@ -104,7 +104,7 @@ public class Player extends DefaultEntity implements Shooter {
     }
 
     @Override
-    public Shooter copy() {
+    public Player copy() {
         return new Player(this.getPresence().copy(), this.gun.copy(), this.getTeam(), this.direction);
     }
 

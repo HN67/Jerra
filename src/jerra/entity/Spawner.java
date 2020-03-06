@@ -5,7 +5,7 @@ package jerra.entity;
  * Represents something that has the capability to spawn new objects
  * @author Ryan Allard
  */
-public interface Spawner<Type> {
+public interface Spawner {
 
     /**
      * Describes whether the Spawner would currently spawn a <Type>
@@ -17,6 +17,6 @@ public interface Spawner<Type> {
      * Returns a new <Type> 'spawned' (created) by the Spawner
      * @return The new <Type>
      */
-    public Type spawn();
+    public Entity spawn();
 
 }
