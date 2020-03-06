@@ -71,10 +71,8 @@ public class TextRoom implements Room {
 
     @Override
     public void spawnPlayer(Player player) {
-        // Adding to entities allows bulk updating
-        this.spawnEntity(player);
-        // Registers the player as a spawner (for shooting)
-        this.spawners.add(player);
+        // Currently a player is just a shooter
+        this.spawnShooter(player);
     }
 
     @Override
