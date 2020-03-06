@@ -3,6 +3,7 @@ package jerra.control;
 import java.util.Scanner;
 
 import jerra.core.Vector;
+import jerra.effect.AccelerationEffect;
 import jerra.core.Rect;
 
 import jerra.presence.DefaultPresence;
@@ -48,7 +49,7 @@ public class TextController implements Controller {
         ));
 
         this.room.spawnPlayer(new Player(new ActivePresence(new Rect(new Vector(0, 0), new Vector(1, 1)), new Vector(1, 1), "up", "down", "left", "right"),
-            new Gun(new Bullet(new Rect(0, 0, 1, 1), new Vector(1, 1), 5, 'P'), 3), 'P'
+            new Gun(new Bullet(new Rect(0, 0, 1, 1), new Vector(1, 1), new AccelerationEffect(new Vector(1, 1)), 5, 'P'), 3), 'P'
         ));
         
         String command = "";
