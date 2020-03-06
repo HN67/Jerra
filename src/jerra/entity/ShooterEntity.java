@@ -13,9 +13,10 @@ public class ShooterEntity extends DefaultEntity implements Shooter {
 
     private Gun gun;
 
-    public ShooterEntity(Presence presence, Gun gun) {
+    public ShooterEntity(Presence presence, Gun gun, char team) {
         super(presence);
         this.gun = gun;
+        this.setTeam(team);
     }
 
     @Override
@@ -55,7 +56,7 @@ public class ShooterEntity extends DefaultEntity implements Shooter {
 
     @Override
     public Shooter copy() {
-        return new ShooterEntity(this.getPresence().copy(), this.gun.copy());
+        return new ShooterEntity(this.getPresence().copy(), this.gun.copy(), this.getTeam());
     }
     
 }

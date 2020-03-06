@@ -1,5 +1,6 @@
 package jerra.entity;
 
+import jerra.api.Affiliate;
 import jerra.api.Physical;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class DefaultEntity implements Entity {
 
     private Presence presence;
     private boolean alive;
+    private char team;
 
     private List<String> commands;
 
@@ -26,6 +28,10 @@ public class DefaultEntity implements Entity {
 
         this.presence = presence;
         this.alive = true;
+
+        // Default team
+        this.team = 0;
+        
     }
 
     public String getName() {
@@ -84,6 +90,7 @@ public class DefaultEntity implements Entity {
         ;
     }
 
+    @Override
     public String toString() {
         return this.getName() + ": " + this.presence.toString();
     }
@@ -92,12 +99,28 @@ public class DefaultEntity implements Entity {
         return "E";
     }
 
+    @Override
     public boolean alive() {
         return this.alive;
     }
 
+    @Override
     public void kill(boolean dead) {
         this.alive = !dead;
+    }
+
+    @Override
+    public char getTeam() {
+        return this.team;
+    }
+
+    @Override
+    public void setTeam(char team) {
+        this.team = team;
+    }
+
+    public boolean friendly(Affiliate other) {
+        return this.getTeam() == other.getTeam();
     }
 
 }

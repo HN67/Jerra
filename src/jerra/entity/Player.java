@@ -14,14 +14,15 @@ public class Player extends DefaultEntity implements Shooter {
     private static final String[] xDirectionNames = {"LEFT", "", "RIGHT"};
     private static final String[] yDirectionNames = {"UP", "", "DOWN"};
 
-    public Player(Presence presence, Gun gun, Vector direction) {
+    public Player(Presence presence, Gun gun, char team, Vector direction) {
         super(presence);
         this.setDirection(direction);
+        this.setTeam(team);
         this.gun = gun;
     }
 
-    public Player(Presence presence, Gun gun) {
-        this(presence, gun, new Vector(0, -1));
+    public Player(Presence presence, Gun gun, char team) {
+        this(presence, gun, team, new Vector(0, -1));
     }
 
     public void setDirection(Vector direction) {
@@ -104,7 +105,7 @@ public class Player extends DefaultEntity implements Shooter {
 
     @Override
     public Shooter copy() {
-        return new Player(this.getPresence().copy(), this.gun.copy(), this.direction);
+        return new Player(this.getPresence().copy(), this.gun.copy(), this.getTeam(), this.direction);
     }
 
 }

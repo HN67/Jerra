@@ -64,9 +64,10 @@ public class GraphicController implements Controller {
         ShooterEntity shooter = new ShooterEntity(
             new WanderPresence(new Rect(new Vector(300, 300), block), new Vector(3, 3), 25),
             new Gun(
-                new Bullet(new Rect(zero, block), new Vector(30, 30), 7),
+                new Bullet(new Rect(zero, block), new Vector(30, 30), 7, 'E'),
                 40
-            )
+            ),
+            'E'
         );
         this.room.spawnShooter(shooter);
 
@@ -90,9 +91,10 @@ public class GraphicController implements Controller {
                     new Bullet(
                         new Rect(
                             new Vector(0, 0), block
-                        ), new Vector(30, 30), 10
+                        ), new Vector(30, 30), 10, 'P'
                     ), 10
                 ),
+                'P',
                 new Vector(1, 0)
             )
         );
