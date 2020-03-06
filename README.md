@@ -2,6 +2,8 @@
 
 Repository for *Jerra*, a two dimensional shoot-loot-upgrade game written in Java.
 
+The source respository can be found on GitHub: [*Jerra*](https://github.com/HN67/Jerra)
+
 ## Building
 
 Jerra can be compiled from command line by running `javac *.java` inside the `src` directory to compile all of the source source files. Once Jerra is compiled, the project can be run with `java Main` inside the `src` directory.
