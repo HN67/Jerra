@@ -3,8 +3,6 @@ package jerra.entity;
 import jerra.core.Rect;
 import jerra.core.Vector;
 
-import jerra.api.Physical;
-
 import jerra.presence.Presence;
 import jerra.presence.DefaultPresence;
 
@@ -15,7 +13,8 @@ import jerra.effect.Effect;
  */
 public class Bullet extends Projectile {
 
-    private Effect<Physical> effect;
+    // Allows for any Effect that can be applied to an Entity
+    private Effect<? super Entity> effect;
 
     /**
      * Constructs a Presence based on position and velocity
@@ -25,7 +24,7 @@ public class Bullet extends Projectile {
         return new DefaultPresence(position, velocity);
     }
 
-    public Bullet(Rect position, Vector velocity, Effect<Physical> effect, int lifetime, char team) {
+    public Bullet(Rect position, Vector velocity, Effect<? super Entity> effect, int lifetime, char team) {
         // Create projectile with predetermined presence
         super(constructPresence(position, velocity), lifetime);
         this.setTeam(team);
