@@ -36,6 +36,15 @@ public class Stats implements Copyable<Stats> {
         return this;
     }
 
+    public Stats changeValue(Type stat, int value) {
+        if (this.values.containsKey(stat)) {
+            this.values.put(stat, this.values.get(stat) + value);
+        } else {
+            this.values.put(stat, value);
+        }
+        return this;
+    }
+
     public int getValue(Type stat) {
         if (this.values.containsKey(stat)) {
             return this.values.get(stat);
