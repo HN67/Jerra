@@ -1,5 +1,6 @@
 package jerra.view;
 
+import javafx.scene.image.Image;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -46,23 +47,14 @@ public class GraphicView extends View<Room> {
 
 		context.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		
-		int scale = 1;
-		
 		for(Entity entity : model.getEntities()) {
 			
-			Rect rect = entity.getPosition();
-			Vector origin = entity.getPosition().getOrigin().scale(scale);
-			int width = rect.width() * scale;
-			int height = rect.height() * scale;
+			Rect pos = entity.getPosition();
+			Image image = entity.image();
 			
-			context.setFill(getColor(entity.symbol()));
-			context.fillRect(
-				origin.x(),
-				origin.y(),
-				width,
-				height
-			);
-//			context.drawImage(entity.image(), entity.getPosition().centerX()-entity.image().getWidth()/2, entity.getPosition().centerY()-entity.image().getHeight()/2);
+			// Align center of image and position
+			context.drawImage(image, pos.centerX() - image.getWidth()/2, pos.centerY() - image.getHeight()/2);
+		
 		}
 	}
 

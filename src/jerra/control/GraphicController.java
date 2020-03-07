@@ -3,6 +3,7 @@ package jerra.control;
 import java.util.Set;
 import java.util.HashSet;
 
+import javafx.scene.image.Image;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
@@ -11,6 +12,7 @@ import javafx.util.Duration;
 
 import jerra.core.Rect;
 import jerra.core.Vector;
+import jerra.core.Resources;
 import jerra.entity.AmbientSpawner;
 import jerra.entity.Bullet;
 import jerra.entity.DefaultEntity;
@@ -50,14 +52,18 @@ public class GraphicController implements Controller {
         Vector zero = new Vector(0, 0);
         Vector block = new Vector(25, 25);
 
-        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(100, 0), block), zero), null));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(200, 0), block), zero), null));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 100), block), zero), null));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 200), block), zero), null));
-        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(125, 125), block), zero), null));
+        Image playerImage = Resources.loadImage("/resources/player.png");
+        Image enemyImage = Resources.loadImage("/resources/enemy.png");
+        Image bulletImage = Resources.loadImage("/resources/bullet.png");
+
+        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(100, 0), block), zero), enemyImage));
+		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(200, 0), block), zero), enemyImage));
+		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 100), block), zero), enemyImage));
+		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 200), block), zero), enemyImage));
+        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(125, 125), block), zero), enemyImage));
 
         this.room.spawnSpawner(new AmbientSpawner(
-            new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 0), block), zero), null),
+            new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 0), block), zero), enemyImage),
             new Vector(300, 300), 
             300, 
             100
@@ -74,9 +80,9 @@ public class GraphicController implements Controller {
                 new Bullet(
                     new Rect(
                         new Vector(0, 0), block
-                    ), new Vector(30, 30), 10, null
+                    ), new Vector(30, 30), 10, bulletImage
                 ),
-                "RIGHT", null
+                "RIGHT", playerImage
             )
         );
     
