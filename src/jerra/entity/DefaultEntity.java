@@ -1,5 +1,8 @@
 package jerra.entity;
 
+import jerra.api.Affiliate;
+import jerra.api.Physical;
+
 import java.util.List;
 
 import javafx.scene.image.Image;
@@ -18,6 +21,7 @@ public class DefaultEntity implements Entity {
     private Presence presence;
     private Image image;
     private boolean alive;
+    private char team;
 
     private List<String> commands;
 
@@ -29,6 +33,10 @@ public class DefaultEntity implements Entity {
 
         this.presence = presence;
         this.alive = true;
+
+        // Default team
+        this.team = 0;
+
     }
 
     public String getName() {
@@ -47,7 +55,8 @@ public class DefaultEntity implements Entity {
         this.presence = presence;
     }
 
-    public boolean collides(Entity other) {
+    @Override
+    public boolean collides(Physical other) {
         return this.getPresence().collides(other.getPresence());
     }
 
@@ -86,6 +95,7 @@ public class DefaultEntity implements Entity {
         ;
     }
 
+    @Override
     public String toString() {
         return this.getName() + ": " + this.presence.toString();
     }
@@ -94,10 +104,12 @@ public class DefaultEntity implements Entity {
         return "E";
     }
 
+    @Override
     public boolean alive() {
         return this.alive;
     }
 
+    @Override
     public void kill(boolean dead) {
         this.alive = !dead;
     }
@@ -108,5 +120,19 @@ public class DefaultEntity implements Entity {
 	}
     
     
+    @Override
+    public char getTeam() {
+        return this.team;
+    }
+
+    @Override
+    public DefaultEntity setTeam(char team) {
+        this.team = team;
+        return this;
+    }
+
+    public boolean friendly(Affiliate other) {
+        return this.getTeam() == other.getTeam();
+    }
 
 }

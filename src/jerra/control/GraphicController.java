@@ -13,12 +13,16 @@ import javafx.util.Duration;
 import jerra.core.Rect;
 import jerra.core.Vector;
 import jerra.core.Resources;
-import jerra.entity.AmbientSpawner;
+import jerra.entity.AmbientShooterSpawner;
 import jerra.entity.Bullet;
 import jerra.entity.DefaultEntity;
+import jerra.entity.Gun;
+import jerra.entity.ShooterEntity;
 import jerra.entity.Player;
+
 import jerra.presence.ActivePresence;
 import jerra.presence.DefaultPresence;
+import jerra.presence.WanderPresence;
 import jerra.room.Room;
 import jerra.view.GraphicView;
 import jerra.view.TextView;
@@ -50,7 +54,7 @@ public class GraphicController implements Controller {
 
     public void start() {
         Vector zero = new Vector(0, 0);
-        Vector block = new Vector(25, 25);
+        Vector block = new Vector(30, 30);
 
         Image playerImage = Resources.loadImage("/resources/player.png");
         Image enemyImage = Resources.loadImage("/resources/enemy.png");
@@ -62,14 +66,28 @@ public class GraphicController implements Controller {
 		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 200), block), zero), enemyImage));
         this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(125, 125), block), zero), enemyImage));
 
-        this.room.spawnSpawner(new AmbientSpawner(
-            new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 0), block), zero), enemyImage),
+        Bullet bullet = new Bullet(new Rect(zero, new Vector(6, 6)), new Vector(15, 15), 100, 'T', bulletImage);
+        
+        ShooterEntity shooter = new ShooterEntity(
+            new WanderPresence(new Rect(new Vector(300, 300), block), new Vector(3, 3), 25),
+            new Gun(
+                bullet.setTeam('E').copy(),
+                40
+            ),
+            'E',
+            enemyImage
+        );
+        this.room.spawnShooter(shooter);
+
+        this.room.spawnShooterSpawner(new AmbientShooterSpawner(
+            // new DefaultEntity(new WanderPresence(new Rect(new Vector(0, 0), block), new Vector(3, 3), 25)),
+            shooter,
             new Vector(300, 300), 
             300, 
             100
         ));
 
-        this.room.spawnPlayer(
+        this.room.spawnShooter(
             new Player(
                 new ActivePresence(
                     new Rect(
@@ -77,12 +95,13 @@ public class GraphicController implements Controller {
                     ), 
                     new Vector(5, 5), "up", "down", "left", "right"
                 ),
-                new Bullet(
-                    new Rect(
-                        new Vector(0, 0), block
-                    ), new Vector(30, 30), 10, bulletImage
+                new Gun(
+                    bullet.setTeam('P').copy(),
+                    10
                 ),
-                "RIGHT", playerImage
+                'P',
+                new Vector(1, 0),
+                playerImage
             )
         );
     
