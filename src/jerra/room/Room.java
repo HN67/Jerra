@@ -14,8 +14,6 @@ import jerra.entity.Spawner;
  */
 public interface Room extends Updatable, Interactive {
 
-    public Entity spawn();
-
     /**
      * Spawns (inserts) a general Entity in the Room
      * @param entity The Entity that the Room will now track (as a general Entity)

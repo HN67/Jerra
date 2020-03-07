@@ -176,9 +176,4 @@ public class TextRoom implements Room {
         return output;
     }
 
-    @Override
-    public Entity spawn() {
-        return null;
-    }
-
 }
