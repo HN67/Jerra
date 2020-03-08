@@ -55,7 +55,7 @@ public class Player extends DefaultCharacter implements Shooter {
     @Override
     public String getName() {
         // Indicate direction in name
-        return "PLAYER (" + this.getDirectionString() + ")";
+        return "PLAYER (" + this.getStats().getValue(Stats.Type.HEALTH) + ", " + this.getDirectionString() + ")";
     }
 
     public String getDirectionString() {

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import jerra.core.Rect;
 
 import jerra.presence.Presence;
+import jerra.stats.Stats;
 
 /**
  * Entity
@@ -18,6 +19,8 @@ public class DefaultEntity implements Entity {
     private Presence presence;
     private boolean alive;
     private char team;
+
+    private Stats stats;
 
     private List<String> commands;
 
@@ -31,6 +34,9 @@ public class DefaultEntity implements Entity {
 
         // Default team
         this.team = 0;
+
+        // Empty stats
+        this.stats = new Stats();
 
     }
 
@@ -115,13 +121,25 @@ public class DefaultEntity implements Entity {
     }
 
     @Override
-    public Affiliate setTeam(char team) {
+    public DefaultEntity setTeam(char team) {
         this.team = team;
         return this;
     }
 
+    @Override
     public boolean friendly(Affiliate other) {
         return this.getTeam() == other.getTeam();
+    }
+
+    @Override
+    public DefaultEntity setStats(Stats stats) {
+        this.stats = stats;
+        return this;
+    }
+
+    @Override
+    public Stats getStats() {
+        return this.stats;
     }
 
 }

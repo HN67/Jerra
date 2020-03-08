@@ -3,14 +3,10 @@ package jerra.entity;
 import jerra.presence.Presence;
 
 import jerra.stats.Stats;
-import jerra.stats.Character;
-
 /**
  * DefaultCharacter
  */
-public class DefaultCharacter extends DefaultEntity implements Character {
-
-    private Stats stats;
+public class DefaultCharacter extends DefaultEntity {
 
     public DefaultCharacter(Presence presence, Stats stats) {
         super(presence);
@@ -18,14 +14,15 @@ public class DefaultCharacter extends DefaultEntity implements Character {
     }
 
     @Override
-    public Stats getStats() {
-        return stats;
+    public boolean alive() {
+        return this.getStats().getValue(Stats.Type.HEALTH) > 0;
     }
 
     @Override
-    public Character setStats(Stats stats) {
-        this.stats = stats;
-        return this;
+    public void kill(boolean dead) {
+        if (!dead) {
+            this.setStats(this.getStats().setValue(Stats.Type.HEALTH, 0));
+        }
     }
     
 }
