@@ -13,17 +13,14 @@ import jerra.core.Rect;
 import jerra.core.Vector;
 import jerra.entity.AmbientShooterSpawner;
 import jerra.entity.Bullet;
-import jerra.entity.DefaultEntity;
 import jerra.entity.Gun;
 import jerra.entity.ShooterEntity;
 import jerra.entity.Player;
 
 import jerra.stats.Stats;
 
-import jerra.effect.AccelerationEffect;
 import jerra.effect.DamageEffect;
 import jerra.presence.ActivePresence;
-import jerra.presence.DefaultPresence;
 import jerra.presence.WanderPresence;
 import jerra.room.Room;
 import jerra.view.GraphicView;
