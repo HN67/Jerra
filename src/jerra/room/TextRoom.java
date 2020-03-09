@@ -1,23 +1,20 @@
 package jerra.room;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import java.util.Set;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
-
+import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
+import java.util.Set;
 
 import jerra.api.Interactive;
 import jerra.api.Mortal;
 import jerra.api.Updatable;
-
 import jerra.entity.Entity;
 import jerra.entity.Player;
-import jerra.entity.Spawner;
 import jerra.entity.Shooter;
+import jerra.entity.Spawner;
 
 /**
  * TextRoom
@@ -132,6 +129,7 @@ public class TextRoom implements Room {
             // Iterate through each collision with the entity
             Entity entity = entry.getKey();
             for (Entity other: entry.getValue()) {
+                entity.deflect(other);
                 entity.interact(other);
             }
         }

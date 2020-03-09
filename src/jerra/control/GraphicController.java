@@ -1,7 +1,7 @@
 package jerra.control;
 
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
 
 import javafx.scene.image.Image;
 import javafx.animation.KeyFrame;
@@ -9,19 +9,22 @@ import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
-
 import jerra.core.Rect;
 import jerra.core.Vector;
 import jerra.core.Resources;
 import jerra.entity.AmbientShooterSpawner;
 import jerra.entity.Bullet;
-import jerra.entity.DefaultEntity;
 import jerra.entity.Gun;
-import jerra.entity.ShooterEntity;
 import jerra.entity.Player;
 
-import jerra.presence.ActivePresence;
+import jerra.stats.Stats;
+
+import jerra.effect.DamageEffect;
+import jerra.entity.ShooterEntity;
+import jerra.entity.Wall;
+
 import jerra.presence.DefaultPresence;
+import jerra.presence.ActivePresence;
 import jerra.presence.WanderPresence;
 import jerra.room.Room;
 import jerra.view.GraphicView;
@@ -60,16 +63,13 @@ public class GraphicController implements Controller {
         Image enemyImage = Resources.loadImage("/resources/enemy.png");
         Image bulletImage = Resources.loadImage("/resources/bullet.png");
 
-        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(100, 0), block), zero), enemyImage));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(200, 0), block), zero), enemyImage));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 100), block), zero), enemyImage));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 200), block), zero), enemyImage));
-        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(125, 125), block), zero), enemyImage));
-
-        Bullet bullet = new Bullet(new Rect(zero, new Vector(6, 6)), new Vector(15, 15), 100, 'T', bulletImage);
+        Bullet bullet = new Bullet(new Rect(zero, new Vector(6, 6)), new Vector(15, 15), new DamageEffect(1), 100, 'T', bulletImage);
         
+        this.setBoundaries();
+
         ShooterEntity shooter = new ShooterEntity(
             new WanderPresence(new Rect(new Vector(300, 300), block), new Vector(3, 3), 25),
+            new Stats(3, 3),
             new Gun(
                 bullet.setTeam('E').copy(),
                 40
@@ -81,7 +81,7 @@ public class GraphicController implements Controller {
 
         this.room.spawnShooterSpawner(new AmbientShooterSpawner(
             // new DefaultEntity(new WanderPresence(new Rect(new Vector(0, 0), block), new Vector(3, 3), 25)),
-            shooter,
+            shooter.copy(),
             new Vector(300, 300), 
             300, 
             100
@@ -91,10 +91,11 @@ public class GraphicController implements Controller {
             new Player(
                 new ActivePresence(
                     new Rect(
-                        new Vector(0, 0), block
+                        new Vector(30, 30), block
                     ), 
                     new Vector(5, 5), "up", "down", "left", "right"
                 ),
+                new Stats(10, 10),
                 new Gun(
                     bullet.setTeam('P').copy(),
                     10
@@ -213,13 +214,92 @@ public class GraphicController implements Controller {
         this.room.update();
 
         // Render the views
-        this.textView.render();
+        // this.textView.render();
 
         this.view.render();
 
         // Clear the room command queue
         this.room.clearQueue();
 
+    }
+
+    private void setBoundaries() {
+        Vector zero = new Vector(0, 0);
+        int stroke = 30;
+        Vector verticalWall = new Vector(stroke, (int) this.canvas.getHeight());
+        Vector horizontalWall = new Vector((int) this.canvas.getHeight(), stroke);
+
+        Image wall = Resources.loadImage("/resources/wall.png");
+        Image horizontalBorder = Resources.loadImage("/resources/border_horizontal.png");
+        Image verticalBorder = Resources.loadImage("/resources/border_vertical.png");
+
+        this.room.spawnEntity(
+            new Wall(
+                new DefaultPresence(
+                    new Rect(
+                        new Vector(300, 300),
+                        new Vector(60, 60)
+                    ), 
+                    zero
+                ),
+                wall
+            )
+        );
+
+        this.room.spawnEntity(
+            new Wall(
+                new DefaultPresence(
+                    new Rect(
+                        new Vector(0,0),
+                        verticalWall
+                    ), 
+                    zero
+                ),
+                verticalBorder
+            )
+        );
+
+        this.room.spawnEntity(
+            new Wall(
+                new DefaultPresence(
+                    new Rect(
+                        new Vector(
+                            (int) this.canvas.getWidth() - stroke, 
+                            0
+                        ),
+                        verticalWall
+                    ), 
+                    zero
+                ),
+                verticalBorder
+            )
+        );
+
+        this.room.spawnEntity(
+            new Wall(
+                new DefaultPresence(
+                    new Rect(
+                        new Vector(0, (int) this.canvas.getHeight() - stroke),
+                        horizontalWall
+                    ), 
+                    zero
+                ),
+                horizontalBorder
+            )
+        );
+
+        this.room.spawnEntity(
+            new Wall(
+                new DefaultPresence(
+                    new Rect(
+                        new Vector(10, 0),
+                        horizontalWall
+                    ), 
+                    zero
+                ),
+                horizontalBorder
+            )
+        );
     }
 
 }

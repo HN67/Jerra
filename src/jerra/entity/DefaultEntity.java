@@ -10,8 +10,8 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 
 import jerra.core.Rect;
-
 import jerra.presence.Presence;
+import jerra.stats.Stats;
 
 /**
  * Entity
@@ -22,6 +22,8 @@ public class DefaultEntity implements Entity {
     private Image image;
     private boolean alive;
     private char team;
+
+    private Stats stats;
 
     private List<String> commands;
 
@@ -36,6 +38,9 @@ public class DefaultEntity implements Entity {
 
         // Default team
         this.team = 0;
+
+        // Empty stats
+        this.stats = new Stats();
 
     }
 
@@ -121,6 +126,11 @@ public class DefaultEntity implements Entity {
     
     
     @Override
+    public void deflect(Physical other) {
+        ;
+    }
+
+    @Override
     public char getTeam() {
         return this.team;
     }
@@ -131,8 +141,20 @@ public class DefaultEntity implements Entity {
         return this;
     }
 
+    @Override
     public boolean friendly(Affiliate other) {
         return this.getTeam() == other.getTeam();
+    }
+
+    @Override
+    public DefaultEntity setStats(Stats stats) {
+        this.stats = stats;
+        return this;
+    }
+
+    @Override
+    public Stats getStats() {
+        return this.stats;
     }
 
 }
