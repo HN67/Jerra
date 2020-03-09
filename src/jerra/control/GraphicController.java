@@ -92,7 +92,7 @@ public class GraphicController implements Controller {
                 ), 
                 new Vector(5, 5), "up", "down", "left", "right"
             ),
-            new Stats(1, 1),
+            new Stats(10, 10),
             new Gun(
                 bullet.setTeam('P').copy(),
                 10
