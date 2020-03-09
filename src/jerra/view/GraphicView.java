@@ -3,9 +3,7 @@ package jerra.view;
 import javafx.scene.image.Image;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import jerra.core.Rect;
-import jerra.core.Vector;
 import jerra.entity.Entity;
 import jerra.room.Room;
 
@@ -23,24 +21,24 @@ public class GraphicView extends View<Room> {
 		return this.canvas;
 	}
 	
-	private static Color getColor(String symbol) {
-		Color color = Color.RED;
+	// private static Color getColor(String symbol) {
+	// 	Color color = Color.RED;
 		
-		switch(symbol) {
-			case "P":
-				color = Color.BLUE;
-				break;
+	// 	switch(symbol) {
+	// 		case "P":
+	// 			color = Color.BLUE;
+	// 			break;
 			
-			case "B": 
-				color = Color.GREEN;
-				break;
+	// 		case "B": 
+	// 			color = Color.GREEN;
+	// 			break;
 
-			case "W":
-				color = Color.YELLOW;
-		}
+	// 		case "W":
+	// 			color = Color.YELLOW;
+	// 	}
 		
-		return color;
-	}
+	// 	return color;
+	// }
 
 	@Override
 	public void render() {

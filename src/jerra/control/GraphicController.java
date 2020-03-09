@@ -214,7 +214,7 @@ public class GraphicController implements Controller {
         this.room.update();
 
         // Render the views
-        // this.textView.render();
+        this.textView.render();
 
         this.view.render();
 
@@ -250,7 +250,7 @@ public class GraphicController implements Controller {
             new Wall(
                 new DefaultPresence(
                     new Rect(
-                        new Vector(0,0),
+                        new Vector(0, 0),
                         verticalWall
                     ), 
                     zero
@@ -292,7 +292,7 @@ public class GraphicController implements Controller {
             new Wall(
                 new DefaultPresence(
                     new Rect(
-                        new Vector(10, 0),
+                        new Vector(0, 0),
                         horizontalWall
                     ), 
                     zero
