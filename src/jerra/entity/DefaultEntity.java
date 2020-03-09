@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.ArrayList;
 
 import jerra.core.Rect;
-
 import jerra.presence.Presence;
 
 /**
@@ -110,6 +109,11 @@ public class DefaultEntity implements Entity {
     }
 
     @Override
+    public void deflect(Physical other) {
+        ;
+    }
+
+    @Override
     public char getTeam() {
         return this.team;
     }
@@ -119,7 +123,8 @@ public class DefaultEntity implements Entity {
         this.team = team;
         return this;
     }
-
+      
+    @Override
     public boolean friendly(Affiliate other) {
         return this.getTeam() == other.getTeam();
     }

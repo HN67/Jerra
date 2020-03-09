@@ -31,6 +31,26 @@ public class Vector {
         return this.y;
     }
 
+    /**
+     * Returns a new Vector identical to this one, but with an updated x value.
+     * This method does not affect the original Vector.
+     * @param x a int, the new x coordinate of the returned Vector
+     * @return a Vector, with the given x and this Vector's y
+     */
+    public Vector alignX(int x) {
+        return new Vector(x, this.y());
+    }
+
+    /**
+     * Returns a new Vector identical to this one, but with an updated y value.
+     * This method does not affect the original Vector.
+     * @param y a int, the new y coordinate of the returned Vector
+     * @return a Vector, with the given y and this Vector's x
+     */
+    public Vector alignY(int y) {
+        return new Vector(this.x(), y);
+    }
+
     public Vector add(int x, int y) {
         return new Vector(this.x() + x, this.y() + y);
     }
