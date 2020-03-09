@@ -4,10 +4,14 @@ import jerra.api.Affiliate;
 import jerra.api.Physical;
 
 import java.util.List;
+
+import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 
 import jerra.core.Rect;
 import jerra.presence.Presence;
+import jerra.stats.Stats;
 
 /**
  * Entity
@@ -15,21 +19,28 @@ import jerra.presence.Presence;
 public class DefaultEntity implements Entity {
 
     private Presence presence;
+    private Image image;
     private boolean alive;
     private char team;
 
+    private Stats stats;
+
     private List<String> commands;
 
-    public DefaultEntity(Presence presence) {
+    public DefaultEntity(Presence presence, Image image) {
 
         // Initalize command list
         this.commands = new ArrayList<String>();
+        this.image = image;
 
         this.presence = presence;
         this.alive = true;
 
         // Default team
         this.team = 0;
+
+        // Empty stats
+        this.stats = new Stats();
 
     }
 
@@ -78,7 +89,7 @@ public class DefaultEntity implements Entity {
     @Override
     public Entity copy() {
         // Construct with copied presence
-        Entity out = new DefaultEntity(this.getPresence().copy());
+        Entity out = new DefaultEntity(this.getPresence().copy(), this.image);
         // Copy over aliveness
         out.kill(!this.alive());
         return out;
@@ -108,6 +119,12 @@ public class DefaultEntity implements Entity {
         this.alive = !dead;
     }
 
+	@Override
+	public Image image() {
+		return this.image;
+	}
+    
+    
     @Override
     public void deflect(Physical other) {
         ;
@@ -119,14 +136,25 @@ public class DefaultEntity implements Entity {
     }
 
     @Override
-    public Affiliate setTeam(char team) {
+    public DefaultEntity setTeam(char team) {
         this.team = team;
         return this;
     }
-      
+
     @Override
     public boolean friendly(Affiliate other) {
         return this.getTeam() == other.getTeam();
+    }
+
+    @Override
+    public DefaultEntity setStats(Stats stats) {
+        this.stats = stats;
+        return this;
+    }
+
+    @Override
+    public Stats getStats() {
+        return this.stats;
     }
 
 }

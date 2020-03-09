@@ -1,12 +1,14 @@
 package jerra.entity;
 
+import javafx.scene.image.Image;
 import jerra.core.Vector;
 import jerra.presence.Presence;
+import jerra.stats.Stats;
 
 /**
  * Player
  */
-public class Player extends DefaultEntity implements Shooter {
+public class Player extends DefaultCharacter implements Shooter {
 
     private Vector direction;
     private Gun gun;
@@ -14,15 +16,11 @@ public class Player extends DefaultEntity implements Shooter {
     private static final String[] xDirectionNames = {"LEFT", "", "RIGHT"};
     private static final String[] yDirectionNames = {"UP", "", "DOWN"};
 
-    public Player(Presence presence, Gun gun, char team, Vector direction) {
-        super(presence);
+    public Player(Presence presence, Stats stats, Gun gun, char team, Vector direction, Image image) {
+        super(presence, stats, image);
         this.setDirection(direction);
         this.setTeam(team);
         this.gun = gun;
-    }
-
-    public Player(Presence presence, Gun gun, char team) {
-        this(presence, gun, team, new Vector(0, -1));
     }
 
     public void setDirection(Vector direction) {
@@ -54,7 +52,7 @@ public class Player extends DefaultEntity implements Shooter {
     @Override
     public String getName() {
         // Indicate direction in name
-        return "PLAYER (" + this.getDirectionString() + ")";
+        return "PLAYER (" + this.getStats().getValue(Stats.Type.HEALTH) + ", " + this.getDirectionString() + ")";
     }
 
     public String getDirectionString() {
@@ -105,7 +103,7 @@ public class Player extends DefaultEntity implements Shooter {
 
     @Override
     public Shooter copy() {
-        return new Player(this.getPresence().copy(), this.gun.copy(), this.getTeam(), this.direction);
+        return new Player(this.getPresence().copy(), this.getStats().copy(), this.gun.copy(), this.getTeam(), this.direction, this.image());
     }
 
 }

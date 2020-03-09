@@ -1,5 +1,7 @@
 package jerra.entity;
 
+import jerra.stats.Stats;
+
 /**
  * Respawner, an object that spawns a Shooter (after a period) iff it is dead.
  */
@@ -8,10 +10,11 @@ public class Respawner implements Spawner<Shooter>{
     private Shooter entity;
     private int tick;
     private int period;
-    private boolean entityDied;
+    private Stats initialStats;
 
     public Respawner(Shooter entity, int period) {
         this.entity = entity;
+        this.initialStats = entity.getStats().copy();
         this.tick = 0;
         this.period = period;
     }
@@ -22,16 +25,10 @@ public class Respawner implements Spawner<Shooter>{
     @Override
     public boolean spawns() {
         if(!this.entity.alive()) {
-            this.entityDied = true;
-
-            this.entity = this.entity.copy();
-        }
-
-        if(this.entityDied) {
             this.tick++;
         }
 
-        if(tick >= this.period) {
+        if(this.tick >= this.period) {
             this.tick = 0;
             return true;
         }
@@ -41,7 +38,13 @@ public class Respawner implements Spawner<Shooter>{
 
     @Override
     public Shooter spawn() {
-        return this.entity;
+        Shooter entity = this.entity.copy();
+
+        entity.setStats(this.initialStats);
+
+        this.entity = entity;
+
+        return entity;
     }
 
 }
