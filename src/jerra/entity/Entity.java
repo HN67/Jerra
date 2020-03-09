@@ -7,12 +7,14 @@ import jerra.api.Physical;
 import jerra.api.Updatable;
 import jerra.api.Affiliate;
 
+import jerra.stats.Character;
+
 import jerra.core.Rect;
 
 /**
  * Entity
  */
-public interface Entity extends Updatable, Interactive, Mortal, Physical, Affiliate, Copyable<Entity> {
+public interface Entity extends Updatable, Interactive, Mortal, Physical, Affiliate, Character, Copyable<Entity> {
 
     public Rect getPosition();
 

@@ -12,13 +12,17 @@ import jerra.core.Rect;
 import jerra.core.Vector;
 import jerra.entity.AmbientShooterSpawner;
 import jerra.entity.Bullet;
-import jerra.entity.DefaultEntity;
 import jerra.entity.Gun;
 import jerra.entity.Player;
+
+import jerra.stats.Stats;
+
+import jerra.effect.DamageEffect;
 import jerra.entity.ShooterEntity;
 import jerra.entity.Wall;
-import jerra.presence.ActivePresence;
+
 import jerra.presence.DefaultPresence;
+import jerra.presence.ActivePresence;
 import jerra.presence.WanderPresence;
 import jerra.room.Room;
 import jerra.view.GraphicView;
@@ -55,17 +59,11 @@ public class GraphicController implements Controller {
         
         this.setBoundaries();
 
-        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(100, 0), block), zero)));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(200, 0), block), zero)));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 100), block), zero)));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 200), block), zero)));
-        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(125, 125), block), zero)));
-
-        
         ShooterEntity shooter = new ShooterEntity(
             new WanderPresence(new Rect(new Vector(300, 300), block), new Vector(3, 3), 25),
+            new Stats(3, 3),
             new Gun(
-                new Bullet(new Rect(zero, block), new Vector(30, 30), 7, 'E'),
+                new Bullet(new Rect(zero, block), new Vector(30, 30), new DamageEffect(1), 7, 'E'),
                 40
             ),
             'E'
@@ -74,7 +72,7 @@ public class GraphicController implements Controller {
 
         this.room.spawnShooterSpawner(new AmbientShooterSpawner(
             // new DefaultEntity(new WanderPresence(new Rect(new Vector(0, 0), block), new Vector(3, 3), 25)),
-            shooter,
+            shooter.copy(),
             new Vector(300, 300), 
             300, 
             100
@@ -88,11 +86,12 @@ public class GraphicController implements Controller {
                     ), 
                     new Vector(5, 5), "up", "down", "left", "right"
                 ),
+                new Stats(10, 10),
                 new Gun(
                     new Bullet(
                         new Rect(
                             new Vector(0, 0), new Vector(10, 10)
-                        ), new Vector(15, 15), 100, 'P'
+                        ), new Vector(15, 15), new DamageEffect(1), 100, 'P'
                     ),
                     10
                 ),
