@@ -251,6 +251,19 @@ public class GraphicController implements Controller {
                 new DefaultPresence(
                     new Rect(
                         new Vector(0, 0),
+                        horizontalWall
+                    ), 
+                    zero
+                ),
+                horizontalBorder
+            )
+        );
+        
+        this.room.spawnEntity(
+            new Wall(
+                new DefaultPresence(
+                    new Rect(
+                        new Vector(0, 0),
                         verticalWall
                     ), 
                     zero
@@ -288,18 +301,9 @@ public class GraphicController implements Controller {
             )
         );
 
-        this.room.spawnEntity(
-            new Wall(
-                new DefaultPresence(
-                    new Rect(
-                        new Vector(0, 0),
-                        horizontalWall
-                    ), 
-                    zero
-                ),
-                horizontalBorder
-            )
-        );
+        
+
+        
     }
 
 }
