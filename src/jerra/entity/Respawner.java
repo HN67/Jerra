@@ -40,7 +40,7 @@ public class Respawner implements Spawner<Shooter>{
     public Shooter spawn() {
         Shooter entity = this.entity.copy();
 
-        entity.setStats(this.initialStats);
+        entity.setStats(this.initialStats.copy());
 
         this.entity = entity;
 
