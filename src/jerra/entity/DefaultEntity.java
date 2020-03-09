@@ -5,9 +5,7 @@ import jerra.api.Physical;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.List;
 
-import jerra.api.Physical;
 import jerra.core.Rect;
 import jerra.presence.Presence;
 
@@ -113,6 +111,7 @@ public class DefaultEntity implements Entity {
     @Override
     public void deflect(Physical other) {
         ;
+    }
 
     @Override
     public char getTeam() {
