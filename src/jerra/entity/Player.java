@@ -8,34 +8,38 @@ import jerra.presence.Presence;
  */
 public class Player extends DefaultEntity implements Shooter {
 
-    private String direction;
+    private Vector direction;
     private Gun gun;
 
-    public Player(Presence presence, Gun gun, String direction) {
+    private static final String[] xDirectionNames = {"LEFT", "", "RIGHT"};
+    private static final String[] yDirectionNames = {"UP", "", "DOWN"};
+
+    public Player(Presence presence, Gun gun, char team, Vector direction) {
         super(presence);
         this.setDirection(direction);
+        this.setTeam(team);
         this.gun = gun;
     }
 
-    public Player(Presence presence, Gun gun) {
-        this(presence, gun, "UP");
+    public Player(Presence presence, Gun gun, char team) {
+        this(presence, gun, team, new Vector(0, -1));
     }
 
-    public void setDirection(String direction) {
-        this.direction = new String(direction);
+    public void setDirection(Vector direction) {
+        this.direction = direction;
     }
 
     @Override
     public void update() {
         for (String command: this.commandQueue()) {
             if (command.equals("upSecondary")) {
-                this.direction = "UP";
+                this.direction = new Vector(0, -1);
             } else if (command.equals("downSecondary")) {
-                this.direction = "DOWN";
+                this.direction = new Vector(0, 1);
             } else if (command.equals("leftSecondary")) {
-                this.direction = "LEFT";
+                this.direction =  new Vector(-1, 0);
             } else if (command.equals("rightSecondary")) {
-                this.direction = "RIGHT";
+                this.direction = new Vector(1, 0);
             } else {
             }
         }
@@ -50,7 +54,11 @@ public class Player extends DefaultEntity implements Shooter {
     @Override
     public String getName() {
         // Indicate direction in name
-        return "PLAYER (" + this.direction + ")";
+        return "PLAYER (" + this.getDirectionString() + ")";
+    }
+
+    public String getDirectionString() {
+        return yDirectionNames[this.direction.y()+1] + xDirectionNames[this.direction.x()+1];
     }
 
     @Override
@@ -70,18 +78,7 @@ public class Player extends DefaultEntity implements Shooter {
         presence.setPosition(this.getPosition().getOrigin());
         Vector velocity = presence.getVelocity();
         // Set Projectile velocity based on facing direction
-        if (this.direction.equals("UP")) {
-            velocity = velocity.scale(0, -1);
-        }
-        if (this.direction.equals("DOWN")) {
-            velocity = velocity.scale(0, 1);
-        }
-        if (this.direction.equals("RIGHT")) {
-            velocity = velocity.scale(1, 0);
-        }
-        if (this.direction.equals("LEFT")) {
-            velocity = velocity.scale(-1, 0);
-        }
+        velocity = velocity.scale(this.direction);
         // Update and return new bullet
         presence.setVelocity(velocity);
         bullet.setPresence(presence);
@@ -108,7 +105,7 @@ public class Player extends DefaultEntity implements Shooter {
 
     @Override
     public Shooter copy() {
-        return new Player(this.getPresence().copy(), this.gun.copy(), this.direction);
+        return new Player(this.getPresence().copy(), this.gun.copy(), this.getTeam(), this.direction);
     }
 
 }

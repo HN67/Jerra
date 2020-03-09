@@ -1,5 +1,7 @@
 package jerra.entity;
 
+import java.lang.Math;
+
 import jerra.core.Vector;
 import jerra.presence.Presence;
 
@@ -11,9 +13,10 @@ public class ShooterEntity extends DefaultEntity implements Shooter {
 
     private Gun gun;
 
-    public ShooterEntity(Presence presence, Gun gun) {
+    public ShooterEntity(Presence presence, Gun gun, char team) {
         super(presence);
         this.gun = gun;
+        this.setTeam(team);
     }
 
     @Override
@@ -32,14 +35,28 @@ public class ShooterEntity extends DefaultEntity implements Shooter {
         Entity bullet = this.gun.spawn();
         Presence presence = bullet.getPresence().copy();
         presence.setPosition(this.getPosition().getOrigin());
-        presence.setVelocity(presence.getVelocity().scale(this.getPresence().getVelocity().sign()));
+        // Generate random direction
+        // Choose between x direction (1) and y direction (0)
+        int y = 0;
+        int x = (int) (Math.random()*2);
+        // y direction
+        if (x == 0) {
+            // x is already 0, generate y
+            // Generate -1 or 1
+            y = ((int) (Math.random()*2))*2 - 1;
+        // x direction
+        } else if (x == 1) {
+            // y is already 0, generate x
+            x = ((int) (Math.random()*2))*2 - 1;
+        }
+        presence.setVelocity(presence.getVelocity().scale(new Vector(x, y)));
         bullet.setPresence(presence);
         return bullet;
     }
 
     @Override
     public Shooter copy() {
-        return new ShooterEntity(this.getPresence().copy(), this.gun.copy());
+        return new ShooterEntity(this.getPresence().copy(), this.gun.copy(), this.getTeam());
     }
     
 }

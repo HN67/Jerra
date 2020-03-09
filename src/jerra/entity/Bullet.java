@@ -18,14 +18,15 @@ public class Bullet extends Projectile {
         return new DefaultPresence(position, velocity);
     }
 
-    public Bullet(Rect position, Vector velocity, int lifetime) {
+    public Bullet(Rect position, Vector velocity, int lifetime, char team) {
         // Create projectile with predetermined presence
         super(constructPresence(position, velocity), lifetime);
+        this.setTeam(team);
     }
 
     @Override
     public Entity copy() {
-        return new Bullet(this.getPosition(), this.getPresence().getVelocity(), this.lifetime);
+        return new Bullet(this.getPosition(), this.getPresence().getVelocity(), this.lifetime, this.getTeam());
     }
 
     @Override
@@ -35,10 +36,13 @@ public class Bullet extends Projectile {
 
     @Override
     public void interact(Entity other) {
-        // Kill other entity
-        other.kill(true);
-        // Kill this (remove for penetrating)
-        this.kill(true);
+        // Only interact if not friendly
+        if (!this.friendly(other)) {
+            // Kill other entity
+            other.kill(true);
+            // Kill this (remove for penetrating)
+            this.kill(true);
+        }
     }
 
 }
