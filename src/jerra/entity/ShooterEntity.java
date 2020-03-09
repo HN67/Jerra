@@ -37,7 +37,6 @@ public class ShooterEntity extends DefaultCharacter implements Shooter {
     public Entity spawn() {
         Entity bullet = this.gun.spawn();
         Presence presence = bullet.getPresence().copy();
-        presence.setPosition(this.getPosition().getOrigin());
         // Generate random direction
         // Choose between x direction (1) and y direction (0)
         int y = 0;
@@ -52,6 +51,7 @@ public class ShooterEntity extends DefaultCharacter implements Shooter {
             // y is already 0, generate x
             x = ((int) (Math.random()*2))*2 - 1;
         }
+        presence.setPosition(this.getPosition().center().add(-presence.getPosition().width()/2 + x*this.getPosition().width()/2, -presence.getPosition().height()/2 + y*this.getPosition().height()/2));
         presence.setVelocity(presence.getVelocity().scale(new Vector(x, y)));
         bullet.setPresence(presence);
         return bullet;
