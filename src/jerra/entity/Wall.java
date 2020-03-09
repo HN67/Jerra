@@ -1,5 +1,7 @@
 package jerra.entity;
 
+import javafx.scene.image.Image;
+
 import jerra.api.Physical;
 import jerra.core.Rect;
 import jerra.presence.Presence;
@@ -9,8 +11,8 @@ import jerra.presence.Presence;
  */
 public class Wall extends DefaultEntity {
     
-    public Wall(Presence presence) {
-        super(presence);
+    public Wall(Presence presence, Image image) {
+        super(presence, image);
     }
 
     @Override

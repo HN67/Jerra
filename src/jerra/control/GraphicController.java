@@ -3,6 +3,7 @@ package jerra.control;
 import java.util.HashSet;
 import java.util.Set;
 
+import javafx.scene.image.Image;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
@@ -10,6 +11,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 import jerra.core.Rect;
 import jerra.core.Vector;
+import jerra.core.Resources;
 import jerra.entity.AmbientShooterSpawner;
 import jerra.entity.Bullet;
 import jerra.entity.Gun;
@@ -55,7 +57,13 @@ public class GraphicController implements Controller {
 
     public void start() {
         Vector zero = new Vector(0, 0);
-        Vector block = new Vector(25, 25);
+        Vector block = new Vector(30, 30);
+
+        Image playerImage = Resources.loadImage("/resources/player.png");
+        Image enemyImage = Resources.loadImage("/resources/enemy.png");
+        Image bulletImage = Resources.loadImage("/resources/bullet.png");
+
+        Bullet bullet = new Bullet(new Rect(zero, new Vector(6, 6)), new Vector(15, 15), new DamageEffect(1), 100, 'T', bulletImage);
         
         this.setBoundaries();
 
@@ -63,10 +71,11 @@ public class GraphicController implements Controller {
             new WanderPresence(new Rect(new Vector(300, 300), block), new Vector(3, 3), 25),
             new Stats(3, 3),
             new Gun(
-                new Bullet(new Rect(zero, block), new Vector(30, 30), new DamageEffect(1), 7, 'E'),
+                bullet.setTeam('E').copy(),
                 40
             ),
-            'E'
+            'E',
+            enemyImage
         );
         this.room.spawnShooter(shooter);
 
@@ -88,15 +97,12 @@ public class GraphicController implements Controller {
                 ),
                 new Stats(10, 10),
                 new Gun(
-                    new Bullet(
-                        new Rect(
-                            new Vector(0, 0), new Vector(10, 10)
-                        ), new Vector(15, 15), new DamageEffect(1), 100, 'P'
-                    ),
+                    bullet.setTeam('P').copy(),
                     10
                 ),
                 'P',
-                new Vector(1, 0)
+                new Vector(1, 0),
+                playerImage
             )
         );
     
@@ -208,7 +214,7 @@ public class GraphicController implements Controller {
         this.room.update();
 
         // Render the views
-        // this.textView.render();
+        this.textView.render();
 
         this.view.render();
 
@@ -219,19 +225,24 @@ public class GraphicController implements Controller {
 
     private void setBoundaries() {
         Vector zero = new Vector(0, 0);
-        int stroke = 20;
+        int stroke = 30;
         Vector verticalWall = new Vector(stroke, (int) this.canvas.getHeight());
         Vector horizontalWall = new Vector((int) this.canvas.getHeight(), stroke);
+
+        Image wall = Resources.loadImage("/resources/wall.png");
+        Image horizontalBorder = Resources.loadImage("/resources/border_horizontal.png");
+        Image verticalBorder = Resources.loadImage("/resources/border_vertical.png");
 
         this.room.spawnEntity(
             new Wall(
                 new DefaultPresence(
                     new Rect(
                         new Vector(300, 300),
-                        new Vector(50, 50)
+                        new Vector(60, 60)
                     ), 
                     zero
-                )
+                ),
+                wall
             )
         );
 
@@ -239,11 +250,12 @@ public class GraphicController implements Controller {
             new Wall(
                 new DefaultPresence(
                     new Rect(
-                        new Vector(0,0),
+                        new Vector(0, 0),
                         verticalWall
                     ), 
                     zero
-                )
+                ),
+                verticalBorder
             )
         );
 
@@ -258,7 +270,8 @@ public class GraphicController implements Controller {
                         verticalWall
                     ), 
                     zero
-                )
+                ),
+                verticalBorder
             )
         );
 
@@ -270,7 +283,8 @@ public class GraphicController implements Controller {
                         horizontalWall
                     ), 
                     zero
-                )
+                ),
+                horizontalBorder
             )
         );
 
@@ -278,11 +292,12 @@ public class GraphicController implements Controller {
             new Wall(
                 new DefaultPresence(
                     new Rect(
-                        new Vector(10, 0),
+                        new Vector(0, 0),
                         horizontalWall
                     ), 
                     zero
-                )
+                ),
+                horizontalBorder
             )
         );
     }

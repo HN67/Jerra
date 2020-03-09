@@ -2,6 +2,8 @@ package jerra.entity;
 
 import java.lang.Math;
 
+import javafx.scene.image.Image;
+
 import jerra.core.Vector;
 import jerra.presence.Presence;
 import jerra.stats.Stats;
@@ -14,8 +16,8 @@ public class ShooterEntity extends DefaultCharacter implements Shooter {
 
     private Gun gun;
 
-    public ShooterEntity(Presence presence, Stats stats, Gun gun, char team) {
-        super(presence, stats);
+    public ShooterEntity(Presence presence, Stats stats, Gun gun, char team, Image image) {
+        super(presence, stats, image);
         this.gun = gun;
         this.setTeam(team);
     }
@@ -57,7 +59,7 @@ public class ShooterEntity extends DefaultCharacter implements Shooter {
 
     @Override
     public Shooter copy() {
-        return new ShooterEntity(this.getPresence().copy(), this.getStats().copy(), this.gun.copy(), this.getTeam());
+        return new ShooterEntity(this.getPresence().copy(), this.getStats().copy(), this.gun.copy(), this.getTeam(), this.image());
     }
     
 }

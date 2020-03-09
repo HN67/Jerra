@@ -23,8 +23,8 @@ public class App extends Application {
 				
 		
 		this.root = new Group();
-		this.scene = new Scene(root, 625, 625, Color.BLACK);
-		this.canvas = new Canvas(625,625);
+		this.scene = new Scene(root, 600, 600, Color.BLACK);
+		this.canvas = new Canvas(600, 600);
 		 
 		root.getChildren().add(canvas);
 
