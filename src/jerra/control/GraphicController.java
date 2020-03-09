@@ -21,6 +21,7 @@ import jerra.effect.DamageEffect;
 import jerra.entity.ShooterEntity;
 import jerra.entity.Wall;
 
+import jerra.presence.DefaultPresence;
 import jerra.presence.ActivePresence;
 import jerra.presence.WanderPresence;
 import jerra.room.Room;
