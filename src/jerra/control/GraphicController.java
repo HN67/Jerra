@@ -15,6 +15,7 @@ import jerra.entity.Bullet;
 import jerra.entity.DefaultEntity;
 import jerra.entity.Gun;
 import jerra.entity.Player;
+import jerra.entity.Respawner;
 import jerra.entity.ShooterEntity;
 import jerra.entity.Wall;
 import jerra.presence.ActivePresence;
@@ -80,32 +81,36 @@ public class GraphicController implements Controller {
             100
         ));
 
-        this.room.spawnShooter(
-            new Player(
-                new ActivePresence(
+        Player player = new Player(
+            new ActivePresence(
+                new Rect(
+                    new Vector(30, 30), block
+                ), 
+                new Vector(5, 5), "up", "down", "left", "right"
+            ),
+            new Gun(
+                new Bullet(
                     new Rect(
-                        new Vector(30, 30), block
-                    ), 
-                    new Vector(5, 5), "up", "down", "left", "right"
+                        new Vector(0, 0), new Vector(10, 10)
+                    ), new Vector(15, 15), 100, 'P'
                 ),
-                new Gun(
-                    new Bullet(
-                        new Rect(
-                            new Vector(0, 0), new Vector(10, 10)
-                        ), new Vector(15, 15), 100, 'P'
-                    ),
-                    10
-                ),
-                'P',
-                new Vector(1, 0)
-            )
+                10
+            ),
+            'P',
+            new Vector(1, 0)
         );
+
+        Respawner respawner = new Respawner(player, 60);
+
+        this.room.spawnShooterSpawner(respawner);
+
+        this.room.spawnShooter(player);
     
         this.view = new GraphicView(this.room, this.canvas);
         view.render();
 
         this.textView = new TextView(this.room);
-        textView.render();
+        // textView.render();
 
         // Handle key events
         this.canvas.getScene().setOnKeyPressed(event -> this.handleKeyPress(event));
