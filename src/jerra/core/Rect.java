@@ -252,6 +252,50 @@ public class Rect {
     }
 
     /**
+     * Returns a new Rect identical to this one, but with a new top edge.
+     * The size of the Rect is maintained, the bototm edge is changed appropriately.
+     * @param edge a int, the new coordinate for the top edge
+     * @return a Rect, with the same size and left/right edges as this one, but with a new top edge
+     */
+    public Rect alignTop(int edge) {
+        // Aligns the origin y, maintains size
+        return new Rect(this.getOrigin().alignY(edge), this.getSize());
+    }
+
+    /**
+     * Returns a new Rect identical to this one, but with a new bottom edge.
+     * The size of the rect is maintained, the top edge is changed appropriately.
+     * @param edge a int, the new coordinate for the bottom edge
+     * @return a Rect, with the same size and left/right edges as this one, but with a new bottom edge
+     */
+    public Rect alignBottom(int edge) {
+        // Aligns the orign y with the new bottom - size.y
+        return new Rect(this.getOrigin().alignY(edge - this.getSize().y()), this.getSize());
+    }
+
+    /**
+     * Returns a new Rect identical to this one, but with a new left edge.
+     * The size of the rect is maintained, the right edge is changed appropriately.
+     * @param edge a int, the new coordinate for the left edge
+     * @return a Rect, with the same size and top/bottom edges as this one, but with a new left edge
+     */
+    public Rect alignLeft(int edge) {
+        // Aligns the origin x, maintains size
+        return new Rect(this.getOrigin().alignX(edge), this.getSize());
+    }
+
+    /**
+     * Returns a new Rect identical to this one, but with a new right edge.
+     * The size of the rect is maintained, the left edge is changed appropriately.
+     * @param edge a int, the new coordinate for the right edge
+     * @return a Rect, with the same size and top/bottom edges as this one, but with a new right edge
+     */
+    public Rect alignRight(int edge) {
+        // Aligns the origin x with the new right - size.x
+        return new Rect(this.getOrigin().alignX(edge - this.getSize().x()), this.getSize());
+    }
+
+    /**
      * Returns a new Rect displaced from this Rect by the given Vector displacement
      * The origin of this Rect is displaced by the given Vector.
      * Does not modify this Rect.

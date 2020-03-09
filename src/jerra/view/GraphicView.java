@@ -32,7 +32,10 @@ public class GraphicView extends View<Room> {
 			
 			case "B": 
 				color = Color.GREEN;
-				
+				break;
+
+			case "W":
+				color = Color.YELLOW;
 		}
 		
 		return color;

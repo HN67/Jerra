@@ -1,10 +1,10 @@
 package jerra.entity;
 
 import jerra.api.Copyable;
-import jerra.api.Updatable;
 import jerra.api.Interactive;
 import jerra.api.Mortal;
 import jerra.api.Physical;
+import jerra.api.Updatable;
 import jerra.api.Affiliate;
 
 import jerra.stats.Character;

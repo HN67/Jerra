@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.ArrayList;
 
 import jerra.core.Rect;
-
 import jerra.presence.Presence;
 import jerra.stats.Stats;
 
@@ -113,6 +112,11 @@ public class DefaultEntity implements Entity {
     @Override
     public void kill(boolean dead) {
         this.alive = !dead;
+    }
+
+    @Override
+    public void deflect(Physical other) {
+        ;
     }
 
     @Override
