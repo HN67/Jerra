@@ -6,6 +6,8 @@ import javafx.scene.canvas.GraphicsContext;
 import jerra.core.Rect;
 import jerra.entity.Entity;
 import jerra.room.Room;
+import jerra.stats.Stats.Type;
+import javafx.scene.paint.Color;
 
 public class GraphicView extends View<Room> {
 	
@@ -52,6 +54,12 @@ public class GraphicView extends View<Room> {
 			
 			Rect pos = entity.getPosition();
 			Image image = entity.image();
+			if (entity.symbol() == "P") {
+//				context.setFill(Color.WHITE);
+//				context.fillRect(entity.getPosition().left(), entity.getPosition().centerY() - 25, entity.getPosition().width(), 4);
+				context.setFill(Color.GREEN);
+				context.fillRect(entity.getPosition().left(), entity.getPosition().centerY() - 25, entity.getPosition().width()*entity.getStats().getValue(Type.HEALTH)/entity.getStats().getValue(Type.VITALITY), 4);
+			}
 			
 			// Align center of image and position
 			context.drawImage(image, pos.centerX() - image.getWidth()/2, pos.centerY() - image.getHeight()/2);
