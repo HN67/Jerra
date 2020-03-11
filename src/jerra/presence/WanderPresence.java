@@ -10,6 +10,8 @@ import jerra.core.Vector;
  */
 public class WanderPresence extends DefaultPresence {
 
+    private static final long serialVersionUID = 0;
+
     private Vector baseVelocity;
     private int segmentTime;
     private int progress;

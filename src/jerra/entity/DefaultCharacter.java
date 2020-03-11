@@ -10,6 +10,8 @@ import jerra.stats.Stats;
  */
 public class DefaultCharacter extends DefaultEntity {
 
+    private static final long serialVersionUID = 0;
+
     public DefaultCharacter(Presence presence, Stats stats, Image image) {
         super(presence, image);
         this.setStats(stats);

@@ -13,6 +13,8 @@ import jerra.effect.Effect;
  */
 public class Bullet extends Projectile {
 
+    private static final long serialVersionUID = 0;
+
     // Allows for any Effect that can be applied to an Entity
     private Effect<? super Entity> effect;
 

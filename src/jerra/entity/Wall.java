@@ -11,6 +11,8 @@ import jerra.presence.Presence;
  */
 public class Wall extends DefaultEntity {
     
+    private static final long serialVersionUID = 0;
+
     public Wall(Presence presence, Image image) {
         super(presence, image);
     }

@@ -9,6 +9,9 @@ import java.io.Serializable;
  * up or slow a player down, respectively.
  */
 abstract class Item implements Serializable {
+
+    private static final long serialVersionUID = 0;
+
     /**
      * Implementation for checking if an item equals another item.
      * Here, the class for both items are just compared;

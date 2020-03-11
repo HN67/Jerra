@@ -8,6 +8,8 @@ import jerra.api.Updatable;
  */
 public class Gun implements Spawner<Entity>, Updatable, Copyable<Gun> {
 
+    private static final long serialVersionUID = 0;
+
     private Entity bullet;
     private int reload;
 

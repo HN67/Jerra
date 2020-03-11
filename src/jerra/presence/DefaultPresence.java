@@ -13,6 +13,8 @@ import jerra.core.Rect;
  */
 public class DefaultPresence implements Presence {
 
+    private static final long serialVersionUID = 0;
+
     private Rect position;
     private Vector velocity;
 

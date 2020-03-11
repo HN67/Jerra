@@ -14,6 +14,8 @@ import jerra.stats.Stats;
  */
 public class ShooterEntity extends DefaultCharacter implements Shooter {
 
+    private static final long serialVersionUID = 0;
+
     private Gun gun;
 
     public ShooterEntity(Presence presence, Stats stats, Gun gun, char team, Image image) {

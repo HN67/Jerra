@@ -12,6 +12,8 @@ import java.io.Serializable;
  */
 public class Rect implements Serializable {
 
+    private static final long serialVersionUID = 0;
+    
     private final Vector origin;
     private final Vector size;
 

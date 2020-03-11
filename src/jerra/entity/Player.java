@@ -10,6 +10,8 @@ import jerra.stats.Stats;
  */
 public class Player extends DefaultCharacter implements Shooter {
 
+    private static final long serialVersionUID = 0;
+
     private Vector direction;
     private Gun gun;
 

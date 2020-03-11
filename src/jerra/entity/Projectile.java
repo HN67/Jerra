@@ -8,6 +8,8 @@ import jerra.presence.Presence;
  */
 public class Projectile extends DefaultEntity {
 
+    private static final long serialVersionUID = 0;
+
     protected int lifetime;
     protected int age;
 

@@ -18,6 +18,8 @@ import jerra.stats.Stats;
  */
 public class DefaultEntity implements Entity {
 
+    private static final long serialVersionUID = 0;
+
     private Presence presence;
     private Image image;
     private boolean alive;

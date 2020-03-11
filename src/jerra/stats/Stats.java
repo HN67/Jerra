@@ -11,6 +11,8 @@ import jerra.api.Copyable;
  */
 public class Stats implements Copyable<Stats>, Serializable {
 
+    private static final long serialVersionUID = 0;
+
     private Map<Type, Integer> values;
 
     public enum Type {
