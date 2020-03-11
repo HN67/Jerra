@@ -73,7 +73,7 @@ public class Player extends DefaultCharacter implements Shooter {
         // Get new bullet from gun
         Entity bullet = this.gun.spawn();
         Presence presence = bullet.getPresence().copy();
-        presence.setPosition(this.getPosition().getOrigin());
+        presence.setPosition(this.getPosition().center().add(-presence.getPosition().width()/2 + this.direction.x()*this.getPosition().width()/2, -presence.getPosition().height()/2 + this.direction.y()*this.getPosition().height()/2));
         Vector velocity = presence.getVelocity();
         // Set Projectile velocity based on facing direction
         velocity = velocity.scale(this.direction);
