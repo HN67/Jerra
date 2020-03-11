@@ -1,8 +1,10 @@
 package jerra.view;
 
-import javafx.scene.image.Image;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import jerra.core.Rect;
 import jerra.entity.Entity;
 import jerra.room.Room;
@@ -50,11 +52,23 @@ public class GraphicView extends View<Room> {
 		
 		for(Entity entity : model.getEntities()) {
 			
+			// if(!(entity instanceof Player)) {
+			// 	continue;
+			// }
+
 			Rect pos = entity.getPosition();
 			Image image = entity.image();
 			
+			context.setFill(new ImagePattern(image));
+
+			if(entity.isHit()) {
+				context.setFill(Color.YELLOW);
+			}
+
+			context.fillRect(pos.x(), pos.y(), pos.width(), pos.height());
+
 			// Align center of image and position
-			context.drawImage(image, pos.centerX() - image.getWidth()/2, pos.centerY() - image.getHeight()/2);
+			// context.drawImage(image, pos.centerX() - image.getWidth()/2, pos.centerY() - image.getHeight()/2);
 		
 		}
 	}

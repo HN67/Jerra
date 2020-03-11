@@ -11,6 +11,11 @@ public interface Physical {
     public void setPresence(Presence presence);
     public boolean collides(Physical other);
     public void deflect(Physical other);
+
+    public void hit();
+    public void unHit();
+    public boolean isHit();
+
     default public boolean solid() {
         return true;
     }

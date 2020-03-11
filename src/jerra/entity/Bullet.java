@@ -3,10 +3,9 @@ package jerra.entity;
 import javafx.scene.image.Image;
 import jerra.core.Rect;
 import jerra.core.Vector;
+import jerra.effect.Effect;
 import jerra.presence.DefaultPresence;
 import jerra.presence.Presence;
-
-import jerra.effect.Effect;
 
 /**
  * Bullet
@@ -46,6 +45,7 @@ public class Bullet extends Projectile {
         // Only interact if not friendly
         if (!this.friendly(other)) {
             this.effect.apply(other);
+            other.hit();
             // Kill other entity
             // other.kill(true);
             // Kill this (remove for penetrating)

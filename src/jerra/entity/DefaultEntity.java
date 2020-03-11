@@ -1,14 +1,11 @@
 package jerra.entity;
 
-import jerra.api.Affiliate;
-import jerra.api.Physical;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.image.Image;
-
-import java.util.ArrayList;
-
+import jerra.api.Affiliate;
+import jerra.api.Physical;
 import jerra.core.Rect;
 import jerra.presence.Presence;
 import jerra.stats.Stats;
@@ -22,6 +19,8 @@ public class DefaultEntity implements Entity {
     private Image image;
     private boolean alive;
     private char team;
+    
+    private boolean hit;
 
     private Stats stats;
 
@@ -62,8 +61,26 @@ public class DefaultEntity implements Entity {
 
     @Override
     public boolean collides(Physical other) {
+
         return this.getPresence().collides(other.getPresence());
     }
+
+    @Override
+    public void hit() {
+        this.hit = true;
+    }
+
+    @Override
+    public void unHit() {
+        this.hit = false;
+    }
+
+    @Override
+    public boolean isHit() {
+        return this.hit;
+    }
+
+    
 
     public List<String> commandQueue() {
         return this.commands;
@@ -83,6 +100,7 @@ public class DefaultEntity implements Entity {
 
     @Override
     public void update() {
+        this.unHit();
         this.presence.update();
     }
 
