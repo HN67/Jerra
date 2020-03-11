@@ -17,6 +17,7 @@ import jerra.entity.AmbientShooterSpawner;
 import jerra.entity.Bullet;
 import jerra.entity.Gun;
 import jerra.entity.Player;
+import jerra.entity.Respawner;
 import jerra.entity.ShooterEntity;
 import jerra.entity.Wall;
 import jerra.presence.ActivePresence;
@@ -106,6 +107,12 @@ public class GraphicController implements Controller {
                 playerImage
             )
         );
+
+        Respawner respawner = new Respawner(player, 60);
+
+        this.room.spawnInteractiveShooterSpawner(respawner);
+
+        this.room.spawnShooter(player);
     
         this.view = new GraphicView(this.room, this.canvas);
         view.render();
@@ -198,6 +205,9 @@ public class GraphicController implements Controller {
                     this.room.queue("rightSecondary");
                     this.room.queue("shoot");
                     break;
+                case "ENTER":
+                    this.room.queue("respawn");
+                    break;
                 default:
                     break;
             }
@@ -216,7 +226,7 @@ public class GraphicController implements Controller {
         this.room.update();
 
         // Render the views
-        this.textView.render();
+        // this.textView.render();
 
         this.view.render();
 

@@ -1,9 +1,7 @@
 package jerra.entity;
 
 import javafx.scene.image.Image;
-
 import jerra.presence.Presence;
-
 import jerra.stats.Stats;
 /**
  * DefaultCharacter

@@ -23,25 +23,6 @@ public class GraphicView extends View<Room> {
 	public Canvas getCanvas() {
 		return this.canvas;
 	}
-	
-	// private static Color getColor(String symbol) {
-	// 	Color color = Color.RED;
-		
-	// 	switch(symbol) {
-	// 		case "P":
-	// 			color = Color.BLUE;
-	// 			break;
-			
-	// 		case "B": 
-	// 			color = Color.GREEN;
-	// 			break;
-
-	// 		case "W":
-	// 			color = Color.YELLOW;
-	// 	}
-		
-	// 	return color;
-	// }
 
 	@Override
 	public void render() {
