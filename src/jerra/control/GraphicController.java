@@ -3,30 +3,27 @@ package jerra.control;
 import java.util.HashSet;
 import java.util.Set;
 
-import javafx.scene.image.Image;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 import jerra.core.Rect;
-import jerra.core.Vector;
 import jerra.core.Resources;
+import jerra.core.Vector;
+import jerra.effect.DamageEffect;
 import jerra.entity.AmbientShooterSpawner;
 import jerra.entity.Bullet;
 import jerra.entity.Gun;
 import jerra.entity.Player;
-
-import jerra.stats.Stats;
-
-import jerra.effect.DamageEffect;
 import jerra.entity.ShooterEntity;
 import jerra.entity.Wall;
-
-import jerra.presence.DefaultPresence;
 import jerra.presence.ActivePresence;
+import jerra.presence.DefaultPresence;
 import jerra.presence.WanderPresence;
 import jerra.room.Room;
+import jerra.stats.Stats;
 import jerra.view.GraphicView;
 import jerra.view.TextView;
 
@@ -36,7 +33,11 @@ import jerra.view.TextView;
 public class GraphicController implements Controller {
 
     private Room room;
+    private Player player;
+
     private Canvas canvas;
+
+    private Timeline gameLoop;
 
     private TextView textView;
     private GraphicView view;
@@ -88,7 +89,7 @@ public class GraphicController implements Controller {
         ));
 
         this.room.spawnShooter(
-            new Player(
+            this.player = new Player(
                 new ActivePresence(
                     new Rect(
                         new Vector(30, 30), block
@@ -122,6 +123,7 @@ public class GraphicController implements Controller {
         KeyFrame frame = new KeyFrame(new Duration(20), (event) -> this.update());
         gameLoop.getKeyFrames().add(frame);
         gameLoop.play();
+        this.gameLoop = gameLoop;
 
     }
 
