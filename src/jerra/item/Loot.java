@@ -1,5 +1,7 @@
 package jerra.item;
 
+import java.io.Serializable;
+
 import jerra.api.Updatable;
 
 import jerra.presence.Presence;
@@ -10,7 +12,7 @@ import jerra.presence.Presence;
  * Represents a combination of a physical entity and an inventory
  * @author Ryan Allard
  */
-public interface Loot extends Updatable {
+public interface Loot extends Updatable, Serializable {
 
     /**
      * Gets a view of the Loot's current inventory

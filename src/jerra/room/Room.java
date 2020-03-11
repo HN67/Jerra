@@ -1,5 +1,6 @@
 package jerra.room;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import jerra.api.Updatable;
@@ -13,7 +14,7 @@ import jerra.entity.Shooter;
 /**
  * Room
  */
-public interface Room extends Updatable, Interactive {
+public interface Room extends Updatable, Interactive, Serializable {
 
     /**
      * Spawns (inserts) a general Entity in the Room

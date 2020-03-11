@@ -1,14 +1,16 @@
 package jerra.core;
 
+import java.io.Serializable;
+
 /**
- * Rect object that represents a rectangular bounding area.
- * Rects use a coordinate system with a top-left zero origin, so down and right are positive directions
- * A Rect inhabits the space between its left and right edges, and top and bottom edges.
- * Edges are pre-indexed before the pixels,
- * so a Rect with an origin of (1, 1) and size of (1, 1) (i.e. a single pixel) has a right and bottom edge of 2,
- * but will not intersect with a Rect at 2.
+ * Rect object that represents a rectangular bounding area. Rects use a
+ * coordinate system with a top-left zero origin, so down and right are positive
+ * directions A Rect inhabits the space between its left and right edges, and
+ * top and bottom edges. Edges are pre-indexed before the pixels, so a Rect with
+ * an origin of (1, 1) and size of (1, 1) (i.e. a single pixel) has a right and
+ * bottom edge of 2, but will not intersect with a Rect at 2.
  */
-public class Rect {
+public class Rect implements Serializable {
 
     private final Vector origin;
     private final Vector size;
