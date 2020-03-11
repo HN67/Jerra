@@ -2,13 +2,12 @@ package jerra.room;
 
 import java.util.Set;
 
-import jerra.api.Updatable;
 import jerra.api.Interactive;
-
+import jerra.api.Updatable;
 import jerra.entity.Entity;
-import jerra.entity.Spawner;
 import jerra.entity.Player;
 import jerra.entity.Shooter;
+import jerra.entity.Spawner;
 
 /**
  * Room
@@ -40,6 +39,12 @@ public interface Room extends Updatable, Interactive {
      * @param spawner The Spawner that the Room will now track, adding its produces as Shooters
      */
     public void spawnShooterSpawner(Spawner<Shooter> spawner);
+
+    /**
+     * Spawns (inserts) an Interactive Shooter spawner in the Room
+     * @param spawner The Spawner that the Room will now track, adding its produces as Shooters
+     */
+    public void spawnInteractiveShooterSpawner(Spawner<Shooter> spawner);
     
     public Set<Entity> getEntities();
 

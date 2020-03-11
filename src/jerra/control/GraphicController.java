@@ -104,7 +104,7 @@ public class GraphicController implements Controller {
 
         Respawner respawner = new Respawner(player, 60);
 
-        this.room.spawnShooterSpawner(respawner);
+        this.room.spawnInteractiveShooterSpawner(respawner);
 
         this.room.spawnShooter(player);
     
@@ -112,7 +112,7 @@ public class GraphicController implements Controller {
         view.render();
 
         this.textView = new TextView(this.room);
-        // textView.render();
+        textView.render();
 
         // Handle key events
         this.canvas.getScene().setOnKeyPressed(event -> this.handleKeyPress(event));
@@ -197,6 +197,9 @@ public class GraphicController implements Controller {
                 case "RIGHT":
                     this.room.queue("rightSecondary");
                     this.room.queue("shoot");
+                    break;
+                case "ENTER":
+                    this.room.queue("respawn");
                     break;
                 default:
                     break;
