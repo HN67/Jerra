@@ -59,6 +59,12 @@ public class GraphicView extends View<Room> {
 //				context.fillRect(entity.getPosition().left(), entity.getPosition().centerY() - 25, entity.getPosition().width(), 4);
 				context.setFill(Color.GREEN);
 				context.fillRect(entity.getPosition().left(), entity.getPosition().centerY() - 25, entity.getPosition().width()*entity.getStats().getValue(Type.HEALTH)/entity.getStats().getValue(Type.VITALITY), 4);
+			} else if (entity.symbol() == "E") {
+//				context.setFill(Color.WHITE);
+//				context.fillRect(entity.getPosition().left(), entity.getPosition().centerY() - 25, entity.getPosition().width(), 4);
+				context.setFill(Color.RED);
+				context.fillRect(entity.getPosition().left(), entity.getPosition().centerY() - 25, entity.getPosition().width()*entity.getStats().getValue(Type.HEALTH)/entity.getStats().getValue(Type.VITALITY), 4);
+
 			}
 			
 			// Align center of image and position
