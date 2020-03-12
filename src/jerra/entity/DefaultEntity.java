@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import jerra.api.Affiliate;
 import jerra.api.Physical;
 import jerra.core.Rect;
+import jerra.effect.Effect;
 import jerra.presence.Presence;
 import jerra.stats.Stats;
 
@@ -71,6 +72,12 @@ public class DefaultEntity implements Entity {
     }
 
     @Override
+    public void hit(Effect<? super Entity> effect) {
+        this.hit();
+        effect.apply(this);
+    }
+
+    @Override
     public void unHit() {
         this.hit = false;
     }
@@ -79,8 +86,6 @@ public class DefaultEntity implements Entity {
     public boolean isHit() {
         return this.hit;
     }
-
-    
 
     public List<String> commandQueue() {
         return this.commands;

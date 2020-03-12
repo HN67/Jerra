@@ -44,8 +44,7 @@ public class Bullet extends Projectile {
     public void interact(Entity other) {
         // Only interact if not friendly
         if (!this.friendly(other)) {
-            this.effect.apply(other);
-            other.hit();
+            other.hit(this.effect);
             // Kill other entity
             // other.kill(true);
             // Kill this (remove for penetrating)

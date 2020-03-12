@@ -1,5 +1,7 @@
 package jerra.api;
 
+import jerra.effect.Effect;
+import jerra.entity.Entity;
 import jerra.presence.Presence;
 
 /**
@@ -13,6 +15,7 @@ public interface Physical {
     public void deflect(Physical other);
 
     public void hit();
+    public void hit(Effect<? super Entity> effect);
     public void unHit();
     public boolean isHit();
 
