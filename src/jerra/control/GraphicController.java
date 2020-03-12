@@ -202,10 +202,28 @@ public class GraphicController implements Controller {
         }
     }
 
+    private void checkEvents() {
+
+        if (this.newKeys.contains("K")) {
+            Resources.saveObject("save.ser", this.room);
+        }
+        
+        if (this.newKeys.contains("L")) {
+            Room room = Resources.loadRoom("save.ser");
+            if (room != null) {
+                this.room = room;
+            }
+        }
+
+    }
+
     private void update() {
 
         // Compute key sets
         this.computeKeys();
+
+        // Check for control events, e.g. save/load
+        this.checkEvents();
 
         // Queue key driven commands into the room
         this.queueKeys();

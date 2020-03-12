@@ -21,6 +21,8 @@ import jerra.entity.Spawner;
  */
 public class TextRoom implements Room {
 
+    private static final long serialVersionUID = 0;
+
     // Raw sets
     private Set<Updatable> updatables;
     private Set<Interactive> interactables;
