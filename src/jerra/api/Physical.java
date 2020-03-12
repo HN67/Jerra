@@ -16,7 +16,7 @@ public interface Physical {
 
     public void hit();
     public void hit(Effect<? super Entity> effect);
-    public void unHit();
+    public void unhit();
     public boolean isHit();
 
     default public boolean solid() {

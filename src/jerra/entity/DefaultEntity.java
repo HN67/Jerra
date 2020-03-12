@@ -78,7 +78,7 @@ public class DefaultEntity implements Entity {
     }
 
     @Override
-    public void unHit() {
+    public void unhit() {
         this.hit = false;
     }
 
@@ -105,7 +105,7 @@ public class DefaultEntity implements Entity {
 
     @Override
     public void update() {
-        this.unHit();
+        this.unhit();
         this.presence.update();
     }
 
