@@ -12,6 +12,8 @@ import jerra.stats.Stats;
  */
 public class Respawner implements Interactive, Spawner<Shooter>{
 
+    private static final long serialVersionUID = 0L;
+
     private Shooter entity;
     private int tick;
     private boolean start;
