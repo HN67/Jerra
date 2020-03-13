@@ -10,6 +10,8 @@ import jerra.core.Vector;
  */
 public class AmbientSpawner<Spawnable extends Physical & Copyable<Spawnable>> extends BaseAmbient implements Spawner<Spawnable> {
     
+    private static final long serialVersionUID = 0L;
+
 	private Spawnable entity;
 
     /**

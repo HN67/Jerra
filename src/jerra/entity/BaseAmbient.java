@@ -1,5 +1,7 @@
 package jerra.entity;
 
+import java.io.Serializable;
+
 import jerra.api.Physical;
 
 import jerra.core.Vector;
@@ -9,7 +11,9 @@ import jerra.presence.Presence;
 /**
  * Base ambient class contains helper methods for implementing an ambient spawner
  */
-public class BaseAmbient {
+public class BaseAmbient implements Serializable {
+
+    private static final long serialVersionUID = 0L;
 
     private int period;
 	private int tick;

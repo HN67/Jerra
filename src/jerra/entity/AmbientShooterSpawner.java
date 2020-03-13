@@ -7,6 +7,8 @@ import jerra.core.Vector;
  */
 public class AmbientShooterSpawner extends BaseAmbient implements Spawner<Shooter> {
 
+    private static final long serialVersionUID = 0L;
+
     private Shooter entity;
 
     /**
