@@ -92,10 +92,4 @@ public class Resources {
         
     }
 
-    public static void main(String[] args) {
-        saveObject("test.ser", "abc");
-        String test = (String) loadObject("test.ser");
-        System.out.println(test);
-    }
-
 }

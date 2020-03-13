@@ -73,14 +73,15 @@ public class GraphicController implements Controller {
         this.setBoundaries();
 
         ShooterEntity shooter = new ShooterEntity(
-            new WanderPresence(new Rect(new Vector(300, 300), block), new Vector(3, 3), 25),
+            new WanderPresence(new Rect(new Vector(300, 300), block), new Vector(3, 3), 25, this.room.getGenerator()),
             new Stats(3, 3),
             new Gun(
                 bullet.setTeam('E').copy(),
                 40
             ),
             'E',
-            enemyImage
+            enemyImage,
+            this.room.getGenerator()
         );
         this.room.spawnShooter(shooter);
 
@@ -89,7 +90,8 @@ public class GraphicController implements Controller {
             shooter.copy(),
             new Vector(300, 300), 
             300, 
-            100
+            100,
+            this.room.getGenerator()
         ));
 
         this.room.spawnShooter(

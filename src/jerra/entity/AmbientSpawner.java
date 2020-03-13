@@ -1,5 +1,7 @@
 package jerra.entity;
 
+import java.util.Random;
+
 import jerra.api.Physical;
 import jerra.api.Copyable;
 
@@ -22,9 +24,9 @@ public class AmbientSpawner<Spawnable extends Physical & Copyable<Spawnable>> ex
      * of the spawned entity is <= origin -+ range.
      * @param period, a int, the Entity is spawned every this many ticks
      */
-    public AmbientSpawner(Spawnable entity, Vector origin, int range, int period) {
+    public AmbientSpawner(Spawnable entity, Vector origin, int range, int period, Random generator) {
         // Call super constructor
-        super(origin, range, period);
+        super(origin, range, period, generator);
         // Save entity
     	this.entity = entity;
     }

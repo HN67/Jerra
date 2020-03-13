@@ -1,5 +1,7 @@
 package jerra.entity;
 
+import java.util.Random;
+
 import jerra.core.Vector;
 
 /**
@@ -19,9 +21,9 @@ public class AmbientShooterSpawner extends BaseAmbient implements Spawner<Shoote
      * of the spawned entity is <= origin -+ range.
      * @param period, a int, the Entity is spawned every this many ticks
      */
-    public AmbientShooterSpawner(Shooter entity, Vector origin, int range, int period) {
+    public AmbientShooterSpawner(Shooter entity, Vector origin, int range, int period, Random generator) {
         // Call super constructor
-        super(origin, range, period);
+        super(origin, range, period, generator);
         // Save entity
     	this.entity = entity;
     }

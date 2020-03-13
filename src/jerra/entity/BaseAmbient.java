@@ -1,5 +1,6 @@
 package jerra.entity;
 
+import java.util.Random;
 import java.io.Serializable;
 
 import jerra.api.Physical;
@@ -18,12 +19,14 @@ public class BaseAmbient implements Serializable {
     private int period;
 	private int tick;
 	private Vector origin;
-	private int range;
+    private int range;
+    private Random generator;
 
-    public BaseAmbient(Vector origin, int range, int period) {
-        // Save origin and range
+    public BaseAmbient(Vector origin, int range, int period, Random generator) {
+        // Save origin and range and generator
     	this.origin = origin;
         this.range = range;
+        this.generator = generator;
         // Initalize tick and period
         this.tick = 0;
         this.period = period;
@@ -48,24 +51,24 @@ public class BaseAmbient implements Serializable {
     public Physical place(Physical physical) {
         // Generate random offsets
         // Determine negative or not for y offset
-    	int negative = (int)(Math.random()*(2));
+    	int negative = this.generator.nextInt(2);
     	int y;
     	if (negative == 0) {
             // Non negative, just generate up to range + 1 exclusive
-    		y = (int)(Math.random()*(this.range+1));
+    		y = this.generator.nextInt(this.range + 1);
     	} else {
             // Negate generation result
-    		y = (int)(Math.random()*(this.range+1))*-1;
+    		y = this.generator.nextInt(this.range + 1)*-1;
         }
         // Determine negative or not for x offset
-    	negative = (int)(Math.random()*(2));
+    	negative = this.generator.nextInt(2);
     	int x;
     	if (negative == 0) {
             // Non negative, just generate up to range + 1 exclusive
-    		x = (int)(Math.random()*(this.range+1));
+    		x = this.generator.nextInt(this.range + 1);
     	} else {
             // Negate generation result
-    		x = (int)(Math.random()*(this.range+1))*-1;
+    		x = this.generator.nextInt(this.range + 1)*-1;
         }
         // Set position to determined offset of origin
         Presence newPresence = physical.getPresence();
