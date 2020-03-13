@@ -2,8 +2,6 @@ package jerra.entity;
 
 import java.lang.Math;
 
-import javafx.scene.image.Image;
-
 import jerra.core.Vector;
 import jerra.presence.Presence;
 import jerra.stats.Stats;
@@ -18,7 +16,7 @@ public class ShooterEntity extends DefaultCharacter implements Shooter {
 
     private Gun gun;
 
-    public ShooterEntity(Presence presence, Stats stats, Gun gun, char team, Image image) {
+    public ShooterEntity(Presence presence, Stats stats, Gun gun, char team, String image) {
         super(presence, stats, image);
         this.gun = gun;
         this.setTeam(team);

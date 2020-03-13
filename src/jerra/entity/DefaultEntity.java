@@ -5,8 +5,6 @@ import jerra.api.Physical;
 
 import java.util.List;
 
-import javafx.scene.image.Image;
-
 import java.util.ArrayList;
 
 import jerra.core.Rect;
@@ -21,7 +19,7 @@ public class DefaultEntity implements Entity {
     private static final long serialVersionUID = 0;
 
     private Presence presence;
-    private Image image;
+    private String image;
     private boolean alive;
     private char team;
 
@@ -29,7 +27,7 @@ public class DefaultEntity implements Entity {
 
     private List<String> commands;
 
-    public DefaultEntity(Presence presence, Image image) {
+    public DefaultEntity(Presence presence, String image) {
 
         // Initalize command list
         this.commands = new ArrayList<String>();
@@ -122,7 +120,7 @@ public class DefaultEntity implements Entity {
     }
 
 	@Override
-	public Image image() {
+	public String image() {
 		return this.image;
 	}
     

@@ -1,5 +1,6 @@
 package jerra.control;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -59,9 +60,13 @@ public class GraphicController implements Controller {
         Vector zero = new Vector(0, 0);
         Vector block = new Vector(30, 30);
 
-        Image playerImage = Resources.loadImage("/resources/player.png");
-        Image enemyImage = Resources.loadImage("/resources/enemy.png");
-        Image bulletImage = Resources.loadImage("/resources/bullet.png");
+        String playerImage = "/resources/player.png";
+        String enemyImage = "/resources/enemy.png";
+        String bulletImage = "/resources/bullet.png";
+
+        // Image playerImage = Resources.loadImage("/resources/player.png");
+        // Image enemyImage = Resources.loadImage("/resources/enemy.png");
+        // Image bulletImage = Resources.loadImage("/resources/bullet.png");
 
         Bullet bullet = new Bullet(new Rect(zero, new Vector(6, 6)), new Vector(15, 15), new DamageEffect(1), 100, 'T', bulletImage);
         
@@ -105,8 +110,19 @@ public class GraphicController implements Controller {
                 playerImage
             )
         );
+
+        // Prepare image dictionary
+        String[] paths = {
+            "border_horizontal", "border_vertical", "bullet", "enemy", "logo", "player",
+            "wall"
+        };
+        HashMap<String, Image> imageDictionary = new HashMap<String, Image>();
+        for (String path: paths) {
+            String fullPath = "/resources/" + path + ".png";
+            imageDictionary.put(fullPath, Resources.loadImage(fullPath));
+        }
     
-        this.view = new GraphicView(this.room, this.canvas);
+        this.view = new GraphicView(this.room, this.canvas, imageDictionary);
         view.render();
 
         this.textView = new TextView(this.room);
@@ -247,9 +263,13 @@ public class GraphicController implements Controller {
         Vector verticalWall = new Vector(stroke, (int) this.canvas.getHeight());
         Vector horizontalWall = new Vector((int) this.canvas.getHeight(), stroke);
 
-        Image wall = Resources.loadImage("/resources/wall.png");
-        Image horizontalBorder = Resources.loadImage("/resources/border_horizontal.png");
-        Image verticalBorder = Resources.loadImage("/resources/border_vertical.png");
+        String wall = "/resources/wall.png";
+        String horizontalBorder = "/resources/border_horizontal.png";
+        String verticalBorder = "/resources/border_vertical.png";
+
+        // Image wall = Resources.loadImage("/resources/wall.png");
+        // Image horizontalBorder = Resources.loadImage("/resources/border_horizontal.png");
+        // Image verticalBorder = Resources.loadImage("/resources/border_vertical.png");
 
         this.room.spawnEntity(
             new Wall(

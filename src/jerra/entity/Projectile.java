@@ -1,6 +1,5 @@
 package jerra.entity;
 
-import javafx.scene.image.Image;
 import jerra.presence.Presence;
 
 /**
@@ -13,7 +12,7 @@ public class Projectile extends DefaultEntity {
     protected int lifetime;
     protected int age;
 
-    public Projectile(Presence presence, int lifetime, Image image) {
+    public Projectile(Presence presence, int lifetime, String image) {
         // Call super constructor
         super(presence, image);
         // Reference lifetime

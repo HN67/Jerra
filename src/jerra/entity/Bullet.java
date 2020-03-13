@@ -1,6 +1,5 @@
 package jerra.entity;
 
-import javafx.scene.image.Image;
 import jerra.core.Rect;
 import jerra.core.Vector;
 import jerra.presence.DefaultPresence;
@@ -26,7 +25,7 @@ public class Bullet extends Projectile {
         return new DefaultPresence(position, velocity);
     }
 
-    public Bullet(Rect position, Vector velocity, Effect<? super Entity> effect, int lifetime, char team, Image image) {
+    public Bullet(Rect position, Vector velocity, Effect<? super Entity> effect, int lifetime, char team, String image) {
         // Create projectile with predetermined presence
         super(constructPresence(position, velocity), lifetime, image);
         this.setTeam(team);
