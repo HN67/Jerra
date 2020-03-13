@@ -228,6 +228,8 @@ public class GraphicController implements Controller {
             Room room = Resources.loadRoom("save.ser");
             if (room != null) {
                 this.room = room;
+                this.view.setModel(room);
+                this.textView.setModel(room);
             }
         }
 
