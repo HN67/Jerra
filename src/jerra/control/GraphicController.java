@@ -3,30 +3,28 @@ package jerra.control;
 import java.util.HashSet;
 import java.util.Set;
 
-import javafx.scene.image.Image;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 import jerra.core.Rect;
-import jerra.core.Vector;
 import jerra.core.Resources;
+import jerra.core.Vector;
+import jerra.effect.DamageEffect;
 import jerra.entity.AmbientShooterSpawner;
 import jerra.entity.Bullet;
 import jerra.entity.Gun;
 import jerra.entity.Player;
-
-import jerra.stats.Stats;
-
-import jerra.effect.DamageEffect;
+import jerra.entity.Respawner;
 import jerra.entity.ShooterEntity;
 import jerra.entity.Wall;
-
-import jerra.presence.DefaultPresence;
 import jerra.presence.ActivePresence;
+import jerra.presence.DefaultPresence;
 import jerra.presence.WanderPresence;
 import jerra.room.Room;
+import jerra.stats.Stats;
 import jerra.view.GraphicView;
 import jerra.view.TextView;
 
@@ -87,24 +85,28 @@ public class GraphicController implements Controller {
             100
         ));
 
-        this.room.spawnShooter(
-            new Player(
-                new ActivePresence(
-                    new Rect(
-                        new Vector(30, 30), block
-                    ), 
-                    new Vector(5, 5), "up", "down", "left", "right"
-                ),
-                new Stats(10, 10),
-                new Gun(
-                    bullet.setTeam('P').copy(),
-                    10
-                ),
-                'P',
-                new Vector(1, 0),
-                playerImage
-            )
+        Player player = new Player(
+            new ActivePresence(
+                new Rect(
+                    new Vector(30, 30), block
+                ), 
+                new Vector(5, 5), "up", "down", "left", "right"
+            ),
+            new Stats(10, 10),
+            new Gun(
+                bullet.setTeam('P').copy(),
+                10
+            ),
+            'P',
+            new Vector(1, 0),
+            playerImage
         );
+
+        Respawner respawner = new Respawner(player, 60);
+
+        this.room.spawnInteractiveShooterSpawner(respawner);
+
+        this.room.spawnShooter(player);
     
         this.view = new GraphicView(this.room, this.canvas);
         view.render();
@@ -196,6 +198,9 @@ public class GraphicController implements Controller {
                     this.room.queue("rightSecondary");
                     this.room.queue("shoot");
                     break;
+                case "ENTER":
+                    this.room.queue("respawn");
+                    break;
                 default:
                     break;
             }
@@ -214,7 +219,7 @@ public class GraphicController implements Controller {
         this.room.update();
 
         // Render the views
-        this.textView.render();
+        // this.textView.render();
 
         this.view.render();
 
