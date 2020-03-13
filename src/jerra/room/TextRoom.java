@@ -93,6 +93,12 @@ public class TextRoom implements Room {
     }
 
     @Override
+    public void spawnInteractiveShooterSpawner(Spawner<Shooter> spawner) {
+        this.interactables.add((Interactive) spawner);
+        this.spawnShooterSpawner(spawner);
+    }
+
+    @Override
     public void queue(String command) {
         // Queue command to every entity
         for (Interactive interactable: this.interactables) {

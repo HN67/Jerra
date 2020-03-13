@@ -1,8 +1,9 @@
 package jerra.stats;
 
-import java.util.Map;
 import java.io.Serializable;
+
 import java.util.HashMap;
+import java.util.Map;
 
 import jerra.api.Copyable;
 

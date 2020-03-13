@@ -1,7 +1,6 @@
 package jerra.entity;
 
 import jerra.presence.Presence;
-
 import jerra.stats.Stats;
 /**
  * DefaultCharacter
