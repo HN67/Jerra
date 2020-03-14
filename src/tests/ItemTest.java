@@ -8,7 +8,7 @@ import jerra.item.HalfAndHalf;
 import jerra.item.Item;
 
 /**
- * Test Class for testing the Rect class.
+ * Test Class for testing the Item class.
  */
 public class ItemTest {
 
