@@ -18,10 +18,7 @@ public abstract class Item {
      */    
     @Override
     public boolean equals(Object item) {
-        if (item == null) {
-            return false;
-        }
-        return this.getClass() == item.getClass();
+        return this.hashCode() == item.hashCode();
     }
 
     /**

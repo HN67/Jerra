@@ -2,17 +2,21 @@ package jerra.control;
 
 import java.util.Scanner;
 
-
 import jerra.core.Vector;
+import jerra.effect.AccelerationEffect;
 import jerra.core.Rect;
 
 import jerra.presence.DefaultPresence;
 import jerra.presence.ActivePresence;
 
+import jerra.entity.Entity;
 import jerra.entity.DefaultEntity;
+import jerra.entity.Gun;
 import jerra.entity.Player;
 import jerra.entity.AmbientSpawner;
 import jerra.entity.Bullet;
+
+import jerra.stats.Stats;
 
 import jerra.room.Room;
 import jerra.view.TextView;
@@ -33,21 +37,21 @@ public class TextController implements Controller {
     public void start() {
         Vector zero = new Vector(0, 0);
 
-        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(4, 0), new Vector(1, 1)), zero)));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(8, 0), new Vector(1, 1)), zero)));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 4), new Vector(1, 1)), zero)));
-		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 8), new Vector(1, 1)), zero)));
-        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(5, 5), new Vector(1, 1)), zero)));
+        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(4, 0), new Vector(1, 1)), zero), null));
+		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(8, 0), new Vector(1, 1)), zero), null));
+		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 4), new Vector(1, 1)), zero), null));
+		this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(0, 8), new Vector(1, 1)), zero), null));
+        this.room.spawnEntity(new DefaultEntity(new DefaultPresence(new Rect(new Vector(5, 5), new Vector(1, 1)), zero), null));
 
-        this.room.spawnSpawner(new AmbientSpawner(
-            new DefaultEntity(new DefaultPresence(new Rect(0, 0, 1, 1), zero)),
+        this.room.spawnSpawner(new AmbientSpawner<Entity>(
+            new DefaultEntity(new DefaultPresence(new Rect(0, 0, 1, 1), zero), null),
             new Vector(4, 4), 
             1, 
             3
         ));
 
         this.room.spawnPlayer(new Player(new ActivePresence(new Rect(new Vector(0, 0), new Vector(1, 1)), new Vector(1, 1), "up", "down", "left", "right"),
-            new Bullet(new Rect(0, 0, 1, 1), new Vector(1, 1), 5)
+            new Stats(10, 10), new Gun(new Bullet(new Rect(0, 0, 1, 1), new Vector(1, 1), new AccelerationEffect(new Vector(1, 1)), 5, 'P', null), 3), 'P', new Vector(1, 0), null
         ));
         
         String command = "";

@@ -1,44 +1,49 @@
 package jerra.entity;
 
+import javafx.scene.image.Image;
 import jerra.core.Vector;
 import jerra.presence.Presence;
+import jerra.stats.Stats;
 
 /**
  * Player
  */
-public class Player extends DefaultEntity implements Spawner {
+public class Player extends DefaultCharacter implements Shooter {
 
-    private String direction;
-    private Projectile bullet;
+    private Vector direction;
+    private Gun gun;
 
-    public Player(Presence presence, Projectile bullet, String direction) {
-        super(presence);
+    private static final String[] xDirectionNames = {"LEFT", "", "RIGHT"};
+    private static final String[] yDirectionNames = {"UP", "", "DOWN"};
+
+    public Player(Presence presence, Stats stats, Gun gun, char team, Vector direction, Image image) {
+        super(presence, stats, image);
         this.setDirection(direction);
-        this.bullet = bullet;
+        this.setTeam(team);
+        this.gun = gun;
     }
 
-    public Player(Presence presence, Projectile bullet) {
-        this(presence, bullet, "UP");
-    }
-
-    public void setDirection(String direction) {
-        this.direction = new String(direction);
+    public void setDirection(Vector direction) {
+        this.direction = direction;
     }
 
     @Override
     public void update() {
         for (String command: this.commandQueue()) {
             if (command.equals("upSecondary")) {
-                this.direction = "UP";
+                this.direction = new Vector(0, -1);
             } else if (command.equals("downSecondary")) {
-                this.direction = "DOWN";
+                this.direction = new Vector(0, 1);
             } else if (command.equals("leftSecondary")) {
-                this.direction = "LEFT";
+                this.direction =  new Vector(-1, 0);
             } else if (command.equals("rightSecondary")) {
-                this.direction = "RIGHT";
+                this.direction = new Vector(1, 0);
             } else {
             }
         }
+
+        // Update gun
+        this.gun.update();
 
         // Call super update (updates Presence and clears queue)
         super.update();
@@ -47,7 +52,11 @@ public class Player extends DefaultEntity implements Spawner {
     @Override
     public String getName() {
         // Indicate direction in name
-        return "PLAYER (" + this.direction + ")";
+        return "PLAYER (" + this.getStats().getValue(Stats.Type.HEALTH) + ", " + this.getDirectionString() + ")";
+    }
+
+    public String getDirectionString() {
+        return yDirectionNames[this.direction.y()+1] + xDirectionNames[this.direction.x()+1];
     }
 
     @Override
@@ -61,24 +70,13 @@ public class Player extends DefaultEntity implements Spawner {
      */
     @Override
     public Entity spawn() {
-        // Prepare new bullet
-        Entity bullet = this.bullet.copy();
+        // Get new bullet from gun
+        Entity bullet = this.gun.spawn();
         Presence presence = bullet.getPresence().copy();
-        presence.setPosition(this.getPosition().getOrigin());
+        presence.setPosition(this.getPosition().center().add(-presence.getPosition().width()/2 + this.direction.x()*this.getPosition().width()/2, -presence.getPosition().height()/2 + this.direction.y()*this.getPosition().height()/2));
         Vector velocity = presence.getVelocity();
         // Set Projectile velocity based on facing direction
-        if (this.direction.equals("UP")) {
-            velocity = velocity.scale(0, -1);
-        }
-        if (this.direction.equals("DOWN")) {
-            velocity = velocity.scale(0, 1);
-        }
-        if (this.direction.equals("RIGHT")) {
-            velocity = velocity.scale(1, 0);
-        }
-        if (this.direction.equals("LEFT")) {
-            velocity = velocity.scale(-1, 0);
-        }
+        velocity = velocity.scale(this.direction);
         // Update and return new bullet
         presence.setVelocity(velocity);
         bullet.setPresence(presence);
@@ -91,12 +89,21 @@ public class Player extends DefaultEntity implements Spawner {
      * @return A boolean representing whether the Player should spawn an entity
      */
     public boolean spawns() {
-        for (String command: this.commandQueue()) {
-            if (command.equals("shoot")) {
-                return true;
+        // Only spawns if gun is ready
+        if (this.gun.spawns()) {
+            // Check for appropriate command
+            for (String command: this.commandQueue()) {
+                if (command.equals("shoot")) {
+                    return true;
+                }
             }
         }
         return false;
+    }
+
+    @Override
+    public Shooter copy() {
+        return new Player(this.getPresence().copy(), this.getStats().copy(), this.gun.copy(), this.getTeam(), this.direction, this.image());
     }
 
 }
