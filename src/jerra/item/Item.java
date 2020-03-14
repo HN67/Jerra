@@ -7,17 +7,31 @@ package jerra.item;
  * speed a player up or slow a player down, respectively.
  */
 public abstract class Item {
+
     /**
      * Implementation for checking if an item equals another item.
      * Here, the class for both items are just compared;
      * and are equal when they come from the same class.
      * 
-     * @param item The item to compare to. 
-     * @return boolean
+     * @param item The Item to compare to. 
+     * @return a boolean, true if the given object is of the same class
      */    
     @Override
     public boolean equals(Object item) {
+        if (item == null) {
+            return false;
+        }
         return this.getClass() == item.getClass();
+    }
+
+    /**
+     * Overrides hashCode implementation to return the hashcode of the class.
+     * This allows multiple instances of the same type of Item to have the same hash.
+     * @return a int, the hashCode of the class
+     */
+    @Override
+    public int hashCode() {
+        return this.getClass().hashCode();
     }
 
     /**
