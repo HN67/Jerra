@@ -1,16 +1,13 @@
 package jerra.item;
 
-import jerra.api.Updatable;
-
-import jerra.presence.Presence;
-
+import jerra.api.Physical;
 
 /**
  * Loot object interface
  * Represents a combination of a physical entity and an inventory
  * @author Ryan Allard
  */
-public interface Loot extends Updatable {
+public interface Loot extends Physical {
 
     /**
      * Gets a view of the Loot's current inventory
@@ -19,15 +16,10 @@ public interface Loot extends Updatable {
     public Inventory getInventory();
 
     /**
-     * Returns the Presence of the Loot
-     * @return A Presence representing the Loot's physical presence
+     * Sets the Loots inventory to a new object
+     * @param inventory a Inventory, to be tracked by the Loot
+     * @return this Loot, allows chaining
      */
-    public Presence getPresence();
-
-    /**
-     * Returns a String representing the state of the Loot
-     * @return A String, for textbased output
-     */
-    public String toString();
+    public Loot setInventory(Inventory inventory);
     
 }
