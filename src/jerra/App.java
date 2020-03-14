@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import jerra.control.Controller;
 import jerra.control.GraphicController;
+import jerra.core.Resources;
 import jerra.room.Room;
 import jerra.room.TextRoom;
 
@@ -22,11 +23,13 @@ public class App extends Application {
 				
 		
 		this.root = new Group();
-		this.scene = new Scene(root, 625, 625, Color.BLACK);
-		this.canvas = new Canvas(625,625);
+		this.scene = new Scene(root, 600, 600, Color.BLACK);
+		this.canvas = new Canvas(600, 600);
 		 
 		root.getChildren().add(canvas);
-		
+
+		primaryStage.setTitle("Jerra");
+		primaryStage.getIcons().add(Resources.loadImage(Resources.resourcePath("logo.png")));
 		primaryStage.setScene(scene);
 		primaryStage.show();
 

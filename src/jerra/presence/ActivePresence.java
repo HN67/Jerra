@@ -73,5 +73,12 @@ public class ActivePresence extends DefaultPresence {
         // Add velocity into position
         super.update();
     }
+
+    @Override
+    public Presence copy() {
+        Presence out = new ActivePresence(this.getPosition(), this.getBaseVelocity(), this.up, this.down, this.left, this.right);
+        out.setVelocity(this.getVelocity());
+        return out;
+    }
     
 }

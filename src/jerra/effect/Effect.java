@@ -1,26 +1,27 @@
 package jerra.effect;
 
-import jerra.core.Vector;
-
-import jerra.entity.Entity;
+import jerra.api.Copyable;
 
 /**
  * Effect Interface
- * An Effect represents a mutation that can be applied to an Entity
+ * An Effect represents a mutation that can be applied to an Entity.
  */
-public interface Effect {
+public interface Effect<Target> extends Copyable<Effect<Target>> {
 	
-	public Effect combine(Effect effect);
-	
-	public void apply(Entity entity);
-	
-	public void setDamage(int x);
-	public int getDamage();
-	
-	public void setAcceleration(Vector vector);
 	/**
-	 * Acceleration represents the change to the Entity's velocity
+	 * Combines the two Effects.
+	 * Specifically, applying a combined Effect should have the same behavior as
+	 * applying this Effect first and then the other effect.
+	 * Should usually not modify this Effect.
+	 * @param other an Effect, to be composed on top of this Effect
+	 * @return a Effect, the combination of the two Effects
 	 */
-	public Vector getAcceleration();
+	public Effect<Target> combine(Effect<Target> other);
+	
+	/**
+	 * Applies this Effect to its Target
+	 * @param target a Target, will be modified based on this Effect
+	 */
+	public void apply(Target target);
 
 }

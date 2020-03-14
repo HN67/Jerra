@@ -1,15 +1,20 @@
 package jerra.entity;
 
+import javafx.scene.image.Image;
 import jerra.core.Rect;
 import jerra.core.Vector;
-
-import jerra.presence.Presence;
 import jerra.presence.DefaultPresence;
+import jerra.presence.Presence;
+
+import jerra.effect.Effect;
 
 /**
  * Bullet
  */
 public class Bullet extends Projectile {
+
+    // Allows for any Effect that can be applied to an Entity
+    private Effect<? super Entity> effect;
 
     /**
      * Constructs a Presence based on position and velocity
@@ -19,14 +24,16 @@ public class Bullet extends Projectile {
         return new DefaultPresence(position, velocity);
     }
 
-    public Bullet(Rect position, Vector velocity, int lifetime) {
+    public Bullet(Rect position, Vector velocity, Effect<? super Entity> effect, int lifetime, char team, Image image) {
         // Create projectile with predetermined presence
-        super(constructPresence(position, velocity), lifetime);
+        super(constructPresence(position, velocity), lifetime, image);
+        this.setTeam(team);
+        this.effect = effect;
     }
 
     @Override
     public Entity copy() {
-        return new Bullet(this.getPosition(), this.getPresence().getVelocity(), this.lifetime);
+        return new Bullet(this.getPosition(), this.getPresence().getVelocity(), this.effect.copy(), this.lifetime, this.getTeam(), this.image());
     }
 
     @Override
@@ -36,10 +43,14 @@ public class Bullet extends Projectile {
 
     @Override
     public void interact(Entity other) {
-        // Kill other entity
-        other.kill(true);
-        // Kill this (remove for penetrating)
-        this.kill(true);
+        // Only interact if not friendly
+        if (!this.friendly(other)) {
+            this.effect.apply(other);
+            // Kill other entity
+            // other.kill(true);
+            // Kill this (remove for penetrating)
+            this.kill(true);
+        }
     }
 
 }
