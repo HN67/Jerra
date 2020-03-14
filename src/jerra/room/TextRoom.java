@@ -1,10 +1,8 @@
 package jerra.room;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -15,6 +13,7 @@ import jerra.entity.Entity;
 import jerra.entity.Player;
 import jerra.entity.Shooter;
 import jerra.entity.Spawner;
+import jerra.presence.Collider;
 
 /**
  * TextRoom
@@ -109,23 +108,9 @@ public class TextRoom implements Room {
 
         // Check for collisions between Entities (O(n^2))
         // Creates a map from each entity to its collisions
-        Map<Entity, List<Entity>> allCollisions = new HashMap<Entity, List<Entity>>(this.entities.size());
-        // Iterate through each entity
-        for (Entity entity: this.entities) {
-            List<Entity> collisions = new ArrayList<Entity>();
-            // Check for collision with *every other* entity
-            for (Entity other: this.entities) {
-                // Check for collision and ensure its not the same entity
-                // Lazy evaluation ensures second check is only performed if first succeeds
-                if (entity.collides(other) && entity != other) {
-                    collisions.add(other);
-                }
-            }
-            // Add collisions to map
-            allCollisions.put(entity, collisions);
-        }
+         Map<Entity, Collection<Entity>> allCollisions = Collider.collisions(this.entities);
         // Resolve collisions through interaction
-        for (Map.Entry<Entity, List<Entity>> entry: allCollisions.entrySet()) {
+        for (Map.Entry<Entity, Collection<Entity>> entry: allCollisions.entrySet()) {
             // Iterate through each collision with the entity
             Entity entity = entry.getKey();
             for (Entity other: entry.getValue()) {
