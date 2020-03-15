@@ -1,6 +1,6 @@
 package jerra.item;
 
-import jerra.entity.Gun;
+// import jerra.entity.Gun;
 
 /**
  * AR15
@@ -9,7 +9,7 @@ import jerra.entity.Gun;
 
  public class AR15 extends Item {
 
-    private Gun gun = new Gun(bullet, 50);
+    // private Gun gun = new Gun(bullet, 50);
 
     @Override
     public String name() {
@@ -21,7 +21,8 @@ import jerra.entity.Gun;
         return "Increase your stopping power.";
     }
 
-    public Gun getGun() {
-        return Gun;
-    }
- }
+    // public Gun getGun() {
+    //     return Gun;
+    // }
+
+}
