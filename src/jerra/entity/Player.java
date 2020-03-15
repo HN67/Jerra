@@ -19,11 +19,12 @@ public class Player extends DefaultCharacter implements Shooter, Loot {
     private static final String[] xDirectionNames = {"LEFT", "", "RIGHT"};
     private static final String[] yDirectionNames = {"UP", "", "DOWN"};
 
-    public Player(Presence presence, Stats stats, Gun gun, char team, Vector direction, Image image) {
+    public Player(Presence presence, Stats stats, Gun gun, Inventory inventory, char team, Vector direction, Image image) {
         super(presence, stats, image);
         this.setDirection(direction);
         this.setTeam(team);
         this.gun = gun;
+        this.inventory = inventory;
     }
 
     public void setDirection(Vector direction) {
@@ -123,7 +124,7 @@ public class Player extends DefaultCharacter implements Shooter, Loot {
 
     @Override
     public Shooter copy() {
-        return new Player(this.getPresence().copy(), this.getStats().copy(), this.gun.copy(), this.getTeam(), this.direction, this.image());
+        return new Player(this.getPresence().copy(), this.getStats().copy(), this.gun.copy(), this.inventory.copy(), this.getTeam(), this.direction, this.image());
     }
 
 }

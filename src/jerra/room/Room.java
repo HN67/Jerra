@@ -4,12 +4,14 @@ import java.util.Set;
 
 import jerra.api.Updatable;
 import jerra.api.Interactive;
+import jerra.api.Visual;
 
 import jerra.entity.Entity;
 import jerra.entity.Spawner;
 import jerra.entity.Player;
 import jerra.entity.Shooter;
 import jerra.item.Loot;
+import jerra.item.Lootbag;
 
 /**
  * Room
@@ -46,8 +48,15 @@ public interface Room extends Updatable, Interactive {
      * @param loot the Loot the Room will now track
      */
     public void spawnLoot(Loot loot);
+    /**
+     * Spawns (inserts) a Lootbag in the Room
+     * @param lootbag the Lootbag the Room will now track, as a Mortal and Loot
+     */
+    public void spawnLootbag(Lootbag lootbag);
     
     public Set<Entity> getEntities();
+
+    public Set<Visual> getVisuals();
 
     @Override
     public String toString();

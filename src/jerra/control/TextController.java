@@ -13,6 +13,7 @@ import jerra.entity.Entity;
 import jerra.entity.DefaultEntity;
 import jerra.entity.Gun;
 import jerra.entity.Player;
+import jerra.item.Inventory;
 import jerra.entity.AmbientSpawner;
 import jerra.entity.Bullet;
 
@@ -51,7 +52,7 @@ public class TextController implements Controller {
         ));
 
         this.room.spawnPlayer(new Player(new ActivePresence(new Rect(new Vector(0, 0), new Vector(1, 1)), new Vector(1, 1), "up", "down", "left", "right"),
-            new Stats(10, 10), new Gun(new Bullet(new Rect(0, 0, 1, 1), new Vector(1, 1), new AccelerationEffect(new Vector(1, 1)), 5, 'P', null), 3), 'P', new Vector(1, 0), null
+            new Stats(10, 10), new Gun(new Bullet(new Rect(0, 0, 1, 1), new Vector(1, 1), new AccelerationEffect(new Vector(1, 1)), 5, 'P', null), 3), new Inventory(), 'P', new Vector(1, 0), null
         ));
         
         String command = "";

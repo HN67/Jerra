@@ -1,6 +1,9 @@
 package jerra.item;
 
+import javafx.scene.image.Image;
+
 import jerra.presence.Presence;
+import jerra.core.Rect;
 import jerra.api.Physical;
 import jerra.api.Mortal;
 
@@ -11,10 +14,12 @@ public class Lootbag implements Loot, Mortal {
 
     private Presence presence;
     private Inventory inventory;
+    private Image image;
 
-    public Lootbag(Presence presence, Inventory inventory) {
+    public Lootbag(Presence presence, Inventory inventory, Image image) {
         this.presence = presence;
         this.inventory = inventory;
+        this.image = image;
     }
 
     @Override
@@ -63,6 +68,16 @@ public class Lootbag implements Loot, Mortal {
         if (dead) {
             this.inventory.clear();
         }
+    }
+
+    @Override
+    public Image image() {
+        return this.image;
+    }
+
+    @Override
+    public Rect getPosition() {
+        return this.getPresence().getPosition();
     }
     
 }

@@ -9,7 +9,9 @@ import java.util.Set;
 import jerra.api.Interactive;
 import jerra.api.Mortal;
 import jerra.api.Updatable;
+import jerra.api.Visual;
 import jerra.item.Loot;
+import jerra.item.Lootbag;
 import jerra.entity.Entity;
 import jerra.entity.Player;
 import jerra.entity.Shooter;
@@ -29,6 +31,7 @@ public class TextRoom implements Room {
     // Entity set should contain *all* entities
     private Set<Entity> entities;
     private Set<Loot> loots;
+    private Set<Visual> visuals;
     // Spawner set
     private Set<Spawner<Entity>> spawners;
     private Set<Spawner<Shooter>> shooterSpawners;
@@ -41,6 +44,8 @@ public class TextRoom implements Room {
         this.entities.remove(object);
         this.spawners.remove(object);
         this.shooterSpawners.remove(object);
+        this.loots.remove(object);
+        this.visuals.remove(object);
     }
 
     public TextRoom() {
@@ -51,6 +56,8 @@ public class TextRoom implements Room {
         this.entities = new LinkedHashSet<Entity>();
         this.spawners = new LinkedHashSet<Spawner<Entity>>();
         this.shooterSpawners = new HashSet<Spawner<Shooter>>();
+        this.loots = new HashSet<Loot>();
+        this.visuals = new HashSet<Visual>();
     }
 
     @Override
@@ -58,6 +65,7 @@ public class TextRoom implements Room {
         this.updatables.add(entity);
         this.interactables.add(entity);
         this.mortals.add(entity);
+        this.visuals.add(entity);
 
         this.entities.add(entity);
     }
@@ -71,6 +79,7 @@ public class TextRoom implements Room {
     public void spawnPlayer(Player player) {
         // Currently a player is just a shooter
         this.spawnShooter(player);
+        this.spawnLoot(player);
     }
 
     @Override
@@ -87,6 +96,13 @@ public class TextRoom implements Room {
     @Override
     public void spawnLoot(Loot loot) {
         this.loots.add(loot);
+        this.visuals.add(loot);
+    }
+
+    @Override
+    public void spawnLootbag(Lootbag lootbag) {
+        this.spawnLoot(lootbag);
+        this.mortals.add(lootbag);
     }
 
     @Override
@@ -156,6 +172,11 @@ public class TextRoom implements Room {
     @Override
     public Set<Entity> getEntities() {
     	return this.entities;
+    }
+
+    @Override
+    public Set<Visual> getVisuals() {
+        return this.visuals;
     }
 
     @Override

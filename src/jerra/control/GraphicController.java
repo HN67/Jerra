@@ -22,7 +22,9 @@ import jerra.stats.Stats;
 import jerra.effect.DamageEffect;
 import jerra.entity.ShooterEntity;
 import jerra.entity.Wall;
-
+import jerra.item.Inventory;
+import jerra.item.Caffeine;
+import jerra.item.Lootbag;
 import jerra.presence.DefaultPresence;
 import jerra.presence.ActivePresence;
 import jerra.presence.WanderPresence;
@@ -62,6 +64,7 @@ public class GraphicController implements Controller {
         Image playerImage = Resources.loadImage("/resources/player.png");
         Image enemyImage = Resources.loadImage("/resources/enemy.png");
         Image bulletImage = Resources.loadImage("/resources/bullet.png");
+        Image lootbagImage = Resources.loadImage("/resources/lootbag.png");
 
         Bullet bullet = new Bullet(new Rect(zero, new Vector(6, 6)), new Vector(15, 15), new DamageEffect(1), 100, 'T', bulletImage);
         
@@ -87,7 +90,7 @@ public class GraphicController implements Controller {
             100
         ));
 
-        this.room.spawnShooter(
+        this.room.spawnPlayer(
             new Player(
                 new ActivePresence(
                     new Rect(
@@ -100,11 +103,22 @@ public class GraphicController implements Controller {
                     bullet.setTeam('P').copy(),
                     10
                 ),
+                new Inventory(),
                 'P',
                 new Vector(1, 0),
                 playerImage
             )
         );
+
+        this.room.spawnLootbag(new Lootbag(
+            new DefaultPresence(
+                new Rect(
+                    new Vector(100, 100), block
+                ), new Vector(0, 0)
+            ),
+            new Inventory().add(new Caffeine()),
+            lootbagImage
+        ));
     
         this.view = new GraphicView(this.room, this.canvas);
         view.render();

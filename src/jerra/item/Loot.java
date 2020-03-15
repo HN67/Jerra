@@ -1,13 +1,14 @@
 package jerra.item;
 
 import jerra.api.Physical;
+import jerra.api.Visual;
 
 /**
  * Loot object interface
  * Represents a combination of a physical entity and an inventory
  * @author Ryan Allard
  */
-public interface Loot extends Physical {
+public interface Loot extends Physical, Visual {
 
     /**
      * Gets a view of the Loot's current inventory

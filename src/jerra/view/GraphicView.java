@@ -3,8 +3,9 @@ package jerra.view;
 import javafx.scene.image.Image;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+
+import jerra.api.Visual;
 import jerra.core.Rect;
-import jerra.entity.Entity;
 import jerra.room.Room;
 
 public class GraphicView extends View<Room> {
@@ -48,7 +49,7 @@ public class GraphicView extends View<Room> {
 
 		context.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		
-		for(Entity entity : model.getEntities()) {
+		for(Visual entity : model.getVisuals()) {
 			
 			Rect pos = entity.getPosition();
 			Image image = entity.image();
