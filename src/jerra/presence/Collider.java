@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.function.BiConsumer;
 import java.util.HashSet;
 
 import jerra.api.Physical;
@@ -38,6 +39,24 @@ public class Collider {
             allCollisions.put(entity, collisions);
         }
         return allCollisions;
+    }
+
+    /**
+     * Takes a Map that maps from any type to a collection of that type.
+     * The method then uses the callback method to combine every key with each object in its Collection value.
+     * Intended to be used after the collisions method, in order to actually handle the collisions.
+     * @param <T> any type, should be able to be in a Map
+     * @param interactors a Map<T, Collection<T>> that indicates which group of objects is associated with each object
+     * @param callback a BiConsumer<T, T>, should interact the two objects it is given
+     */
+    public static <T> void interact(Map<T, Collection<T>> interactors, BiConsumer<T, T> callback) {
+        for (Map.Entry<T, Collection<T>> entry: interactors.entrySet()) {
+            // Iterate through each interaction, call callback
+            T left = entry.getKey();
+            for (T right: entry.getValue()) {
+                callback.accept(left, right);
+            }
+        }
     }
     
 }

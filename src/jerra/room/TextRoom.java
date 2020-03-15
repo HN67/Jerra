@@ -110,14 +110,10 @@ public class TextRoom implements Room {
         // Creates a map from each entity to its collisions
          Map<Entity, Collection<Entity>> allCollisions = Collider.collisions(this.entities);
         // Resolve collisions through interaction
-        for (Map.Entry<Entity, Collection<Entity>> entry: allCollisions.entrySet()) {
-            // Iterate through each collision with the entity
-            Entity entity = entry.getKey();
-            for (Entity other: entry.getValue()) {
-                entity.deflect(other);
-                entity.interact(other);
-            }
-        }
+        Collider.interact(allCollisions, (Entity entity, Entity other) -> {
+            entity.deflect(other);
+            entity.interact(other);
+        });
 
         // Remove dead mortals
         for (Mortal mortal: new HashSet<Mortal>(this.mortals)) {
