@@ -9,6 +9,7 @@ import java.util.Set;
 import jerra.api.Interactive;
 import jerra.api.Mortal;
 import jerra.api.Updatable;
+import jerra.item.Loot;
 import jerra.entity.Entity;
 import jerra.entity.Player;
 import jerra.entity.Shooter;
@@ -27,6 +28,7 @@ public class TextRoom implements Room {
 
     // Entity set should contain *all* entities
     private Set<Entity> entities;
+    private Set<Loot> loots;
     // Spawner set
     private Set<Spawner<Entity>> spawners;
     private Set<Spawner<Shooter>> shooterSpawners;
@@ -83,6 +85,11 @@ public class TextRoom implements Room {
     }
 
     @Override
+    public void spawnLoot(Loot loot) {
+        this.loots.add(loot);
+    }
+
+    @Override
     public void queue(String command) {
         // Queue command to every entity
         for (Interactive interactable: this.interactables) {
@@ -108,11 +115,18 @@ public class TextRoom implements Room {
 
         // Check for collisions between Entities (O(n^2))
         // Creates a map from each entity to its collisions
-         Map<Entity, Collection<Entity>> allCollisions = Collider.collisions(this.entities);
+        Map<Entity, Collection<Entity>> allCollisions = Collider.collisions(this.entities);
         // Resolve collisions through interaction
         Collider.interact(allCollisions, (Entity entity, Entity other) -> {
             entity.deflect(other);
             entity.interact(other);
+        });
+
+        // Check for collisions between loot objects
+        Map<Loot, Collection<Loot>> lootCollisions = Collider.collisions(this.loots);
+        // Handle collisions between loot objects with interaction (e.g. picking up)
+        Collider.interact(lootCollisions, (Loot loot, Loot other) -> {
+            loot.interact(other);
         });
 
         // Remove dead mortals

@@ -9,6 +9,7 @@ import jerra.entity.Entity;
 import jerra.entity.Spawner;
 import jerra.entity.Player;
 import jerra.entity.Shooter;
+import jerra.item.Loot;
 
 /**
  * Room
@@ -40,6 +41,11 @@ public interface Room extends Updatable, Interactive {
      * @param spawner The Spawner that the Room will now track, adding its produces as Shooters
      */
     public void spawnShooterSpawner(Spawner<Shooter> spawner);
+    /**
+     * Spawns (inserts) a Loot in the Room
+     * @param loot the Loot the Room will now track
+     */
+    public void spawnLoot(Loot loot);
     
     public Set<Entity> getEntities();
 

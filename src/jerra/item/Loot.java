@@ -21,5 +21,11 @@ public interface Loot extends Physical {
      * @return this Loot, allows chaining
      */
     public Loot setInventory(Inventory inventory);
+
+    /**
+     * Interacts with another Loot
+     * @param other a Loot, to be interacted with
+     */
+    public void interact(Loot other);
     
 }
