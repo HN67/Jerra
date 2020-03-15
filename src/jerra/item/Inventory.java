@@ -4,10 +4,12 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Set;
 
+import jerra.api.Copyable;
+
 /**
  * Inventory class, for tracking quantities of Items
  */
-public class Inventory {
+public class Inventory implements Copyable<Inventory> {
 
     // Map the links an Item to its count
     private Map<Item, Integer> inventory = new HashMap<Item, Integer>();
@@ -24,8 +26,9 @@ public class Inventory {
      * If the Item is not already in the inventory, it will be initalized with the count.
      * @param item a Item, the item to add to the inventory. Items are differentiated by class.
      * @param count a int, the number to increase the counter of the Item by.
+     * @return this Inventory
      */
-    public void add(Item item, int count) {
+    public Inventory add(Item item, int count) {
 
         // Check if the item is already in the inventory
         if (this.inventory.containsKey(item)) {
@@ -35,25 +38,29 @@ public class Inventory {
             // Set the value
             this.inventory.put(item, count);
         }
+        return this;
 
     }
 
     /**
      * Adds a single Item to this Inventory.
      * @param item a Item, the item to add to this Inventory.
+     * @return this Inventory
      */
-    public void add(Item item) {
-        this.add(item, 1);
+    public Inventory add(Item item) {
+        return this.add(item, 1);
     }
     
     /**
      * Iteratively add the contents of the other Inventory to this Inventory
      * @param other a Inventory, will have its contents copied into this one
+     * @return this Inventory
      */
-    public void add(Inventory other) {
+    public Inventory add(Inventory other) {
         for (Item item: other.items()) {
             this.add(item, other.count(item));
         }
+        return this;
     }
 
     /**
@@ -130,6 +137,11 @@ public class Inventory {
         }
         // Return true if no non zero found
         return true;
+    }
+
+    @Override
+    public Inventory copy() {
+        return new Inventory().add(this);
     }
 
     @Override
