@@ -4,14 +4,17 @@ import javafx.scene.image.Image;
 import jerra.core.Vector;
 import jerra.presence.Presence;
 import jerra.stats.Stats;
+import jerra.item.Inventory;
+import jerra.item.Loot;
 
 /**
  * Player
  */
-public class Player extends DefaultCharacter implements Shooter {
+public class Player extends DefaultCharacter implements Shooter, Loot {
 
     private Vector direction;
     private Gun gun;
+    private Inventory inventory;
 
     private static final String[] xDirectionNames = {"LEFT", "", "RIGHT"};
     private static final String[] yDirectionNames = {"UP", "", "DOWN"};
@@ -99,6 +102,23 @@ public class Player extends DefaultCharacter implements Shooter {
             }
         }
         return false;
+    }
+
+    @Override
+    public Inventory getInventory() {
+        return this.inventory;
+    }
+
+    @Override
+    public Player setInventory(Inventory inventory) {
+        this.inventory = inventory;
+        return this;
+    }
+
+    @Override
+    public void interact(Loot other) {
+        this.inventory.add(other.getInventory());
+        other.setInventory(other.getInventory().clear());
     }
 
     @Override

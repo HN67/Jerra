@@ -111,8 +111,25 @@ public class Inventory {
      * Clears all items from this Inventory.
      * Causes .count to return 0 for any item.
      */
-    public void clear() {
+    public Inventory clear() {
         this.inventory.clear();
+        return this;
+    }
+
+    /**
+     * Checks if all Items have a zero count
+     * Note: If potentially there is a negative amount, this counts as non-zero
+     * @return a boolean, true if there are no items in the inventory, false if there are any.
+     */
+    public boolean empty() {
+        // Look for non zero entries, return false on finding one
+        for (Map.Entry<Item, Integer> entry: this.inventory.entrySet()) {
+            if (entry.getValue() != 0) {
+                return false;
+            }
+        }
+        // Return true if no non zero found
+        return true;
     }
 
     @Override
