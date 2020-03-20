@@ -11,6 +11,8 @@ import jerra.stats.Stats;
 
 public class Medkit extends Item {
 
+    private static final long serialVersionUID = 0L;
+
     private int healAmount = -5;
     private Effect<Character> heal = new DamageEffect(healAmount);
     

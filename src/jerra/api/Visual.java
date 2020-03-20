@@ -1,7 +1,5 @@
 package jerra.api;
 
-import javafx.scene.image.Image;
-
 import jerra.core.Rect;
 
 /**
@@ -9,7 +7,7 @@ import jerra.core.Rect;
  */
 public interface Visual {
 
-    public Image image();
+    public String image();
 
     public Rect getPosition();
     

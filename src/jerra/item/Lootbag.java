@@ -1,7 +1,5 @@
 package jerra.item;
 
-import javafx.scene.image.Image;
-
 import jerra.presence.Presence;
 import jerra.core.Rect;
 import jerra.api.Physical;
@@ -12,11 +10,13 @@ import jerra.api.Mortal;
  */
 public class Lootbag implements Loot, Mortal {
 
+    private static final long serialVersionUID = 0L;
+
     private Presence presence;
     private Inventory inventory;
-    private Image image;
+    private String image;
 
-    public Lootbag(Presence presence, Inventory inventory, Image image) {
+    public Lootbag(Presence presence, Inventory inventory, String image) {
         this.presence = presence;
         this.inventory = inventory;
         this.image = image;
@@ -71,7 +71,7 @@ public class Lootbag implements Loot, Mortal {
     }
 
     @Override
-    public Image image() {
+    public String image() {
         return this.image;
     }
 

@@ -9,6 +9,8 @@ package jerra.item;
 
  public class AR15 extends Item {
 
+    private static final long serialVersionUID = 0L;
+
     // private Gun gun = new Gun(bullet, 50);
 
     @Override
