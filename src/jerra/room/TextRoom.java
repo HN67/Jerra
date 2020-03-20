@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import java.util.Random;
+
 import jerra.api.Interactive;
 import jerra.api.Mortal;
 import jerra.api.Updatable;
@@ -20,6 +22,11 @@ import jerra.entity.Spawner;
  * TextRoom
  */
 public class TextRoom implements Room {
+
+    private static final long serialVersionUID = 0;
+
+    // Random generator, local to this room
+    private Random generator;
 
     // Raw sets
     private Set<Updatable> updatables;
@@ -50,6 +57,8 @@ public class TextRoom implements Room {
         this.entities = new LinkedHashSet<Entity>();
         this.spawners = new LinkedHashSet<Spawner<Entity>>();
         this.shooterSpawners = new HashSet<Spawner<Shooter>>();
+
+        this.generator = new Random();
     }
 
     @Override
@@ -167,6 +176,11 @@ public class TextRoom implements Room {
     @Override
     public Set<Entity> getEntities() {
     	return this.entities;
+    }
+
+    @Override
+    public Random getGenerator() {
+        return this.generator;
     }
 
     @Override

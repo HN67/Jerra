@@ -1,9 +1,11 @@
 package jerra.stats;
 
+import java.io.Serializable;
+
 /**
  * Character interfaces, indicates that the object has a Stats component
  */
-public interface Character {
+public interface Character extends Serializable {
 
     /**
      * Returns the Stats object associated with this Character.

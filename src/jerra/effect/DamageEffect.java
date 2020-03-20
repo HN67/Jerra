@@ -8,6 +8,8 @@ import jerra.stats.Character;
 
 public class DamageEffect implements Effect<Character> {
 
+	private static final long serialVersionUID = 0;
+
 	private int damage;
 
 	private List<Effect<Character>> links;

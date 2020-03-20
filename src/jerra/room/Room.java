@@ -1,6 +1,7 @@
 package jerra.room;
 
 import java.util.Set;
+import java.util.Random;
 
 import jerra.api.Interactive;
 import jerra.api.Updatable;
@@ -47,6 +48,8 @@ public interface Room extends Updatable, Interactive {
     public void spawnInteractiveShooterSpawner(Spawner<Shooter> spawner);
     
     public Set<Entity> getEntities();
+
+    public Random getGenerator();
 
     @Override
     public String toString();

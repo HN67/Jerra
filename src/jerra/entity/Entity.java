@@ -1,6 +1,5 @@
 package jerra.entity;
 
-import javafx.scene.image.Image;
 import jerra.api.Copyable;
 import jerra.api.Interactive;
 import jerra.api.Mortal;
@@ -25,6 +24,6 @@ public interface Entity extends Updatable, Interactive, Mortal, Physical, Affili
     public String toString();
     public String symbol();
     
-    public Image image();
+    public String image();
     
 }
