@@ -1,10 +1,8 @@
 package jerra.room;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,10 +11,14 @@ import java.util.Random;
 import jerra.api.Interactive;
 import jerra.api.Mortal;
 import jerra.api.Updatable;
+import jerra.api.Visual;
+import jerra.item.Loot;
+import jerra.item.Lootbag;
 import jerra.entity.Entity;
 import jerra.entity.Player;
 import jerra.entity.Shooter;
 import jerra.entity.Spawner;
+import jerra.presence.Collider;
 
 /**
  * TextRoom
@@ -35,6 +37,8 @@ public class TextRoom implements Room {
 
     // Entity set should contain *all* entities
     private Set<Entity> entities;
+    private Set<Loot> loots;
+    private Set<Visual> visuals;
     // Spawner set
     private Set<Spawner<Entity>> spawners;
     private Set<Spawner<Shooter>> shooterSpawners;
@@ -47,6 +51,8 @@ public class TextRoom implements Room {
         this.entities.remove(object);
         this.spawners.remove(object);
         this.shooterSpawners.remove(object);
+        this.loots.remove(object);
+        this.visuals.remove(object);
     }
 
     public TextRoom() {
@@ -57,6 +63,8 @@ public class TextRoom implements Room {
         this.entities = new LinkedHashSet<Entity>();
         this.spawners = new LinkedHashSet<Spawner<Entity>>();
         this.shooterSpawners = new HashSet<Spawner<Shooter>>();
+        this.loots = new HashSet<Loot>();
+        this.visuals = new HashSet<Visual>();
 
         this.generator = new Random();
     }
@@ -66,6 +74,7 @@ public class TextRoom implements Room {
         this.updatables.add(entity);
         this.interactables.add(entity);
         this.mortals.add(entity);
+        this.visuals.add(entity);
 
         this.entities.add(entity);
     }
@@ -79,6 +88,7 @@ public class TextRoom implements Room {
     public void spawnPlayer(Player player) {
         // Currently a player is just a shooter
         this.spawnShooter(player);
+        this.spawnLoot(player);
     }
 
     @Override
@@ -90,6 +100,18 @@ public class TextRoom implements Room {
     @Override
     public void spawnShooterSpawner(Spawner<Shooter> spawner) {
         this.shooterSpawners.add(spawner);
+    }
+
+    @Override
+    public void spawnLoot(Loot loot) {
+        this.loots.add(loot);
+        this.visuals.add(loot);
+    }
+
+    @Override
+    public void spawnLootbag(Lootbag lootbag) {
+        this.spawnLoot(lootbag);
+        this.mortals.add(lootbag);
     }
 
     @Override
@@ -124,30 +146,19 @@ public class TextRoom implements Room {
 
         // Check for collisions between Entities (O(n^2))
         // Creates a map from each entity to its collisions
-        Map<Entity, List<Entity>> allCollisions = new HashMap<Entity, List<Entity>>(this.entities.size());
-        // Iterate through each entity
-        for (Entity entity: this.entities) {
-            List<Entity> collisions = new ArrayList<Entity>();
-            // Check for collision with *every other* entity
-            for (Entity other: this.entities) {
-                // Check for collision and ensure its not the same entity
-                // Lazy evaluation ensures second check is only performed if first succeeds
-                if (entity.collides(other) && entity != other) {
-                    collisions.add(other);
-                }
-            }
-            // Add collisions to map
-            allCollisions.put(entity, collisions);
-        }
+        Map<Entity, Collection<Entity>> allCollisions = Collider.collisions(this.entities);
         // Resolve collisions through interaction
-        for (Map.Entry<Entity, List<Entity>> entry: allCollisions.entrySet()) {
-            // Iterate through each collision with the entity
-            Entity entity = entry.getKey();
-            for (Entity other: entry.getValue()) {
-                entity.deflect(other);
-                entity.interact(other);
-            }
-        }
+        Collider.interact(allCollisions, (Entity entity, Entity other) -> {
+            entity.deflect(other);
+            entity.interact(other);
+        });
+
+        // Check for collisions between loot objects
+        Map<Loot, Collection<Loot>> lootCollisions = Collider.collisions(this.loots);
+        // Handle collisions between loot objects with interaction (e.g. picking up)
+        Collider.interact(lootCollisions, (Loot loot, Loot other) -> {
+            loot.interact(other);
+        });
 
         // Remove dead mortals
         for (Mortal mortal: new HashSet<Mortal>(this.mortals)) {
@@ -176,6 +187,11 @@ public class TextRoom implements Room {
     @Override
     public Set<Entity> getEntities() {
     	return this.entities;
+    }
+
+    @Override
+    public Set<Visual> getVisuals() {
+        return this.visuals;
     }
 
     @Override

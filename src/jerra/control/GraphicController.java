@@ -21,8 +21,11 @@ import jerra.entity.Player;
 import jerra.entity.Respawner;
 import jerra.entity.ShooterEntity;
 import jerra.entity.Wall;
-import jerra.presence.ActivePresence;
+import jerra.item.Inventory;
+import jerra.item.Caffeine;
+import jerra.item.Lootbag;
 import jerra.presence.DefaultPresence;
+import jerra.presence.ActivePresence;
 import jerra.presence.WanderPresence;
 import jerra.room.Room;
 import jerra.stats.Stats;
@@ -61,6 +64,7 @@ public class GraphicController implements Controller {
         String playerImage = "/resources/player.png";
         String enemyImage = "/resources/enemy.png";
         String bulletImage = "/resources/bullet.png";
+        String lootbagImage = "/resources/lootbag.png";
 
         // Image playerImage = Resources.loadImage("/resources/player.png");
         // Image enemyImage = Resources.loadImage("/resources/enemy.png");
@@ -104,10 +108,23 @@ public class GraphicController implements Controller {
                 bullet.setTeam('P').copy(),
                 10
             ),
+            new Inventory(),
             'P',
             new Vector(1, 0),
             playerImage
         );
+
+        this.room.spawnPlayer(player);
+
+        this.room.spawnLootbag(new Lootbag(
+            new DefaultPresence(
+                new Rect(
+                    new Vector(100, 100), block
+                ), new Vector(0, 0)
+            ),
+            new Inventory().add(new Caffeine()),
+            lootbagImage
+        ));
 
         Respawner respawner = new Respawner(player, 60);
 
@@ -118,7 +135,7 @@ public class GraphicController implements Controller {
         // Prepare image dictionary
         String[] paths = {
             "border_horizontal", "border_vertical", "bullet", "enemy", "logo", "player",
-            "wall"
+            "wall", "lootbag"
         };
         HashMap<String, Image> imageDictionary = new HashMap<String, Image>();
         for (String path: paths) {
