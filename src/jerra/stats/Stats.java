@@ -1,14 +1,18 @@
 package jerra.stats;
 
-import java.util.Map;
+import java.io.Serializable;
+
 import java.util.HashMap;
+import java.util.Map;
 
 import jerra.api.Copyable;
 
 /**
  * Stats class that contains various types of stats
  */
-public class Stats implements Copyable<Stats> {
+public class Stats implements Copyable<Stats>, Serializable {
+
+    private static final long serialVersionUID = 0;
 
     private Map<Type, Integer> values;
 

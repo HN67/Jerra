@@ -6,6 +6,8 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
+import java.util.Random;
+
 import jerra.api.Interactive;
 import jerra.api.Mortal;
 import jerra.api.Updatable;
@@ -22,6 +24,11 @@ import jerra.presence.Collider;
  * TextRoom
  */
 public class TextRoom implements Room {
+
+    private static final long serialVersionUID = 0;
+
+    // Random generator, local to this room
+    private Random generator;
 
     // Raw sets
     private Set<Updatable> updatables;
@@ -58,6 +65,8 @@ public class TextRoom implements Room {
         this.shooterSpawners = new HashSet<Spawner<Shooter>>();
         this.loots = new HashSet<Loot>();
         this.visuals = new HashSet<Visual>();
+
+        this.generator = new Random();
     }
 
     @Override
@@ -103,6 +112,12 @@ public class TextRoom implements Room {
     public void spawnLootbag(Lootbag lootbag) {
         this.spawnLoot(lootbag);
         this.mortals.add(lootbag);
+    }
+
+    @Override
+    public void spawnInteractiveShooterSpawner(Spawner<Shooter> spawner) {
+        this.interactables.add((Interactive) spawner);
+        this.spawnShooterSpawner(spawner);
     }
 
     @Override
@@ -177,6 +192,11 @@ public class TextRoom implements Room {
     @Override
     public Set<Visual> getVisuals() {
         return this.visuals;
+    }
+
+    @Override
+    public Random getGenerator() {
+        return this.generator;
     }
 
     @Override

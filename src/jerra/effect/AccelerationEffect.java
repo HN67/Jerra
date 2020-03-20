@@ -9,6 +9,8 @@ import jerra.core.Vector;
 
 public class AccelerationEffect implements Effect<Physical> {
 
+	private static final long serialVersionUID = 0;
+
 	private Vector acceleration;
 
 	private List<Effect<Physical>> links;

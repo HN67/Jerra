@@ -24,5 +24,5 @@ public interface Entity extends Updatable, Interactive, Mortal, Physical, Affili
     @Override
     public String toString();
     public String symbol();
-
+    
 }

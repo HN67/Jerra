@@ -48,7 +48,8 @@ public class TextController implements Controller {
             new DefaultEntity(new DefaultPresence(new Rect(0, 0, 1, 1), zero), null),
             new Vector(4, 4), 
             1, 
-            3
+            3,
+            this.room.getGenerator()
         ));
 
         this.room.spawnPlayer(new Player(new ActivePresence(new Rect(new Vector(0, 0), new Vector(1, 1)), new Vector(1, 1), "up", "down", "left", "right"),

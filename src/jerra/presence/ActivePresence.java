@@ -9,6 +9,8 @@ import jerra.core.Vector;
  */
 public class ActivePresence extends DefaultPresence {
 
+    private static final long serialVersionUID = 0;
+
     private String up;
     private String right;
     private String down;

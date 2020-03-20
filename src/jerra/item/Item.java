@@ -1,12 +1,16 @@
 package jerra.item;
 
-/** 
- * This is the abstract Item class. This must be extended by a concrete,
- * in-game item class. An item could be but is not limited to food, or a
- * weapon. Let's say we have drinks like: Caffeine or HalfAndHalf which might 
- * speed a player up or slow a player down, respectively.
+import java.io.Serializable;
+
+/**
+ * This is the abstract Item class. This must be extended by a concrete, in-game
+ * item class. An item could be but is not limited to food, or a weapon. Let's
+ * say we have drinks like: Caffeine or HalfAndHalf which might speed a player
+ * up or slow a player down, respectively.
  */
-public abstract class Item {
+public abstract class Item implements Serializable {
+
+    private static final long serialVersionUID = 0;
 
     /**
      * Implementation for checking if an item equals another item.

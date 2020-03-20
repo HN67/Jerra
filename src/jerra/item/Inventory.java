@@ -1,5 +1,7 @@
 package jerra.item;
 
+import java.io.Serializable;
+
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Set;
@@ -9,7 +11,9 @@ import jerra.api.Copyable;
 /**
  * Inventory class, for tracking quantities of Items
  */
-public class Inventory implements Copyable<Inventory> {
+public class Inventory implements Copyable<Inventory>, Serializable {
+
+    private static final long serialVersionUID = 0L;
 
     // Map the links an Item to its count
     private Map<Item, Integer> inventory = new HashMap<Item, Integer>();

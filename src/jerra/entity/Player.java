@@ -1,6 +1,5 @@
 package jerra.entity;
 
-import javafx.scene.image.Image;
 import jerra.core.Vector;
 import jerra.presence.Presence;
 import jerra.stats.Stats;
@@ -12,6 +11,8 @@ import jerra.item.Loot;
  */
 public class Player extends DefaultCharacter implements Shooter, Loot {
 
+    private static final long serialVersionUID = 0;
+
     private Vector direction;
     private Gun gun;
     private Inventory inventory;
@@ -19,7 +20,7 @@ public class Player extends DefaultCharacter implements Shooter, Loot {
     private static final String[] xDirectionNames = {"LEFT", "", "RIGHT"};
     private static final String[] yDirectionNames = {"UP", "", "DOWN"};
 
-    public Player(Presence presence, Stats stats, Gun gun, Inventory inventory, char team, Vector direction, Image image) {
+    public Player(Presence presence, Stats stats, Gun gun, Inventory inventory, char team, Vector direction, String image) {
         super(presence, stats, image);
         this.setDirection(direction);
         this.setTeam(team);
