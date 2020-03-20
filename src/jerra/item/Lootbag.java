@@ -76,6 +76,11 @@ public class Lootbag implements Loot, Mortal {
     }
 
     @Override
+    public String symbol() {
+        return "L";
+    }
+
+    @Override
     public Rect getPosition() {
         return this.getPresence().getPosition();
     }

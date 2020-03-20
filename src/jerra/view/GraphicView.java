@@ -9,6 +9,7 @@ import javafx.scene.canvas.GraphicsContext;
 import jerra.api.Visual;
 import jerra.core.Rect;
 import jerra.room.Room;
+import jerra.stats.Character;
 import jerra.stats.Stats.Type;
 import javafx.scene.paint.Color;
 
@@ -61,18 +62,19 @@ public class GraphicView extends View<Room> {
 			Rect pos = entity.getPosition();
 
 			if (entity.symbol() == "P") {
+				Character character = (Character) entity;
 //				context.setFill(Color.WHITE);
 //				context.fillRect(entity.getPosition().left(), entity.getPosition().centerY() - 25, entity.getPosition().width(), 4);
 				context.setFill(Color.GREEN);
-				context.fillRect(entity.getPosition().left(), entity.getPosition().centerY() - 25, entity.getPosition().width()*entity.getStats().getValue(Type.HEALTH)/entity.getStats().getValue(Type.VITALITY), 4);
+				context.fillRect(entity.getPosition().left(), entity.getPosition().centerY() - 25, entity.getPosition().width()*character.getStats().getValue(Type.HEALTH)/character.getStats().getValue(Type.VITALITY), 4);
 			} else if (entity.symbol() == "E") {
+				Character character = (Character) entity;
 //				context.setFill(Color.WHITE);
 //				context.fillRect(entity.getPosition().left(), entity.getPosition().centerY() - 25, entity.getPosition().width(), 4);
 				context.setFill(Color.RED);
-				context.fillRect(entity.getPosition().left(), entity.getPosition().centerY() - 25, entity.getPosition().width()*entity.getStats().getValue(Type.HEALTH)/entity.getStats().getValue(Type.VITALITY), 4);
-
+				context.fillRect(entity.getPosition().left(), entity.getPosition().centerY() - 25, entity.getPosition().width()*character.getStats().getValue(Type.HEALTH)/character.getStats().getValue(Type.VITALITY), 4);
 			}
-			
+
 			Image image = this.imageDictionary.get(entity.image());
 			
 			// Align center of image and position
