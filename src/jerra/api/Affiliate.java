@@ -1,10 +1,12 @@
 package jerra.api;
 
+import java.io.Serializable;
+
 /**
- * Affiliate interface, indicates the object belongs to a team
- * Based off of a char team system
+ * Affiliate interface, indicates the object belongs to a team Based off of a
+ * char team system
  */
-public interface Affiliate {
+public interface Affiliate extends Serializable {
 
     /**
      * Returns the team of this Affiliate

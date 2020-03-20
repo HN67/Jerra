@@ -1,14 +1,18 @@
 package jerra.room;
 
 import java.util.Set;
+import java.util.Random;
+
+import jerra.api.Interactive;
+import jerra.api.Visual;
 
 import jerra.api.Updatable;
-import jerra.api.Interactive;
-
 import jerra.entity.Entity;
-import jerra.entity.Spawner;
 import jerra.entity.Player;
 import jerra.entity.Shooter;
+import jerra.item.Loot;
+import jerra.item.Lootbag;
+import jerra.entity.Spawner;
 
 /**
  * Room
@@ -40,8 +44,27 @@ public interface Room extends Updatable, Interactive {
      * @param spawner The Spawner that the Room will now track, adding its produces as Shooters
      */
     public void spawnShooterSpawner(Spawner<Shooter> spawner);
+    /**
+     * Spawns (inserts) a Loot in the Room
+     * @param loot the Loot the Room will now track
+     */
+    public void spawnLoot(Loot loot);
+    /**
+     * Spawns (inserts) a Lootbag in the Room
+     * @param lootbag the Lootbag the Room will now track, as a Mortal and Loot
+     */
+    public void spawnLootbag(Lootbag lootbag);
+    /**
+     * Spawns (inserts) an Interactive Shooter spawner in the Room
+     * @param spawner The Spawner that the Room will now track, adding its produces as Shooters
+     */
+    public void spawnInteractiveShooterSpawner(Spawner<Shooter> spawner);
     
     public Set<Entity> getEntities();
+
+    public Set<Visual> getVisuals();
+
+    public Random getGenerator();
 
     @Override
     public String toString();

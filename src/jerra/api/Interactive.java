@@ -1,9 +1,11 @@
 package jerra.api;
 
+import java.io.Serializable;
+
 /**
  * Interactive
  */
-public interface Interactive {
+public interface Interactive extends Serializable {
 
     /**
      * Queues a String event to be handled next update

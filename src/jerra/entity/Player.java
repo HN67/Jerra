@@ -1,26 +1,31 @@
 package jerra.entity;
 
-import javafx.scene.image.Image;
 import jerra.core.Vector;
 import jerra.presence.Presence;
 import jerra.stats.Stats;
+import jerra.item.Inventory;
+import jerra.item.Loot;
 
 /**
  * Player
  */
-public class Player extends DefaultCharacter implements Shooter {
+public class Player extends DefaultCharacter implements Shooter, Loot {
+
+    private static final long serialVersionUID = 0;
 
     private Vector direction;
     private Gun gun;
+    private Inventory inventory;
 
     private static final String[] xDirectionNames = {"LEFT", "", "RIGHT"};
     private static final String[] yDirectionNames = {"UP", "", "DOWN"};
 
-    public Player(Presence presence, Stats stats, Gun gun, char team, Vector direction, Image image) {
+    public Player(Presence presence, Stats stats, Gun gun, Inventory inventory, char team, Vector direction, String image) {
         super(presence, stats, image);
         this.setDirection(direction);
         this.setTeam(team);
         this.gun = gun;
+        this.inventory = inventory;
     }
 
     public void setDirection(Vector direction) {
@@ -102,8 +107,25 @@ public class Player extends DefaultCharacter implements Shooter {
     }
 
     @Override
+    public Inventory getInventory() {
+        return this.inventory;
+    }
+
+    @Override
+    public Player setInventory(Inventory inventory) {
+        this.inventory = inventory;
+        return this;
+    }
+
+    @Override
+    public void interact(Loot other) {
+        this.inventory.add(other.getInventory());
+        other.setInventory(other.getInventory().clear());
+    }
+
+    @Override
     public Shooter copy() {
-        return new Player(this.getPresence().copy(), this.getStats().copy(), this.gun.copy(), this.getTeam(), this.direction, this.image());
+        return new Player(this.getPresence().copy(), this.getStats().copy(), this.gun.copy(), this.inventory.copy(), this.getTeam(), this.direction, this.image());
     }
 
 }
