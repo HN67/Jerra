@@ -8,6 +8,7 @@ import jerra.core.Rect;
 public interface Visual {
 
     public String image();
+    public String symbol();
 
     public Rect getPosition();
     
