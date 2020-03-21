@@ -1,5 +1,6 @@
 package jerra.control;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,8 +21,11 @@ import jerra.entity.Player;
 import jerra.entity.Respawner;
 import jerra.entity.ShooterEntity;
 import jerra.entity.Wall;
-import jerra.presence.ActivePresence;
+import jerra.item.Inventory;
+import jerra.item.Caffeine;
+import jerra.item.Lootbag;
 import jerra.presence.DefaultPresence;
+import jerra.presence.ActivePresence;
 import jerra.presence.WanderPresence;
 import jerra.room.Room;
 import jerra.stats.Stats;
@@ -57,23 +61,29 @@ public class GraphicController implements Controller {
         Vector zero = new Vector(0, 0);
         Vector block = new Vector(30, 30);
 
-        Image playerImage = Resources.loadImage("/resources/player.png");
-        Image enemyImage = Resources.loadImage("/resources/enemy.png");
-        Image bulletImage = Resources.loadImage("/resources/bullet.png");
+        String playerImage = "/resources/player.png";
+        String enemyImage = "/resources/enemy.png";
+        String bulletImage = "/resources/bullet.png";
+        String lootbagImage = "/resources/lootbag.png";
+
+        // Image playerImage = Resources.loadImage("/resources/player.png");
+        // Image enemyImage = Resources.loadImage("/resources/enemy.png");
+        // Image bulletImage = Resources.loadImage("/resources/bullet.png");
 
         Bullet bullet = new Bullet(new Rect(zero, new Vector(6, 6)), new Vector(15, 15), new DamageEffect(1), 100, 'T', bulletImage);
         
         this.setBoundaries();
 
         ShooterEntity shooter = new ShooterEntity(
-            new WanderPresence(new Rect(new Vector(300, 300), block), new Vector(3, 3), 25),
+            new WanderPresence(new Rect(new Vector(300, 300), block), new Vector(3, 3), 25, this.room.getGenerator()),
             new Stats(3, 3),
             new Gun(
                 bullet.setTeam('E').copy(),
                 40
             ),
             'E',
-            enemyImage
+            enemyImage,
+            this.room.getGenerator()
         );
         this.room.spawnShooter(shooter);
 
@@ -82,7 +92,8 @@ public class GraphicController implements Controller {
             shooter.copy(),
             new Vector(300, 300), 
             300, 
-            100
+            100,
+            this.room.getGenerator()
         ));
 
         Player player = new Player(
@@ -97,18 +108,42 @@ public class GraphicController implements Controller {
                 bullet.setTeam('P').copy(),
                 10
             ),
+            new Inventory(),
             'P',
             new Vector(1, 0),
             playerImage
         );
+
+        this.room.spawnPlayer(player);
+
+        this.room.spawnLootbag(new Lootbag(
+            new DefaultPresence(
+                new Rect(
+                    new Vector(100, 100), block
+                ), new Vector(0, 0)
+            ),
+            new Inventory().add(new Caffeine()),
+            lootbagImage
+        ));
 
         Respawner respawner = new Respawner(player, 60);
 
         this.room.spawnInteractiveShooterSpawner(respawner);
 
         this.room.spawnShooter(player);
+        
+        // Prepare image dictionary
+        String[] paths = {
+            "border_horizontal", "border_vertical", "bullet", "enemy", "logo", "player",
+            "wall", "lootbag"
+        };
+        HashMap<String, Image> imageDictionary = new HashMap<String, Image>();
+        for (String path: paths) {
+            String fullPath = "/resources/" + path + ".png";
+            imageDictionary.put(fullPath, Resources.loadImage(fullPath));
+        }
     
-        this.view = new GraphicView(this.room, this.canvas);
+        this.view = new GraphicView(this.room, this.canvas, imageDictionary);
         view.render();
 
         this.textView = new TextView(this.room);
@@ -207,10 +242,30 @@ public class GraphicController implements Controller {
         }
     }
 
+    private void checkEvents() {
+
+        if (this.newKeys.contains("K")) {
+            Resources.saveObject("save.ser", this.room);
+        }
+        
+        if (this.newKeys.contains("L")) {
+            Room room = Resources.loadRoom("save.ser");
+            if (room != null) {
+                this.room = room;
+                this.view.setModel(room);
+                this.textView.setModel(room);
+            }
+        }
+
+    }
+
     private void update() {
 
         // Compute key sets
         this.computeKeys();
+
+        // Check for control events, e.g. save/load
+        this.checkEvents();
 
         // Queue key driven commands into the room
         this.queueKeys();
@@ -234,9 +289,13 @@ public class GraphicController implements Controller {
         Vector verticalWall = new Vector(stroke, (int) this.canvas.getHeight());
         Vector horizontalWall = new Vector((int) this.canvas.getHeight(), stroke);
 
-        Image wall = Resources.loadImage("/resources/wall.png");
-        Image horizontalBorder = Resources.loadImage("/resources/border_horizontal.png");
-        Image verticalBorder = Resources.loadImage("/resources/border_vertical.png");
+        String wall = "/resources/wall.png";
+        String horizontalBorder = "/resources/border_horizontal.png";
+        String verticalBorder = "/resources/border_vertical.png";
+
+        // Image wall = Resources.loadImage("/resources/wall.png");
+        // Image horizontalBorder = Resources.loadImage("/resources/border_horizontal.png");
+        // Image verticalBorder = Resources.loadImage("/resources/border_vertical.png");
 
         this.room.spawnEntity(
             new Wall(

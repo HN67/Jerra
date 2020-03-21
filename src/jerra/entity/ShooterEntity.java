@@ -1,8 +1,6 @@
 package jerra.entity;
 
-import java.lang.Math;
-
-import javafx.scene.image.Image;
+import java.util.Random;
 
 import jerra.core.Vector;
 import jerra.presence.Presence;
@@ -14,11 +12,15 @@ import jerra.stats.Stats;
  */
 public class ShooterEntity extends DefaultCharacter implements Shooter {
 
-    private Gun gun;
+    private static final long serialVersionUID = 0;
 
-    public ShooterEntity(Presence presence, Stats stats, Gun gun, char team, Image image) {
+    private Gun gun;
+    private Random generator;
+
+    public ShooterEntity(Presence presence, Stats stats, Gun gun, char team, String image, Random generator) {
         super(presence, stats, image);
         this.gun = gun;
+        this.generator = generator;
         this.setTeam(team);
     }
 
@@ -40,16 +42,16 @@ public class ShooterEntity extends DefaultCharacter implements Shooter {
         // Generate random direction
         // Choose between x direction (1) and y direction (0)
         int y = 0;
-        int x = (int) (Math.random()*2);
+        int x = this.generator.nextInt(2);
         // y direction
         if (x == 0) {
             // x is already 0, generate y
             // Generate -1 or 1
-            y = ((int) (Math.random()*2))*2 - 1;
+            y = this.generator.nextInt(2)*2 - 1;
         // x direction
         } else if (x == 1) {
             // y is already 0, generate x
-            x = ((int) (Math.random()*2))*2 - 1;
+            x = this.generator.nextInt(2)*2 - 1;
         }
         presence.setPosition(this.getPosition().center().add(-presence.getPosition().width()/2 + x*this.getPosition().width()/2, -presence.getPosition().height()/2 + y*this.getPosition().height()/2));
         presence.setVelocity(presence.getVelocity().scale(new Vector(x, y)));
@@ -59,7 +61,7 @@ public class ShooterEntity extends DefaultCharacter implements Shooter {
 
     @Override
     public Shooter copy() {
-        return new ShooterEntity(this.getPresence().copy(), this.getStats().copy(), this.gun.copy(), this.getTeam(), this.image());
+        return new ShooterEntity(this.getPresence().copy(), this.getStats().copy(), this.gun.copy(), this.getTeam(), this.image(), this.generator);
     }
     
 }

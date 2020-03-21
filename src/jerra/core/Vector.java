@@ -1,10 +1,15 @@
 package jerra.core;
 
+import java.io.Serializable;
+
 /**
  * Vector
+ * 
  * @author Ryan Allard
  */
-public class Vector {
+public class Vector implements Serializable {
+
+    private static final long serialVersionUID = 0;
 
     private final int x;
     private final int y;

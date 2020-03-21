@@ -1,12 +1,14 @@
 package jerra.effect;
 
+import java.io.Serializable;
+
 import jerra.api.Copyable;
 
 /**
  * Effect Interface
  * An Effect represents a mutation that can be applied to an Entity.
  */
-public interface Effect<Target> extends Copyable<Effect<Target>> {
+public interface Effect<Target> extends Copyable<Effect<Target>>, Serializable {
 	
 	/**
 	 * Combines the two Effects.

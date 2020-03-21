@@ -6,6 +6,8 @@ package jerra.item;
  */
 public class HalfAndHalf extends Item{
 
+    private static final long serialVersionUID = 0;
+
     public String name() {
         return "Half-and-Half";
     }

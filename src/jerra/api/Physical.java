@@ -1,11 +1,13 @@
 package jerra.api;
 
+import java.io.Serializable;
+
 import jerra.presence.Presence;
 
 /**
  * Physical
  */
-public interface Physical {
+public interface Physical extends Serializable {
 
     public Presence getPresence();
     public void setPresence(Presence presence);

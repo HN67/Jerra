@@ -1,6 +1,5 @@
 package jerra.entity;
 
-import javafx.scene.image.Image;
 import jerra.presence.Presence;
 import jerra.stats.Stats;
 /**
@@ -8,7 +7,9 @@ import jerra.stats.Stats;
  */
 public class DefaultCharacter extends DefaultEntity {
 
-    public DefaultCharacter(Presence presence, Stats stats, Image image) {
+    private static final long serialVersionUID = 0;
+
+    public DefaultCharacter(Presence presence, Stats stats, String image) {
         super(presence, image);
         this.setStats(stats);
     }
