@@ -15,6 +15,8 @@ import jerra.stats.Stats.Type;
 public class GraphicView extends View<Room> {
 
 	private Map<String, Image> imageDictionary;
+
+	private int tick = 0;
 	
 	private Canvas canvas;
 	
@@ -61,15 +63,25 @@ public class GraphicView extends View<Room> {
 
 			Image image = this.imageDictionary.get(entity.image());
 
-			entity.getStats().setOnChangeValue((event, type) -> this.showHealthBar(entity, context));
+			context.setFill(Color.RED);
+
+			// entity.getStats().setOnChangeValue((event, type) -> context.setFill(Color.YELLOW));
+
+			this.showHealthBar(entity, context);
 			
 			// Align center of image and position
 			context.drawImage(image, pos.centerX() - image.getWidth()/2, pos.centerY() - image.getHeight()/2);
 		
+			tick++;
+
 		}
 	}
 
 	private void showHealthBar(Entity entity, GraphicsContext context) {
+		if(this.tick % 60 > 30) {
+			return;
+		}
+
 		if (entity.symbol().equals("P")) {
 			Character character = (Character) entity;
 //				context.setFill(Color.WHITE);
