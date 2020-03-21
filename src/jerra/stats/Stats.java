@@ -2,6 +2,7 @@ package jerra.stats;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observer;
 
 import jerra.api.Copyable;
 
@@ -11,6 +12,8 @@ import jerra.api.Copyable;
 public class Stats implements Copyable<Stats> {
 
     private Map<Type, Integer> values;
+
+    private Observer onChangeValue;
 
     public enum Type {
         HEALTH,
@@ -42,7 +45,14 @@ public class Stats implements Copyable<Stats> {
         } else {
             this.values.put(stat, value);
         }
+
+        this.onChangeValue.handle(stat, this.values.get(stat));
+
         return this;
+    }
+
+    public void setOnChangeValue() {
+
     }
 
     public int getValue(Type stat) {
