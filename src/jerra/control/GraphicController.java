@@ -236,6 +236,24 @@ public class GraphicController implements Controller {
                 case "ENTER":
                     this.room.queue("respawn");
                     break;
+                case "E":
+                	if(this.view.getBorderX() >= 160) {
+                		this.view.setBorderX(this.view.getBorderX() - 160);
+                	} else {
+                    	this.view.setBorderX(this.view.getBorderX() + 40);
+
+                	}
+                	break;
+                case "Q":
+                	if(this.view.getBorderX() <= 0) {
+                		this.view.setBorderX(this.view.getBorderX() + 160);
+                	} else {
+                    	this.view.setBorderX(this.view.getBorderX() - 40);
+
+                	}
+                	break;
+                
+                    
                 default:
                     break;
             }

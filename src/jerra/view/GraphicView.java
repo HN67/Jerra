@@ -19,6 +19,8 @@ public class GraphicView extends View<Room> {
 	
 	private Canvas canvas;
 	
+	private int borderX = 0;
+	
 	public GraphicView(Room model, Canvas canvas, Map<String, Image> imageDictionary) {
 		super(model);
 		
@@ -57,14 +59,12 @@ public class GraphicView extends View<Room> {
 
 		context.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		
-		Image inventory = new Image("/resources/inventory.png", 200, 40, false, false);
+		Image inventory = new Image("/resources/inventory.png", 201, 40, false, false);
 		
-		context.drawImage(inventory, canvas.getWidth()/2 - inventory.getWidth()/2, 500);
 		
 		Image border = new Image("/resources/border2.png", 42, 42, false, false);
 		
 
-		context.drawImage(border, canvas.getWidth()/2 - inventory.getWidth()/2, 499);
 		
 		for(Visual entity : model.getVisuals()) {
 			
@@ -92,8 +92,20 @@ public class GraphicView extends View<Room> {
 
 		
 		}
+		context.drawImage(inventory, canvas.getWidth()/2 - inventory.getWidth()/2, 500);
+
+		context.drawImage(border, canvas.getWidth()/2 - inventory.getWidth()/2 + this.borderX, 499);
+
 
 		
+	}
+	
+	public void setBorderX(int num) {
+		this.borderX = num;
+	}
+	
+	public int getBorderX() {
+		return this.borderX;
 	}
 
 }
