@@ -57,6 +57,15 @@ public class GraphicView extends View<Room> {
 
 		context.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		
+		Image inventory = new Image("/resources/inventory.png", 200, 40, false, false);
+		
+		context.drawImage(inventory, canvas.getWidth()/2 - inventory.getWidth()/2, 500);
+		
+		Image border = new Image("/resources/border2.png", 42, 42, false, false);
+		
+
+		context.drawImage(border, canvas.getWidth()/2 - inventory.getWidth()/2, 499);
+		
 		for(Visual entity : model.getVisuals()) {
 			
 			Rect pos = entity.getPosition();
@@ -79,8 +88,12 @@ public class GraphicView extends View<Room> {
 			
 			// Align center of image and position
 			context.drawImage(image, pos.centerX() - image.getWidth()/2, pos.centerY() - image.getHeight()/2);
+			
+
 		
 		}
+
+		
 	}
 
 }
