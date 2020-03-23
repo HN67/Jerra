@@ -64,15 +64,15 @@ public class GraphicView extends View<Room> {
 			if (entity.symbol() == "P") {
 				Character character = (Character) entity;
 //				context.setFill(Color.WHITE);
-//				context.fillRect(entity.getPosition().left(), entity.getPosition().centerY() - 25, entity.getPosition().width(), 4);
+//				context.fillRect(pos.left(), pos.centerY() - 25, pos.width(), 4);
 				context.setFill(Color.GREEN);
-				context.fillRect(entity.getPosition().left(), entity.getPosition().centerY() - 25, entity.getPosition().width()*character.getStats().getValue(Type.HEALTH)/character.getStats().getValue(Type.VITALITY), 4);
+				context.fillRect(pos.left(), pos.centerY() - 25, pos.width()*character.getStats().getValue(Type.HEALTH)/character.getStats().getValue(Type.VITALITY), 4);
 			} else if (entity.symbol() == "E") {
 				Character character = (Character) entity;
 //				context.setFill(Color.WHITE);
-//				context.fillRect(entity.getPosition().left(), entity.getPosition().centerY() - 25, entity.getPosition().width(), 4);
+//				context.fillRect(pos.left(), pos.centerY() - 25, pos.width(), 4);
 				context.setFill(Color.RED);
-				context.fillRect(entity.getPosition().left(), entity.getPosition().centerY() - 25, entity.getPosition().width()*character.getStats().getValue(Type.HEALTH)/character.getStats().getValue(Type.VITALITY), 4);
+				context.fillRect(pos.left(), pos.centerY() - 25, pos.width()*character.getStats().getValue(Type.HEALTH)/character.getStats().getValue(Type.VITALITY), 4);
 			}
 
 			Image image = this.imageDictionary.get(entity.image());
