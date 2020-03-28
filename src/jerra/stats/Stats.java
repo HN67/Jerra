@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import jerra.api.ChangeListener;
 import jerra.api.Copyable;
+import jerra.api.StatsChangeListener;
 
 /**
  * Stats class that contains various types of stats
@@ -16,7 +16,7 @@ public class Stats implements Copyable<Stats>, Serializable {
 
     private Map<Type, Integer> values;
 
-    private ChangeListener<Stats> onChangeValue = null;
+    private StatsChangeListener onChangeValue = null;
 
     public enum Type {
         HEALTH,
@@ -56,7 +56,7 @@ public class Stats implements Copyable<Stats>, Serializable {
         return this;
     }
 
-    public void setOnChangeValue(ChangeListener<Stats> onChangeValue) {
+    public void setOnChangeValue(StatsChangeListener onChangeValue) {
         this.onChangeValue = onChangeValue;
     }
 

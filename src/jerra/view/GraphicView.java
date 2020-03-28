@@ -32,25 +32,6 @@ public class GraphicView extends View<Room> {
 	public Canvas getCanvas() {
 		return this.canvas;
 	}
-	
-	// private static Color getColor(String symbol) {
-	// 	Color color = Color.RED;
-		
-	// 	switch(symbol) {
-	// 		case "P":
-	// 			color = Color.BLUE;
-	// 			break;
-			
-	// 		case "B": 
-	// 			color = Color.GREEN;
-	// 			break;
-
-	// 		case "W":
-	// 			color = Color.YELLOW;
-	// 	}
-		
-	// 	return color;
-	// }
 
 	@Override
 	public void render() {
@@ -74,6 +55,11 @@ public class GraphicView extends View<Room> {
 		}
 	}
 
+	/**
+	 * Associates healthbars to entities and draws it in the graphics context.
+	 * @param entity an Entity in the room
+	 * @param context a context currently used by the canvas
+	 */
 	private void drawHealthbar(Entity entity, GraphicsContext context) {
 		if(entity instanceof DefaultCharacter) {
 			if(!this.healthbars.containsKey(entity)) {
