@@ -1,11 +1,11 @@
 package jerra.stats;
 
 import java.io.Serializable;
-
 import java.util.HashMap;
 import java.util.Map;
 
 import jerra.api.Copyable;
+import jerra.api.StatsChangeListener;
 
 /**
  * Stats class that contains various types of stats
@@ -15,6 +15,8 @@ public class Stats implements Copyable<Stats>, Serializable {
     private static final long serialVersionUID = 0;
 
     private Map<Type, Integer> values;
+
+    private StatsChangeListener onChangeValue = null;
 
     public enum Type {
         HEALTH,
@@ -46,7 +48,16 @@ public class Stats implements Copyable<Stats>, Serializable {
         } else {
             this.values.put(stat, value);
         }
+
+        if(this.onChangeValue != null) {
+            this.onChangeValue.changed(this.copy(), stat);
+        }
+
         return this;
+    }
+
+    public void setOnChangeValue(StatsChangeListener onChangeValue) {
+        this.onChangeValue = onChangeValue;
     }
 
     public int getValue(Type stat) {
