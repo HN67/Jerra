@@ -12,6 +12,7 @@ import jerra.entity.DefaultCharacter;
 import jerra.entity.Entity;
 import jerra.entity.Player;
 import jerra.room.Room;
+import jerra.stats.StatsDisplay;
 
 public class GraphicView extends View<Room> {
 
@@ -70,16 +71,26 @@ public class GraphicView extends View<Room> {
 					color = Color.GREEN;
 				}
 
-				this.healthbars.put(entity, new Healthbar((DefaultCharacter) entity, canvas, color, 100));
+				StatsDisplay display = new StatsDisplay(entity.getStats(), 100);
+
+				this.healthbars.put(entity, new Healthbar(
+					(DefaultCharacter) entity, display, canvas, color
+				));
+
+				entity.getStats().setOnChangeValue(
+				(event, type) -> 
+				display.show()
+				);
+			
 			}
 
 			this.healthbars.get(entity).render();
 			
-			entity.getStats().setOnChangeValue(
-				(event, type) -> 
-				this.healthbars.get(entity).show()
-			);
 		}
 	}
+
+	// public void show(Entity entity) {
+	// 	this.healthbars.get(entity).show();
+	// }
 
 }

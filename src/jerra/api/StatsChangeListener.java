@@ -1,12 +1,14 @@
 package jerra.api;
 
+import java.io.Serializable;
+
 import jerra.stats.Stats;
 
 /**
  * Interface meant for classes that handle the Stats on change event.
  */
 @FunctionalInterface
-public interface StatsChangeListener {
+public interface StatsChangeListener extends Serializable {
 
     /**
      * The method invoked by a Stats object when one of it the Stats change.

@@ -5,17 +5,16 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import jerra.entity.DefaultCharacter;
 import jerra.stats.Stats.Type;
+import jerra.stats.StatsDisplay;
 
 /**
  * A view that renders an DefaultCharacter's Health as a healthbar.
  */
 class Healthbar extends View<DefaultCharacter> {
 
-    private int tick = 0;
+    private StatsDisplay stats;
     private Color color;
     private Canvas canvas;
-    private boolean show;
-    private int hideAfter = -1;
 
     /**
      * Creates a new healthbar
@@ -27,14 +26,10 @@ class Healthbar extends View<DefaultCharacter> {
      *  after it is shown; negativenumbers enable the healthbar to 
      *  never be hidden after it is shown
      */
-    public Healthbar(DefaultCharacter model, Canvas canvas, Color color, int hideAfter) {
-        this(model, canvas, color);
-        this.setHideAfter(hideAfter);
-    }
-
-    public Healthbar(DefaultCharacter model, Canvas canvas, Color color) {
+    public Healthbar(DefaultCharacter model, StatsDisplay stats, Canvas canvas, Color color) {
         super(model);
 
+        this.stats = stats;
         this.canvas = canvas;
         this.color = color;
     }
@@ -45,7 +40,7 @@ class Healthbar extends View<DefaultCharacter> {
 
     @Override
     public void render() {
-        if(!this.show) {
+        if(!this.stats.visible()) {
             return;
         }
 
@@ -61,38 +56,7 @@ class Healthbar extends View<DefaultCharacter> {
         }
 
         context.fillRect(entity.getPosition().left(), entity.getPosition().centerY() - 25, entity.getPosition().width()*character.getStats().getValue(Type.HEALTH)/character.getStats().getValue(Type.VITALITY), 4);
-        this.tick++;
-
-        if(this.hideAfter > 0 && this.tick > this.hideAfter) {
-            this.tick = 0;
-            this.hide();
-        }
-    }
-
-    /**
-     * Sets the instance variable show as true.
-     * If it is, this ensures that the healthbar is shown
-     * when it is rendered.
-     */
-    public void show() {
-        this.show = true;
-    }
-
-    /**
-     * Sets the instance variable show as false;
-     * If it is, this ensures that the healthbar is hidden
-     * when it is rendered.
-     */
-    public void hide() {
-        this.show = false;
-    }
-
-    /**
-     * Sets the instance variable hideAfter;
-     * @param hideAfter
-     */
-    public void setHideAfter(int hideAfter) {
-        this.hideAfter = hideAfter;
+        this.stats.tick();
     }
     
 }
