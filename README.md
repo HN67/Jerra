@@ -42,7 +42,11 @@ Jerra uses an Effects architecture, where each Bullet carries an effect (i.e. Da
 
 ### Stats
 
-Every entity has a Stats object, which tracks various values such as health. Effects can manipulate these stats, allowing bullets to deal damage to entities.
+Every entity has a Stats object, which tracks various values such as health. Effects can manipulate these stats, allowing bullets to deal damage to entities. Health is displayed using health bars overhead that are displayed briefly onhit.
+
+### Items
+
+The player has an inventory which can contain items, tracking the count of each. Also, lootbags can be created that are picked up on collision with the player and added to their inventory.
 
 ### Mortality
 
@@ -50,4 +54,4 @@ Every entity has a state of aliveness, and is removed from the game when it is "
 
 ### Images
 
-Every entity self-reports a JavaFX image, allowing entities to return a different image based on its state and orientation. This image is then drawn onto a canvas based on the entity's position, allowing simple graphical output of the game logic.
+Every entity self-reports a image string, which is matched against a string to JavaFX map, allowing entities to return a different image based on its state and orientation, but also be easily serializable. This image is then drawn onto a canvas based on the entity's position, allowing simple graphical output of the game logic.
