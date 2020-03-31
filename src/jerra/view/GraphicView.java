@@ -13,6 +13,7 @@ import jerra.entity.Entity;
 import jerra.entity.Player;
 import jerra.room.Room;
 import jerra.stats.StatsDisplay;
+import jerra.api.Visual;
 
 public class GraphicView extends View<Room> {
 
@@ -42,7 +43,7 @@ public class GraphicView extends View<Room> {
 
 		context.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		
-		for(Entity entity : model.getEntities()) {
+		for(Visual entity : model.getVisuals()) {
 			Rect pos = entity.getPosition();
 
 			Image image = this.imageDictionary.get(entity.image());
@@ -58,11 +59,12 @@ public class GraphicView extends View<Room> {
 
 	/**
 	 * Associates healthbars to entities and draws it in the graphics context.
-	 * @param entity an Entity in the room
+	 * @param entity an Visual in the room
 	 * @param context a context currently used by the canvas
 	 */
-	private void drawHealthbar(Entity entity, GraphicsContext context) {
-		if(entity instanceof DefaultCharacter) {
+	private void drawHealthbar(Visual visual, GraphicsContext context) {
+		if(visual instanceof DefaultCharacter) {
+			DefaultCharacter entity = (DefaultCharacter) visual;
 			if(!this.healthbars.containsKey(entity)) {
 
 				Color color = Color.RED;
