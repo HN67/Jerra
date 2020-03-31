@@ -16,6 +16,10 @@ Either method requires a Java JDK installation, recommended Java 8 or later. Jav
 
 Jerra is a top down shooter game designed to be capable of growing into a full loot and upgrade adventure game.
 
+### Save
+
+Jerra supports a fully capable save and load system by serializing the Room object (which is the main logic container) to disk and then unserializing on load. Loading fully resets the game state to when it was saved, and can be loaded from a save created by a previous instance of the application.
+
 ### Movement
 
 The player controls an avatar which can be moved by entering movement commands, such as "up", "down", "left", and "right", which causes the avatar to move in the respective direction. Movement commands are automatically provided by WASD keypresses. Enemies will autonoumously move in random directions. Conversely, bullets move in a fixed linear direction. Movement is implemented in Jerra with a capable velocity system, allowing expansion into acceleration and other complex movement if desired.
