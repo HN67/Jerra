@@ -45,6 +45,11 @@ public interface Room extends Updatable, Interactive {
      */
     public void spawnShooterSpawner(Spawner<Shooter> spawner);
     /**
+     * Spawns (inserts) a Loot spawner in the Room
+     * @param spawner The Spawner that the Room will now track, adding its produces as Loots
+     */
+    public void spawnLootbagSpawner(Spawner<Lootbag> spawner);
+    /**
      * Spawns (inserts) a Loot in the Room
      * @param loot the Loot the Room will now track
      */

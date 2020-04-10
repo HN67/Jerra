@@ -15,6 +15,7 @@ import jerra.core.Resources;
 import jerra.core.Vector;
 import jerra.effect.DamageEffect;
 import jerra.entity.AmbientShooterSpawner;
+import jerra.entity.AmbientSpawner;
 import jerra.entity.Bullet;
 import jerra.entity.Gun;
 import jerra.entity.Player;
@@ -90,8 +91,8 @@ public class GraphicController implements Controller {
         this.room.spawnShooterSpawner(new AmbientShooterSpawner(
             // new DefaultEntity(new WanderPresence(new Rect(new Vector(0, 0), block), new Vector(3, 3), 25)),
             shooter.copy(),
-            new Vector(300, 300), 
-            300, 
+            new Vector(285, 285), 
+            255, 
             100,
             this.room.getGenerator()
         ));
@@ -116,7 +117,8 @@ public class GraphicController implements Controller {
 
         this.room.spawnPlayer(player);
 
-        this.room.spawnLootbag(new Lootbag(
+        // Create basic medkit drop bag
+        Lootbag medkitBag = new Lootbag(
             new DefaultPresence(
                 new Rect(
                     new Vector(100, 100), block
@@ -124,6 +126,16 @@ public class GraphicController implements Controller {
             ),
             new Inventory().add(new Caffeine()),
             lootbagImage
+        );
+
+        this.room.spawnLootbag(medkitBag.copy());
+
+        this.room.spawnLootbagSpawner(new AmbientSpawner<Lootbag>(
+            medkitBag.copy(),
+            new Vector(285, 285),
+            255,
+            300,
+            this.room.getGenerator()
         ));
 
         Respawner respawner = new Respawner(player, 60);

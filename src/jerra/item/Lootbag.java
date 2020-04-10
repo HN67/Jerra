@@ -4,11 +4,13 @@ import jerra.presence.Presence;
 import jerra.core.Rect;
 import jerra.api.Physical;
 import jerra.api.Mortal;
+import jerra.api.Copyable;
 
 /**
- * Lootbag
+ * Lootbag class, implements Loot as well as Mortal
+ * Intended to contain collectable items
  */
-public class Lootbag implements Loot, Mortal {
+public class Lootbag implements Loot, Mortal, Copyable<Lootbag> {
 
     private static final long serialVersionUID = 0L;
 
@@ -83,6 +85,15 @@ public class Lootbag implements Loot, Mortal {
     @Override
     public Rect getPosition() {
         return this.getPresence().getPosition();
+    }
+
+    @Override
+    /**
+     * Returns an (ideally) deep copy of this Lootbag
+     * @return a Lootbag, equivalent to this one
+     */
+    public Lootbag copy() {
+        return new Lootbag(this.getPresence().copy(), this.getInventory().copy(), this.image);
     }
     
 }
