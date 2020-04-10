@@ -5,6 +5,7 @@ import jerra.presence.Presence;
 import jerra.stats.Stats;
 import jerra.item.Inventory;
 import jerra.item.Loot;
+import jerra.item.Medkit;
 
 /**
  * Player
@@ -12,6 +13,8 @@ import jerra.item.Loot;
 public class Player extends DefaultCharacter implements Shooter, Loot {
 
     private static final long serialVersionUID = 0;
+
+    private static Medkit medkitRef = new Medkit();
 
     private Vector direction;
     private Gun gun;
@@ -43,6 +46,14 @@ public class Player extends DefaultCharacter implements Shooter, Loot {
                 this.direction =  new Vector(-1, 0);
             } else if (command.equals("rightSecondary")) {
                 this.direction = new Vector(1, 0);
+            } else if (command.equals("use")) {
+                if (
+                    this.inventory.count(medkitRef) > 0 &&
+                    this.getStats().getValue(Stats.Type.HEALTH) < this.getStats().getValue(Stats.Type.VITALITY)
+                ) {
+                    medkitRef.apply(this);
+                    this.inventory.remove(medkitRef);
+                }
             } else {
             }
         }

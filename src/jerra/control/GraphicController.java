@@ -25,6 +25,7 @@ import jerra.entity.Wall;
 import jerra.item.Inventory;
 import jerra.item.Caffeine;
 import jerra.item.Lootbag;
+import jerra.item.Medkit;
 import jerra.presence.DefaultPresence;
 import jerra.presence.ActivePresence;
 import jerra.presence.WanderPresence;
@@ -93,7 +94,7 @@ public class GraphicController implements Controller {
             shooter.copy(),
             new Vector(285, 285), 
             255, 
-            100,
+            200,
             this.room.getGenerator()
         ));
 
@@ -124,7 +125,7 @@ public class GraphicController implements Controller {
                     new Vector(100, 100), block
                 ), new Vector(0, 0)
             ),
-            new Inventory().add(new Caffeine()),
+            new Inventory().add(new Medkit()),
             lootbagImage
         );
 
@@ -134,7 +135,7 @@ public class GraphicController implements Controller {
             medkitBag.copy(),
             new Vector(285, 285),
             255,
-            300,
+            1000,
             this.room.getGenerator()
         ));
 
@@ -247,6 +248,9 @@ public class GraphicController implements Controller {
                     break;
                 case "ENTER":
                     this.room.queue("respawn");
+                    break;
+                case "E":
+                    this.room.queue("use");
                     break;
                 default:
                     break;
