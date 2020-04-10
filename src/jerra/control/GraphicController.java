@@ -23,7 +23,6 @@ import jerra.entity.Respawner;
 import jerra.entity.ShooterEntity;
 import jerra.entity.Wall;
 import jerra.item.Inventory;
-import jerra.item.Caffeine;
 import jerra.item.Lootbag;
 import jerra.item.Medkit;
 import jerra.presence.DefaultPresence;

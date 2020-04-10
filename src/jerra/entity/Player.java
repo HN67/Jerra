@@ -4,6 +4,7 @@ import jerra.core.Vector;
 import jerra.presence.Presence;
 import jerra.stats.Stats;
 import jerra.item.Inventory;
+import jerra.item.Item;
 import jerra.item.Loot;
 import jerra.item.Medkit;
 
@@ -130,8 +131,21 @@ public class Player extends DefaultCharacter implements Shooter, Loot {
 
     @Override
     public void interact(Loot other) {
-        this.inventory.add(other.getInventory());
-        other.setInventory(other.getInventory().clear());
+        // Collect items from other inventory
+        for (Item item: other.getInventory().items()) {
+            // Can only carry 1 medkit
+            if (item.equals(medkitRef)) {
+                if (other.getInventory().count(medkitRef) > 0 && this.inventory.count(medkitRef) <= 0) {
+                    // Set inventory to 1 medkit
+                    this.inventory.add(medkitRef, -this.inventory.count(medkitRef) + 1);
+                    // Remove one medkit
+                    other.getInventory().remove(medkitRef);
+                }
+            } else {
+                this.inventory.add(item, other.getInventory().count(item));
+                other.getInventory().remove(item, other.getInventory().count(item));
+            }
+        }
     }
 
     @Override
