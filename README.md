@@ -34,7 +34,7 @@ Jerra checks for collisions between all entities, and allows them to interact wi
 
 ### Items
 
-Jerra has a developed Item and Inventory system that allows tracking and using quantities of items. The player can pick up medkits from lootbags spawned randomly, and then consume them with E, which takes advantage of the Effect and Stats architecture to increase their health.
+Jerra has a developed Item and Inventory system that allows tracking and using quantities of items. The player has an inventory that contains items, currently only medkits. The player can pick up randomly spawned lootbags, which adds the contents (a medkit) to their inventory. A medkit can then be consumed with E, which takes advantage of the Effect and Stats architecture to increase the player health.
 
 ### Deflection
 
@@ -51,10 +51,6 @@ Jerra uses an Effects architecture, where each Bullet carries an effect (i.e. Da
 ### Stats
 
 Every entity has a Stats object, which tracks various values such as health. Effects can manipulate these stats, allowing bullets to deal damage to entities. Health is displayed using health bars overhead that are displayed briefly onhit.
-
-### Items
-
-The player has an inventory which can contain items, tracking the count of each. Also, lootbags can be created that are picked up on collision with the player and added to their inventory.
 
 ### Mortality
 
