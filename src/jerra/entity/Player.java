@@ -4,7 +4,9 @@ import jerra.core.Vector;
 import jerra.presence.Presence;
 import jerra.stats.Stats;
 import jerra.item.Inventory;
+import jerra.item.Item;
 import jerra.item.Loot;
+import jerra.item.Medkit;
 
 /**
  * Player
@@ -12,6 +14,8 @@ import jerra.item.Loot;
 public class Player extends DefaultCharacter implements Shooter, Loot {
 
     private static final long serialVersionUID = 0;
+
+    private static Medkit medkitRef = new Medkit();
 
     private Vector direction;
     private Gun gun;
@@ -43,6 +47,14 @@ public class Player extends DefaultCharacter implements Shooter, Loot {
                 this.direction =  new Vector(-1, 0);
             } else if (command.equals("rightSecondary")) {
                 this.direction = new Vector(1, 0);
+            } else if (command.equals("use")) {
+                if (
+                    this.inventory.count(medkitRef) > 0 &&
+                    this.getStats().getValue(Stats.Type.HEALTH) < this.getStats().getValue(Stats.Type.VITALITY)
+                ) {
+                    medkitRef.apply(this);
+                    this.inventory.remove(medkitRef);
+                }
             } else {
             }
         }
@@ -119,8 +131,21 @@ public class Player extends DefaultCharacter implements Shooter, Loot {
 
     @Override
     public void interact(Loot other) {
-        this.inventory.add(other.getInventory());
-        other.setInventory(other.getInventory().clear());
+        // Collect items from other inventory
+        for (Item item: other.getInventory().items()) {
+            // Can only carry 1 medkit
+            if (item.equals(medkitRef)) {
+                if (other.getInventory().count(medkitRef) > 0 && this.inventory.count(medkitRef) <= 0) {
+                    // Set inventory to 1 medkit
+                    this.inventory.add(medkitRef, -this.inventory.count(medkitRef) + 1);
+                    // Remove one medkit
+                    other.getInventory().remove(medkitRef);
+                }
+            } else {
+                this.inventory.add(item, other.getInventory().count(item));
+                other.getInventory().remove(item, other.getInventory().count(item));
+            }
+        }
     }
 
     @Override
