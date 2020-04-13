@@ -26,11 +26,15 @@ The player controls an avatar which can be moved by entering movement commands, 
 
 ### Spawning
 
-New entities are spawned into the game room with a robust Spawner architecture, which allows spawners to self report when and what they spawn. The avatar and enemies uses this architecture to spawn bullets, and an ambient spawner uses this architecture to spawn new entities.
+New entities are spawned into the game room with a robust Spawner architecture, which allows spawners to self report when and what they spawn. The avatar and enemies uses this architecture to spawn bullets, and an ambient spawner uses this architecture to spawn new entities. Additionally, another ambient spawner (using the same generic class) uses this to spawn medkit lootbags.
 
 ### Collisions
 
-Jerra checks for collisions between all entities, and allows them to interact with each other. Currently, this allows for bullets to hit and kill the player's avatar, as well as other entities, but has the potential to be expanded to handle any type of interaction, such as opening a chest.
+Jerra checks for collisions between all entities, and allows them to interact with each other. Currently, this allows for bullets to hit and kill the player's avatar, as well as other entities, but has the potential to be expanded to handle any type of interaction, such as opening a chest. Collision architecture is used to detect and collect lootbags.
+
+### Items
+
+Jerra has a developed Item and Inventory system that allows tracking and using quantities of items. The player can pick up medkits from lootbags spawned randomly, and then consume them with E, which takes advantage of the Effect and Stats architecture to increase their health.
 
 ### Deflection
 
