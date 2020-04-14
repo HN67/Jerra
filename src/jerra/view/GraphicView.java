@@ -7,13 +7,13 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import jerra.api.Visual;
 import jerra.core.Rect;
 import jerra.entity.DefaultCharacter;
 import jerra.entity.Entity;
 import jerra.entity.Player;
 import jerra.room.Room;
 import jerra.stats.StatsDisplay;
-import jerra.api.Visual;
 
 public class GraphicView extends View<Room> {
 
@@ -42,6 +42,9 @@ public class GraphicView extends View<Room> {
 		GraphicsContext context = canvas.getGraphicsContext2D();
 
 		context.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+		Image backgroundImage = this.imageDictionary.get("/resources/background.png");
+		context.drawImage(backgroundImage, 0, 0);
 		
 		for(Visual entity : model.getVisuals()) {
 			Rect pos = entity.getPosition();

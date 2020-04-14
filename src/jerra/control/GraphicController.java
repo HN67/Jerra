@@ -25,8 +25,8 @@ import jerra.entity.Wall;
 import jerra.item.Inventory;
 import jerra.item.Lootbag;
 import jerra.item.Medkit;
-import jerra.presence.DefaultPresence;
 import jerra.presence.ActivePresence;
+import jerra.presence.DefaultPresence;
 import jerra.presence.WanderPresence;
 import jerra.room.Room;
 import jerra.stats.Stats;
@@ -147,10 +147,10 @@ public class GraphicController implements Controller {
         // Prepare image dictionary
         String[] paths = {
             "border_horizontal", "border_vertical", "bullet", "enemy", "logo", "player",
-            "wall", "lootbag"
+            "wall", "lootbag", "background"
         };
         HashMap<String, Image> imageDictionary = new HashMap<String, Image>();
-        for (String path: paths) {
+        for (String path : paths) {
             String fullPath = "/resources/" + path + ".png";
             imageDictionary.put(fullPath, Resources.loadImage(fullPath));
         }
