@@ -196,3 +196,6 @@ fabric.properties
 # VS Code
 .vscode
 .DS_Store
+
+# Manifest file
+MANIFEST.MF
